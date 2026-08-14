@@ -6,6 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/MizukiBirthday/scenes/001-store1.unity
+    guid: 7ef45bd91a6b32d43818147fe9047714
+  - enabled: 1
+    path: Assets/MizukiBirthday/scenes/001-store2.unity
+    guid: 86daa8e322c15fd4aad71e46374ac733
+  - enabled: 1
+    path: Assets/MizukiBirthday/scenes/001-wave.unity
+    guid: d3be81754e22ff145ad1ecbbb5db217b
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

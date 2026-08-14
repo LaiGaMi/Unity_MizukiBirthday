@@ -1,0 +1,254 @@
+{
+  "dialogues": [
+  
+    {
+      "background": "BG01",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "空無一人的「世界」。"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "ena_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "繪名",
+      "talk": "大家今天辛苦了！為了給瑞希最棒的生日驚喜，這次絕對不能失敗！"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "ena_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "mfy_n", "focus": true},
+      "name": "真冬",
+      "talk": "蛋糕也準備好了。"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "ena_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "繪名",
+      "talk": "還有裝飾、禮物、彩帶……嗯，應該沒有漏掉什麼。"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "你們幾個偷偷摸摸的～到底在做什麼呢？"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "ena_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "繪名",
+      "talk": "欸！？"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "ena_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "knd_n", "focus": true},
+      "name": "奏",
+      "talk": "瑞希……！？"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "mfy_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "knd_n", "focus": true},
+      "name": "真冬",
+      "talk": "……"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "果然有事情瞞著我吧？"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "繪名",
+      "talk": "沒、沒有！什麼都沒有！"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "瑞希",
+      "talk": "真的～？"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "繪名",
+      "talk": "真的！"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "那為什麼你們三個看到我之後，表情都這麼可疑？"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mfy_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "真冬",
+      "talk": "……繪名，臉紅了。"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "mfy_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "繪名",
+      "talk": "真冬！不要說出來！"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "啊哈哈……看來真的有什麼～"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "knd_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "奏",
+      "talk": "瑞希，現在……可以先不要過來這邊嗎？"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "嗯？"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "knd_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "奏",
+      "talk": "再過一下下，我們就會……"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "就在這時——"
+    },
+	{
+      "background": "BG00-2",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "一道奇異的光芒突然出現在「世界」中央。"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "……咦？"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "ena_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "繪名",
+      "talk": "那是什麼？"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "ena_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "mfy_n", "focus": true},
+      "name": "真冬",
+      "talk": "一個……在發光的東西？"
+    },
+	{
+      "background": "BG01",
+      "ch01": {"id": "knd_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "mfy_n", "focus": true},
+      "name": "奏",
+      "talk": "小心一點……"
+    },
+	{
+      "background": "BG00-2",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "光芒越來越強烈，周圍的景象開始扭曲。"
+    },
+	{
+      "background": "BG00-2",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "等等……這個感覺……"
+    },
+	{
+      "background": "BG00-2",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "ena_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "繪名",
+      "talk": "瑞希！"
+    },
+	{
+      "background": "BG00-2",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "knd_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "奏",
+      "talk": "大家快離開那裡……！"
+    },
+	{
+      "background": "BG00-2",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mfy_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "真冬",
+      "talk": "……"
+    },
+	{
+      "background": "BG00-2",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "四人的身影被光芒吞沒。"
+    }
+	
+  ]
+}
