@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - V
+  - Patt01
+  - Patt04
+  - Patt07
+  - HPadd01
+  - HPadd02
+  - HPadd03
+  - Patt01-2
+  - Vatt
+  - Patt05
   layers:
   - Default
   - TransparentFX

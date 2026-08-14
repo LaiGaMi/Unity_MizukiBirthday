@@ -1,0 +1,277 @@
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Level : MonoBehaviour
+{
+    // =========================================================
+    // EXP 設定
+    // =========================================================
+
+    // 每個等級所需要的 EXP
+    public static List<int> expRequired = new List<int>()
+    {
+        100,   // Level 0 → Level 1
+        250,   // Level 1 → Level 2
+        450,   // Level 2 → Level 3
+        700,   // Level 3 → Level 4
+        1000   // Level 4 → Level 5
+    };
+
+
+    // =========================================================
+    // 技能資料
+    // =========================================================
+
+    // 七個技能
+    public List<SkillData> skills = new List<SkillData>();
+
+
+    // =========================================================
+    // 升級 UI
+    // =========================================================
+
+    // 升級 UI 的總父級物件
+    public GameObject upgradeUI;
+
+
+    [System.Serializable]
+    public class SkillUI
+    {
+        public Image icon;
+        public Text skillName;
+        public Text description;
+        public Button confirmButton;
+    }
+
+
+    // 三個技能選擇 UI
+    public SkillUI[] skillUI = new SkillUI[3];
+
+
+    // 本次抽中的三個技能
+    private List<int> selectedSkills = new List<int>();
+
+
+    // =========================================================
+    // 偵測是否可以升級
+    // =========================================================
+
+    public void CheckLevelUp()
+    {
+        if (mizuki.level >= expRequired.Count)
+        {
+            return;
+        }
+
+        if (mizuki.exp >= expRequired[mizuki.level])
+        {
+            LevelUp();
+        }
+    }
+
+
+    // =========================================================
+    // 升級
+    // =========================================================
+
+    private void LevelUp()
+    {
+        mizuki.level++;
+
+        Debug.Log("升級！目前 Level：" + mizuki.level);
+
+        // 抽取三個技能
+        ShowSkillChoices();
+
+        // 開啟整個升級 UI
+        upgradeUI.SetActive(true);
+		
+		Time.timeScale = 0f;
+    }
+
+
+    // =========================================================
+    // 抽取三個技能
+    // =========================================================
+
+    private void ShowSkillChoices()
+    {
+        selectedSkills.Clear();
+
+        List<int> availableSkills = new List<int>();
+
+
+        // 檢查七個技能
+        for (int i = 0; i < 7; i++)
+        {
+            int skillLevel = GetSkillLevel(i);
+
+            // 技能還沒到 3 級
+            if (skillLevel < 3)
+            {
+                availableSkills.Add(i);
+            }
+        }
+
+
+        // 隨機抽取最多三個不同技能
+        while (selectedSkills.Count < 3 && availableSkills.Count > 0)
+        {
+            int randomIndex = Random.Range(0, availableSkills.Count);
+
+            selectedSkills.Add(availableSkills[randomIndex]);
+
+            availableSkills.RemoveAt(randomIndex);
+        }
+
+
+        // 顯示 UI
+        for (int i = 0; i < 3; i++)
+        {
+            if (i < selectedSkills.Count)
+            {
+                ShowSkill(i, selectedSkills[i]);
+
+                skillUI[i].confirmButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                skillUI[i].confirmButton.gameObject.SetActive(false);
+            }
+        }
+    }
+
+
+    // =========================================================
+    // 顯示技能資料
+    // =========================================================
+
+    private void ShowSkill(int uiIndex, int skillIndex)
+    {
+        int currentLevel = GetSkillLevel(skillIndex);
+
+        SkillData skill = skills[skillIndex];
+
+
+        // -----------------------------------------------------
+        // 圖示
+        // -----------------------------------------------------
+
+        skillUI[uiIndex].icon.sprite = skill.icon;
+
+
+        // -----------------------------------------------------
+        // 名稱與說明
+        // -----------------------------------------------------
+
+        SkillLevelData nextLevel =
+            skill.levels[currentLevel + 1];
+
+        skillUI[uiIndex].skillName.text =
+            nextLevel.skillName;
+
+        skillUI[uiIndex].description.text =
+            nextLevel.description;
+
+
+        // -----------------------------------------------------
+        // Button
+        // -----------------------------------------------------
+
+        skillUI[uiIndex].confirmButton.onClick.RemoveAllListeners();
+
+
+        int selectedSkill = skillIndex;
+
+
+        skillUI[uiIndex].confirmButton.onClick.AddListener(
+            () => ConfirmSkill(selectedSkill)
+        );
+    }
+
+
+    // =========================================================
+    // 玩家確認選擇
+    // =========================================================
+
+    private void ConfirmSkill(int skillIndex)
+    {
+        // 技能等級 +1
+        AddSkillLevel(skillIndex);
+
+
+        Debug.Log(
+            "選擇技能：" +
+            skills[skillIndex].skillID +
+            "，目前等級：" +
+            GetSkillLevel(skillIndex)
+        );
+
+
+        // 關閉整個升級 UI
+        upgradeUI.SetActive(false);
+		
+		Time.timeScale = 1f;
+    }
+
+
+    // =========================================================
+    // 取得技能等級
+    // =========================================================
+
+    private int GetSkillLevel(int index)
+    {
+        switch (index)
+        {
+            case 0: return mizuki.att01;
+            case 1: return mizuki.att02;
+            case 2: return mizuki.att03;
+            case 3: return mizuki.att04;
+            case 4: return mizuki.att05;
+            case 5: return mizuki.att06;
+            case 6: return mizuki.att07;
+        }
+
+        return 0;
+    }
+
+
+    // =========================================================
+    // 技能等級 +1
+    // =========================================================
+
+    private void AddSkillLevel(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                mizuki.att01++;
+                break;
+
+            case 1:
+                mizuki.att02++;
+                break;
+
+            case 2:
+                mizuki.att03++;
+                break;
+
+            case 3:
+                mizuki.att04++;
+                break;
+
+            case 4:
+                mizuki.att05++;
+                break;
+
+            case 5:
+                mizuki.att06++;
+                break;
+
+            case 6:
+                mizuki.att07++;
+                break;
+        }
+    }
+}

@@ -1,0 +1,328 @@
+using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Player_HP : MonoBehaviour
+{
+    [Header("HP")]
+    [SerializeField] private float maxHP = 100f;
+    [SerializeField] private float currentHP;
+
+    [Header("Damage")]
+    [SerializeField] private string damageTag = "Enemy";
+    [SerializeField] private float damageAmount = 5f;
+    [SerializeField] private float damageCooldown = 1f;
+
+    [Header("Card Defense")]
+    [SerializeField] private float cardDefenseCooldown = 1f;
+
+    [Header("HP Bar")]
+    [SerializeField] private Image hpBar;
+
+    [Header("Player Image")]
+    [SerializeField] private SpriteRenderer playerSprite;
+
+
+    // =========================================================
+    // 回血道具
+    // =========================================================
+
+    [Header("Heal Item Tag")]
+
+    // 回血道具 1 的 Tag
+    [SerializeField] private string healItem01Tag = "HealItem01";
+
+    // 回血道具 2 的 Tag
+    [SerializeField] private string healItem02Tag = "HealItem02";
+
+    // 回血道具 3 的 Tag
+    [SerializeField] private string healItem03Tag = "HealItem03";
+
+
+    [Header("Heal Amount")]
+
+    // 回血道具 1 回復量
+    [SerializeField] private float healAmount01 = 10f;
+
+    // 回血道具 2 回復量
+    [SerializeField] private float healAmount02 = 25f;
+
+    // 回血道具 3 回復量
+    [SerializeField] private float healAmount03 = 50f;
+
+
+    // 一般受傷無敵
+    private bool isInvincible = false;
+
+    // 塔羅牌防禦冷卻
+    private bool isCardDefenseCooldown = false;
+
+
+    private void Awake()
+    {
+        // 初始血量
+        currentHP = maxHP;
+
+        // 如果沒有手動綁定 SpriteRenderer
+        if (playerSprite == null)
+        {
+            playerSprite = GetComponent<SpriteRenderer>();
+        }
+
+        UpdateHPBar();
+    }
+
+
+    // =========================================================
+    // 玩家碰撞
+    // =========================================================
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // =====================================================
+        // 回血道具
+        // =====================================================
+
+        if (other.CompareTag(healItem01Tag))
+        {
+            Heal(healAmount01, other.gameObject);
+            return;
+        }
+
+        if (other.CompareTag(healItem02Tag))
+        {
+            Heal(healAmount02, other.gameObject);
+            return;
+        }
+
+        if (other.CompareTag(healItem03Tag))
+        {
+            Heal(healAmount03, other.gameObject);
+            return;
+        }
+
+
+        // =====================================================
+        // 一般受傷
+        // =====================================================
+
+        // 一般無敵期間不受傷
+        if (isInvincible)
+        {
+            return;
+        }
+
+        // 塔羅牌防禦冷卻期間
+        if (isCardDefenseCooldown)
+        {
+            return;
+        }
+
+        // 確認敵人 Tag
+        if (other.CompareTag(damageTag))
+        {
+            TakeDamage(damageAmount);
+        }
+    }
+
+
+    // =========================================================
+    // 回復生命值
+    // =========================================================
+
+    private void Heal(float amount, GameObject healItem)
+    {
+        // 已經滿血
+        if (currentHP >= maxHP)
+        {
+            return;
+        }
+
+
+        // 增加 HP
+        currentHP += amount;
+
+
+        // 不允許超過最大 HP
+        currentHP = Mathf.Min(currentHP, maxHP);
+
+
+        // 更新 HP Bar
+        UpdateHPBar();
+
+
+        Debug.Log(
+            "玩家回血 " +
+            amount +
+            "，目前 HP：" +
+            currentHP +
+            "/" +
+            maxHP
+        );
+
+
+        // 刪除回血道具
+        Destroy(healItem);
+    }
+
+
+    // =========================================================
+    // 受到傷害
+    // =========================================================
+
+    private void TakeDamage(float damage)
+    {
+        // =====================================================
+        // 有塔羅牌
+        // =====================================================
+
+        if (mizuki.card > 0)
+        {
+            // 消耗一張塔羅牌
+            mizuki.card--;
+
+            Debug.Log(
+                "塔羅牌防禦！剩餘塔羅牌：" +
+                mizuki.card
+            );
+
+            // 開始塔羅牌防禦冷卻
+            StartCoroutine(CardDefenseCooldown());
+
+            return;
+        }
+
+
+        // =====================================================
+        // 沒有塔羅牌
+        // =====================================================
+
+        currentHP -= damage;
+
+        // 防止 HP 低於 0
+        currentHP = Mathf.Max(currentHP, 0f);
+
+        // 更新 HP Bar
+        UpdateHPBar();
+
+        // 開始一般無敵時間
+        StartCoroutine(DamageCooldown());
+
+
+        // HP 歸零
+        if (currentHP <= 0f)
+        {
+            Die();
+        }
+    }
+
+
+    // =========================================================
+    // 一般受傷無敵
+    // =========================================================
+
+    private IEnumerator DamageCooldown()
+    {
+        isInvincible = true;
+
+        // 半透明
+        SetPlayerColor(1f, 1f, 1f, 0.5f);
+
+        // 等待冷卻
+        yield return new WaitForSeconds(damageCooldown);
+
+        // 恢復正常
+        SetPlayerColor(1f, 1f, 1f, 1f);
+
+        isInvincible = false;
+    }
+
+
+    // =========================================================
+    // 塔羅牌防禦冷卻
+    // =========================================================
+
+    private IEnumerator CardDefenseCooldown()
+    {
+        isCardDefenseCooldown = true;
+
+        // 半透明 + 藍色
+        SetPlayerColor(0.5f, 0.7f, 1f, 0.5f);
+
+        // 等待防禦冷卻
+        yield return new WaitForSeconds(cardDefenseCooldown);
+
+        // 恢復正常
+        SetPlayerColor(1f, 1f, 1f, 1f);
+
+        isCardDefenseCooldown = false;
+    }
+
+
+    // =========================================================
+    // 設定玩家顏色與透明度
+    // =========================================================
+
+    private void SetPlayerColor(
+        float r,
+        float g,
+        float b,
+        float a)
+    {
+        if (playerSprite == null)
+        {
+            return;
+        }
+
+        Color color = new Color(r, g, b, a);
+
+        playerSprite.color = color;
+    }
+
+
+    // =========================================================
+    // HP Bar
+    // =========================================================
+
+    private void UpdateHPBar()
+    {
+        if (hpBar == null)
+        {
+            return;
+        }
+
+        hpBar.fillAmount = currentHP / maxHP;
+    }
+
+
+    // =========================================================
+    // 死亡
+    // =========================================================
+
+    private void Die()
+    {
+        Debug.Log("Player HP = 0");
+
+        // 之後可以在這裡加入死亡處理
+    }
+
+
+    // =========================================================
+    // 取得目前 HP
+    // =========================================================
+
+    public float GetCurrentHP()
+    {
+        return currentHP;
+    }
+
+
+    // =========================================================
+    // 取得最大 HP
+    // =========================================================
+
+    public float GetMaxHP()
+    {
+        return maxHP;
+    }
+}

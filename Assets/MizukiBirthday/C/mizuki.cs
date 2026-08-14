@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public static class mizuki
+{
+	// 玩家技能紀錄
+	public static int att01 = 3;
+	public static int att02 = 3;
+	public static int att03 = 3;
+	public static int att04 = 3;
+	public static int att05 = 3;
+	public static int att06 = 3;
+	public static int att07 = 3;
+	
+	// 玩家等級
+	public static int level = 0;
+	public static int exp = 0;
+	
+	// 隱者
+	public static int card = 0;
+	public static int cardMax = 0;
+	
+	// 其他紀錄
+	public static int Time = 0;
+}

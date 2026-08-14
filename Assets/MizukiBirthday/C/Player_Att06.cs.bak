@@ -1,0 +1,90 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player_Att06 : MonoBehaviour
+{
+    [Header("人偶架預置物")]
+    public GameObject puppetPrefab;
+
+    [Header("生成位置")]
+    public Transform spawnPoint;
+
+    [Header("生成間隔")]
+    public float attackInterval = 2f;
+
+    private float attackTimer = 0f;
+
+
+    private void Update()
+    {
+        // 沒有技能
+        if (mizuki.att06 <= 0)
+        {
+            return;
+        }
+
+        attackTimer += Time.deltaTime;
+
+        if (attackTimer >= attackInterval)
+        {
+            SpawnPuppets();
+
+            attackTimer = 0f;
+        }
+    }
+
+
+    private void SpawnPuppets()
+    {
+        int puppetCount = 0;
+        int bounceCount = 0;
+
+
+        // ==============================
+        // 根據技能等級設定
+        // ==============================
+
+        switch (mizuki.att06)
+        {
+            case 1:
+                puppetCount = 1;
+                bounceCount = 1;
+                break;
+
+            case 2:
+                puppetCount = 2;
+                bounceCount = 3;
+                break;
+
+            case 3:
+                puppetCount = 3;
+                bounceCount = 5;
+                break;
+        }
+
+
+        // ==============================
+        // 生成指定數量的人偶
+        // ==============================
+
+        for (int i = 0; i < puppetCount; i++)
+        {
+            GameObject puppet = Instantiate(
+                puppetPrefab,
+                spawnPoint.position,
+                Quaternion.identity
+            );
+
+
+            // 設定人偶的彈跳次數
+            Puppet puppetScript =
+                puppet.GetComponent<Object_runtantan>();
+
+            if (puppetScript != null)
+            {
+                puppetScript.SetBounceCount(bounceCount);
+            }
+        }
+    }
+}

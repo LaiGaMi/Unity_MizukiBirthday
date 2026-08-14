@@ -1,0 +1,276 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player_Att02 : MonoBehaviour
+{
+    // =========================================================
+    // 塔羅牌設定
+    // =========================================================
+
+    [Header("塔羅牌預置物")]
+    public GameObject cardPrefab;
+
+    [Header("塔羅牌距離玩家的距離")]
+    public float cardDistance = 1.5f;
+
+    [Header("補充塔羅牌時間")]
+    public float cardInterval = 5f;
+
+    [Header("塔羅牌旋轉速度")]
+    public float rotateSpeed = 90f;
+
+
+    // =========================================================
+    // 計時
+    // =========================================================
+
+    private float cardTimer = 0f;
+
+
+    // =========================================================
+    // 塔羅牌旋轉角度
+    // =========================================================
+
+    private float currentAngle = 0f;
+
+
+    // =========================================================
+    // 已生成的塔羅牌
+    // =========================================================
+
+    private List<GameObject> cards = new List<GameObject>();
+
+
+    // =========================================================
+    // 初始化
+    // =========================================================
+
+    private void Start()
+    {
+        UpdateCardMax();
+
+        UpdateCards();
+    }
+
+
+    // =========================================================
+    // 每幀
+    // =========================================================
+
+    private void Update()
+    {
+        // 更新最大數量
+        UpdateCardMax();
+
+
+        // =====================================================
+        // 技能沒有啟用
+        // =====================================================
+
+        if (mizuki.att02 <= 0)
+        {
+            ClearCards();
+
+            return;
+        }
+
+
+        // =====================================================
+        // 塔羅牌旋轉
+        // =====================================================
+
+        currentAngle += rotateSpeed * Time.deltaTime;
+
+        if (currentAngle >= 360f)
+        {
+            currentAngle -= 360f;
+        }
+
+
+        // =====================================================
+        // 如果目前數量小於最大數量
+        // =====================================================
+
+        if (mizuki.card < mizuki.cardMax)
+        {
+            cardTimer += Time.deltaTime;
+
+            if (cardTimer >= cardInterval)
+            {
+                mizuki.card++;
+
+                cardTimer = 0f;
+
+                UpdateCards();
+            }
+        }
+        else
+        {
+            cardTimer = 0f;
+        }
+
+
+        // =====================================================
+        // 確認實際塔羅牌數量
+        // =====================================================
+
+        if (cards.Count != mizuki.card)
+        {
+            UpdateCards();
+        }
+
+
+        // =====================================================
+        // 更新塔羅牌位置
+        // =====================================================
+
+        UpdateCardPositions();
+    }
+
+
+    // =========================================================
+    // 根據 att02 設定最大塔羅牌數量
+    // =========================================================
+
+    private void UpdateCardMax()
+    {
+        switch (mizuki.att02)
+        {
+            case 0:
+                mizuki.cardMax = 0;
+                break;
+
+            case 1:
+                mizuki.cardMax = 1;
+                break;
+
+            case 2:
+                mizuki.cardMax = 3;
+                break;
+
+            case 3:
+                mizuki.cardMax = 5;
+                break;
+        }
+
+
+        // 防止目前數量超過最大值
+        if (mizuki.card > mizuki.cardMax)
+        {
+            mizuki.card = mizuki.cardMax;
+        }
+    }
+
+
+    // =========================================================
+    // 生成塔羅牌
+    // =========================================================
+
+    private void UpdateCards()
+    {
+        // 先清除舊塔羅牌
+        ClearCards();
+
+
+        // 沒有塔羅牌
+        if (mizuki.card <= 0)
+        {
+            return;
+        }
+
+
+        // =====================================================
+        // 生成塔羅牌
+        // =====================================================
+
+        for (int i = 0; i < mizuki.card; i++)
+        {
+            GameObject newCard =
+                Instantiate(
+                    cardPrefab,
+                    transform.position,
+                    Quaternion.identity,
+                    transform
+                );
+
+
+            cards.Add(newCard);
+        }
+
+
+        // 生成完成後立刻更新位置
+        UpdateCardPositions();
+    }
+
+
+    // =========================================================
+    // 更新塔羅牌位置
+    // =========================================================
+
+    private void UpdateCardPositions()
+    {
+        if (cards.Count == 0)
+        {
+            return;
+        }
+
+
+        // =====================================================
+        // 平均分配塔羅牌
+        // =====================================================
+
+        float angleStep =
+            360f / cards.Count;
+
+
+        for (int i = 0; i < cards.Count; i++)
+        {
+            if (cards[i] == null)
+            {
+                continue;
+            }
+
+
+            // 每張牌自己的角度
+            float angle =
+                currentAngle + (angleStep * i);
+
+
+            // 轉換成弧度
+            float radian =
+                angle * Mathf.Deg2Rad;
+
+
+            // 計算圓周位置
+            Vector3 offset =
+                new Vector3(
+                    Mathf.Cos(radian),
+                    Mathf.Sin(radian),
+                    0f
+                ) * cardDistance;
+
+
+            // 設定位置
+            cards[i].transform.localPosition = offset;
+        }
+    }
+
+
+    // =========================================================
+    // 清除所有塔羅牌
+    // =========================================================
+
+    private void ClearCards()
+    {
+        for (int i = 0; i < cards.Count; i++)
+        {
+            if (cards[i] != null)
+            {
+                Destroy(cards[i]);
+            }
+        }
+
+        cards.Clear();
+    }
+}

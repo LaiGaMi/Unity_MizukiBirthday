@@ -1,0 +1,139 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player_Move : MonoBehaviour
+{
+    [Header("Movement")]
+    [SerializeField] private float moveSpeed = 5f;
+
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+
+    private Rigidbody2D rb;
+    private Camera mainCamera;
+
+    private Vector2 moveDirection = Vector2.zero;
+
+    // 記錄角色最後面向
+    private bool facingRight = true;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        mainCamera = Camera.main;
+
+        // 如果沒有手動綁定 Animator，就自動尋找
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
+    }
+
+    private void Update()
+    {
+        // =========================
+        // 滑鼠
+        // =========================
+
+        if (Input.GetMouseButton(0))
+        {
+            UpdateMoveDirection(Input.mousePosition);
+        }
+        else
+        {
+            StopMoving();
+        }
+
+
+        // =========================
+        // 觸控
+        // =========================
+
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began ||
+                touch.phase == TouchPhase.Moved ||
+                touch.phase == TouchPhase.Stationary)
+            {
+                UpdateMoveDirection(touch.position);
+            }
+            else if (touch.phase == TouchPhase.Ended ||
+                     touch.phase == TouchPhase.Canceled)
+            {
+                StopMoving();
+            }
+        }
+
+        UpdateAnimation();
+    }
+
+    private void FixedUpdate()
+    {
+        float currentSpeed = moveSpeed + mizuki.att04;
+		rb.velocity = moveDirection * currentSpeed;
+    }
+
+    private void UpdateMoveDirection(Vector2 screenPosition)
+    {
+        // 螢幕中心
+        Vector2 screenCenter = new Vector2(
+            Screen.width / 2f,
+            Screen.height / 2f
+        );
+
+        // 螢幕座標 → 世界座標
+        Vector3 touchWorldPosition =
+            mainCamera.ScreenToWorldPoint(screenPosition);
+
+        Vector3 centerWorldPosition =
+            mainCamera.ScreenToWorldPoint(screenCenter);
+
+        // 畫面中心 → 滑鼠 / 手指
+        Vector2 direction =
+            (Vector2)(touchWorldPosition - centerWorldPosition);
+
+        if (direction.sqrMagnitude > 0.01f)
+        {
+            moveDirection = direction.normalized;
+
+            // 判斷左右方向
+            if (moveDirection.x > 0.01f)
+            {
+                facingRight = true;
+            }
+            else if (moveDirection.x < -0.01f)
+            {
+                facingRight = false;
+            }
+        }
+        else
+        {
+            moveDirection = Vector2.zero;
+        }
+    }
+
+    private void StopMoving()
+    {
+        moveDirection = Vector2.zero;
+    }
+
+    private void UpdateAnimation()
+    {
+        bool isMoving = moveDirection.sqrMagnitude > 0.01f;
+
+        // Move
+        animator.SetBool("move", isMoving);
+
+        // 左右方向
+        animator.SetBool("R", facingRight);
+        animator.SetBool("L", !facingRight);
+    }
+	
+	public Vector2 GetMoveDirection()
+	{
+	    return moveDirection;
+	}
+}

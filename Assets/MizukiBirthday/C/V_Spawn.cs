@@ -1,0 +1,80 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class V_Spawn : MonoBehaviour
+{
+    [Header("Spawn Settings")]
+    [SerializeField] private float spawnMargin = 2f;
+
+    private Camera mainCamera;
+
+    private void Start()
+    {
+        // 自動取得主攝影機
+        mainCamera = Camera.main;
+
+        if (mainCamera == null)
+        {
+            Debug.LogError("找不到 Main Camera！");
+            return;
+        }
+
+        SpawnOutsideCamera();
+    }
+
+    private void SpawnOutsideCamera()
+    {
+        // 攝影機中心
+        Vector3 cameraCenter = mainCamera.transform.position;
+
+        // 計算攝影機世界座標尺寸
+        float cameraHeight = mainCamera.orthographicSize * 2f;
+        float cameraWidth = cameraHeight * mainCamera.aspect;
+
+        // 攝影機範圍
+        float left = cameraCenter.x - cameraWidth / 2f;
+        float right = cameraCenter.x + cameraWidth / 2f;
+        float bottom = cameraCenter.y - cameraHeight / 2f;
+        float top = cameraCenter.y + cameraHeight / 2f;
+
+        // 隨機決定從哪一邊生成
+        int side = Random.Range(0, 4);
+
+        float spawnX;
+        float spawnY;
+
+        switch (side)
+        {
+            // 左
+            case 0:
+                spawnX = left - spawnMargin;
+                spawnY = Random.Range(bottom - spawnMargin, top + spawnMargin);
+                break;
+
+            // 右
+            case 1:
+                spawnX = right + spawnMargin;
+                spawnY = Random.Range(bottom - spawnMargin, top + spawnMargin);
+                break;
+
+            // 下
+            case 2:
+                spawnX = Random.Range(left - spawnMargin, right + spawnMargin);
+                spawnY = bottom - spawnMargin;
+                break;
+
+            // 上
+            default:
+                spawnX = Random.Range(left - spawnMargin, right + spawnMargin);
+                spawnY = top + spawnMargin;
+                break;
+        }
+
+        transform.position = new Vector3(
+            spawnX,
+            spawnY,
+            transform.position.z
+        );
+    }
+}

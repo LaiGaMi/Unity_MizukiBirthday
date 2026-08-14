@@ -1,0 +1,283 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class V_Move : MonoBehaviour
+{
+    [Header("Movement")]
+    [SerializeField] private float speed = 3f;
+
+    // 實際使用中的速度
+    private float currentSpeed;
+
+
+    [Header("Attack")]
+    [SerializeField] private float attackInterval = 2f;
+    [SerializeField] private GameObject bulletPrefab;
+
+
+    [Header("Umbrella")]
+    [SerializeField] private string umbrellaTag = "Umbrella";
+
+    // 碰到雨傘後後退的距離
+    [SerializeField] private float knockbackDistance = 1f;
+
+
+    [Header("Slow")]
+    [SerializeField] private string slowBulletTag = "SlowBullet";
+
+    // 減速百分比
+    [SerializeField, Range(0f, 100f)]
+    private float slowPercent = 25f;
+
+    // 是否已經被減速
+    private bool isSlowed = false;
+
+
+    [Header("Stop")]
+    // att04 = 3 時，停止移動的機率
+    [Range(0f, 100f)]
+    [SerializeField] private float stopChance = 25f;
+
+    // 停止移動時間
+    [SerializeField] private float stopDuration = 3f;
+
+
+    private Rigidbody2D rb;
+    private Transform target;
+
+    // 敵人目前的移動方向
+    private Vector2 moveDirection = Vector2.right;
+
+    // 攻擊計時器
+    private float attackTimer;
+
+    // 是否正在停止
+    private bool isStopped = false;
+
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+
+        // 初始速度
+        currentSpeed = speed;
+
+
+        // 自動尋找名為 mizuki 的物件
+        GameObject mizukiObject = GameObject.Find("mizuki");
+
+        if (mizukiObject != null)
+        {
+            target = mizukiObject.transform;
+        }
+        else
+        {
+            Debug.LogError("找不到名為 mizuki 的物件！");
+        }
+
+
+        // 讓敵人一生成就可以開始攻擊
+        attackTimer = attackInterval;
+    }
+
+
+    private void FixedUpdate()
+    {
+        // 沒有玩家
+        if (target == null)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        }
+
+
+        // 正在停止
+        if (isStopped)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        }
+
+
+        // =========================
+        // 追蹤玩家
+        // =========================
+
+        moveDirection =
+            ((Vector2)target.position - rb.position).normalized;
+
+        rb.velocity = moveDirection * currentSpeed;
+
+
+        // =========================
+        // 攻擊計時
+        // =========================
+
+        attackTimer -= Time.fixedDeltaTime;
+
+        if (attackTimer <= 0f)
+        {
+            Attack();
+
+            attackTimer = attackInterval;
+        }
+    }
+
+
+    // =========================================================
+    // 攻擊
+    // =========================================================
+
+    private void Attack()
+    {
+        if (bulletPrefab == null)
+        {
+            return;
+        }
+
+
+        GameObject bullet = Instantiate(
+            bulletPrefab,
+            transform.position,
+            Quaternion.identity
+        );
+
+
+        // 子彈朝敵人目前移動方向
+        float angle = Mathf.Atan2(
+            moveDirection.y,
+            moveDirection.x
+        ) * Mathf.Rad2Deg;
+
+
+        bullet.transform.rotation =
+            Quaternion.Euler(0f, 0f, angle);
+    }
+
+
+    // =========================================================
+    // Trigger
+    // =========================================================
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // =====================================================
+        // 減速子彈
+        // =====================================================
+
+        if (other.CompareTag(slowBulletTag))
+        {
+            SlowEnemy();
+        }
+
+
+        // =====================================================
+        // 雨傘
+        // =====================================================
+
+        if (other.CompareTag(umbrellaTag))
+        {
+            // 面向玩家
+            if (target != null)
+            {
+                moveDirection =
+                    ((Vector2)target.position - rb.position).normalized;
+            }
+
+
+            // 後退
+            Vector2 backwardDirection = -moveDirection;
+
+            Vector2 newPosition =
+                rb.position +
+                backwardDirection * knockbackDistance;
+
+            rb.position = newPosition;
+
+
+            // att04 = 3
+            // 25% 機率停止
+            if (mizuki.att04 == 3)
+            {
+                float randomValue = Random.Range(0f, 100f);
+
+                if (randomValue < stopChance)
+                {
+                    StartCoroutine(StopMovement());
+                }
+            }
+        }
+    }
+
+
+    // =========================================================
+    // 減速
+    // =========================================================
+
+    private void SlowEnemy()
+    {
+        // 已經減速就不重複計算
+        if (isSlowed)
+        {
+            return;
+        }
+
+
+        isSlowed = true;
+
+
+        // 例如 3 × 0.75 = 2.25
+        currentSpeed =
+            speed * (1f - slowPercent / 100f);
+
+
+        Debug.Log(
+            gameObject.name +
+            " 被減速！目前速度：" +
+            currentSpeed
+        );
+    }
+
+
+    // =========================================================
+    // 停止移動
+    // =========================================================
+
+    private IEnumerator StopMovement()
+    {
+        // 如果已經停止，就不重複開始
+        if (isStopped)
+        {
+            yield break;
+        }
+
+
+        isStopped = true;
+
+        // 停止敵人
+        rb.velocity = Vector2.zero;
+
+
+        Debug.Log(
+            gameObject.name +
+            " 被雨傘阻擋，停止移動 " +
+            stopDuration +
+            " 秒"
+        );
+
+
+        // 等待
+        yield return new WaitForSeconds(stopDuration);
+
+
+        // 恢復移動
+        isStopped = false;
+
+
+        Debug.Log(
+            gameObject.name +
+            " 恢復移動"
+        );
+    }
+}
