@@ -5,13 +5,13 @@ using UnityEngine;
 public static class mizuki
 {
 	// 玩家技能紀錄
-	public static int att01 = 3;
-	public static int att02 = 3;
-	public static int att03 = 3;
-	public static int att04 = 3;
-	public static int att05 = 3;
-	public static int att06 = 3;
-	public static int att07 = 3;
+	public static int att01 = 1;
+	public static int att02 = 0;
+	public static int att03 = 0;
+	public static int att04 = 0;
+	public static int att05 = 0;
+	public static int att06 = 0;
+	public static int att07 = 0;
 	
 	// 玩家等級
 	public static int level = 0;

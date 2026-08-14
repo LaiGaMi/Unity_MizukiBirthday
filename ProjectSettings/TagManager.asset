@@ -14,6 +14,7 @@ TagManager:
   - Patt01-2
   - Vatt
   - Patt05
+  - Umbrella
   layers:
   - Default
   - TransparentFX

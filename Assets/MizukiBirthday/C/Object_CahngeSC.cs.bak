@@ -1,0 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using EasyTransition;
+
+public class Object_CahngeSC : MonoBehaviour
+{
+	// 場景名稱
+    public string sceneName;
+
+    // 改成拖這個
+    public TransitionSettings transitionSettings;
+
+    public float loadDelay = 0f;
+	
+    void OnEnable()
+    {
+        TransitionManager.Instance().Transition(sceneName, transitionSettings, loadDelay);
+    }
+
+}

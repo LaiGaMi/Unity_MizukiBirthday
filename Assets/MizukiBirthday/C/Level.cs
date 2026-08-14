@@ -69,6 +69,11 @@ public class Level : MonoBehaviour
             LevelUp();
         }
     }
+	
+	public void WaveCompleted()
+	{
+	    LevelUp();
+	}
 
 
     // =========================================================

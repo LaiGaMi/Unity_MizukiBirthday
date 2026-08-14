@@ -17,7 +17,17 @@ public class Object_runtantan : MonoBehaviour
     public float maxTargetDistance = 5f;
 
 
-    // 還剩多少次彈跳
+    // =========================================================
+    // 共用目標佔用清單
+    // =========================================================
+    //
+    // 用來避免同一批人偶在選擇目標時全部鎖定同一隻敵人。
+    //
+    private static HashSet<GameObject> reservedTargets =
+        new HashSet<GameObject>();
+
+
+    // 還剩多少次攻擊
     private int bounceCount;
 
 
@@ -30,9 +40,9 @@ public class Object_runtantan : MonoBehaviour
         new List<GameObject>();
 
 
-    // =========================================
+    // =========================================================
     // 設定彈跳次數
-    // =========================================
+    // =========================================================
 
     public void SetBounceCount(int count)
     {
@@ -42,9 +52,9 @@ public class Object_runtantan : MonoBehaviour
     }
 
 
-    // =========================================
-    // 更新
-    // =========================================
+    // =========================================================
+    // Update
+    // =========================================================
 
     private void Update()
     {
@@ -59,14 +69,16 @@ public class Object_runtantan : MonoBehaviour
         // 目標已經被刪除
         if (!currentTarget.activeInHierarchy)
         {
+            ReleaseCurrentTarget();
+
             FindTarget();
             return;
         }
 
 
-        // =====================================
+        // =====================================================
         // 朝目標移動
-        // =====================================
+        // =====================================================
 
         Vector3 direction =
             currentTarget.transform.position -
@@ -80,12 +92,19 @@ public class Object_runtantan : MonoBehaviour
     }
 
 
-    // =========================================
-    // 搜尋第一個目標
-    // =========================================
+    // =========================================================
+    // 尋找第一個目標
+    // =========================================================
 
     private void FindTarget()
     {
+        // 已經有目標就不用找
+        if (currentTarget != null)
+        {
+            return;
+        }
+
+
         GameObject[] enemies =
             GameObject.FindGameObjectsWithTag(enemyTag);
 
@@ -104,8 +123,27 @@ public class Object_runtantan : MonoBehaviour
 
         foreach (GameObject enemy in enemies)
         {
-            // 不選已經攻擊過的
+            if (enemy == null)
+            {
+                continue;
+            }
+
+
+            // -------------------------------------------------
+            // 已經攻擊過的敵人不能再次攻擊
+            // -------------------------------------------------
+
             if (attackedEnemies.Contains(enemy))
+            {
+                continue;
+            }
+
+
+            // -------------------------------------------------
+            // 已經被其他人偶鎖定的敵人先跳過
+            // -------------------------------------------------
+
+            if (reservedTargets.Contains(enemy))
             {
                 continue;
             }
@@ -127,9 +165,63 @@ public class Object_runtantan : MonoBehaviour
         }
 
 
+        // =====================================================
+        // 找到不同的目標
+        // =====================================================
+
         if (nearestEnemy != null)
         {
-            currentTarget = nearestEnemy;
+            SetCurrentTarget(nearestEnemy);
+            return;
+        }
+
+
+        // =====================================================
+        // 沒有「未被其他人偶鎖定」的敵人
+        // =====================================================
+        //
+        // 例如：
+        //
+        // 3 個人偶
+        // 只有 2 個敵人
+        //
+        // 第 3 個人偶就不可能取得不同目標。
+        //
+        // 這時候再嘗試找一個沒有攻擊過的敵人。
+        // =====================================================
+
+        foreach (GameObject enemy in enemies)
+        {
+            if (enemy == null)
+            {
+                continue;
+            }
+
+
+            if (attackedEnemies.Contains(enemy))
+            {
+                continue;
+            }
+
+
+            float distance =
+                Vector2.Distance(
+                    transform.position,
+                    enemy.transform.position
+                );
+
+
+            if (distance < nearestDistance)
+            {
+                nearestDistance = distance;
+                nearestEnemy = enemy;
+            }
+        }
+
+
+        if (nearestEnemy != null)
+        {
+            SetCurrentTarget(nearestEnemy);
         }
         else
         {
@@ -138,9 +230,41 @@ public class Object_runtantan : MonoBehaviour
     }
 
 
-    // =========================================
+    // =========================================================
+    // 設定目前目標
+    // =========================================================
+
+    private void SetCurrentTarget(GameObject target)
+    {
+        currentTarget = target;
+
+        if (currentTarget != null)
+        {
+            reservedTargets.Add(currentTarget);
+        }
+    }
+
+
+    // =========================================================
+    // 釋放目前目標
+    // =========================================================
+
+    private void ReleaseCurrentTarget()
+    {
+        if (currentTarget == null)
+        {
+            return;
+        }
+
+        reservedTargets.Remove(currentTarget);
+
+        currentTarget = null;
+    }
+
+
+    // =========================================================
     // 碰到敵人
-    // =========================================
+    // =========================================================
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -150,24 +274,40 @@ public class Object_runtantan : MonoBehaviour
         }
 
 
-        // 確認是不是目前目標
+        // =====================================================
+        // 確認是不是目前鎖定的目標
+        // =====================================================
+
         if (other.gameObject != currentTarget)
         {
             return;
         }
 
 
-        // 記錄這個敵人已經被攻擊
+        // =====================================================
+        // 記錄已經攻擊過
+        // =====================================================
+
         attackedEnemies.Add(other.gameObject);
 
 
-        // 彈跳次數 -1
+        // =====================================================
+        // 釋放目前目標
+        // =====================================================
+
+        ReleaseCurrentTarget();
+
+
+        // =====================================================
+        // 攻擊次數 -1
+        // =====================================================
+
         bounceCount--;
 
 
-        // =====================================
-        // 彈跳次數結束
-        // =====================================
+        // =====================================================
+        // 次數結束
+        // =====================================================
 
         if (bounceCount <= 0)
         {
@@ -176,17 +316,31 @@ public class Object_runtantan : MonoBehaviour
         }
 
 
-        // =====================================
+        // =====================================================
         // 尋找下一個目標
-        // =====================================
+        // =====================================================
 
         currentTarget = FindNextTarget();
+
+
+        // =====================================================
+        // 有找到下一個目標
+        // =====================================================
+
+        if (currentTarget != null)
+        {
+            reservedTargets.Add(currentTarget);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
 
-    // =========================================
+    // =========================================================
     // 找下一個目標
-    // =========================================
+    // =========================================================
 
     private GameObject FindNextTarget()
     {
@@ -201,8 +355,27 @@ public class Object_runtantan : MonoBehaviour
 
         foreach (GameObject enemy in enemies)
         {
+            if (enemy == null)
+            {
+                continue;
+            }
+
+
+            // -------------------------------------------------
             // 不選已經攻擊過的
+            // -------------------------------------------------
+
             if (attackedEnemies.Contains(enemy))
+            {
+                continue;
+            }
+
+
+            // -------------------------------------------------
+            // 不選目前被其他人偶鎖定的
+            // -------------------------------------------------
+
+            if (reservedTargets.Contains(enemy))
             {
                 continue;
             }
@@ -215,11 +388,15 @@ public class Object_runtantan : MonoBehaviour
                 );
 
 
-            // 距離不符合
+            // -------------------------------------------------
+            // 距離限制
+            // -------------------------------------------------
+
             if (distance < minTargetDistance)
             {
                 continue;
             }
+
 
             if (distance > maxTargetDistance)
             {
@@ -227,7 +404,10 @@ public class Object_runtantan : MonoBehaviour
             }
 
 
+            // -------------------------------------------------
             // 找最近
+            // -------------------------------------------------
+
             if (distance < nearestDistance)
             {
                 nearestDistance = distance;
@@ -237,5 +417,16 @@ public class Object_runtantan : MonoBehaviour
 
 
         return nearestEnemy;
+    }
+
+
+    // =========================================================
+    // 人偶被刪除
+    // =========================================================
+
+    private void OnDestroy()
+    {
+        // 防止人偶消失後，敵人還一直被佔用
+        ReleaseCurrentTarget();
     }
 }

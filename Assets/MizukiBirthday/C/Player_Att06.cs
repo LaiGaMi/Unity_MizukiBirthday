@@ -35,41 +35,61 @@ public class Player_Att06 : MonoBehaviour
     }
 
 
+    // =========================================================
+    // 生成技能人偶
+    // =========================================================
+
     private void SpawnPuppets()
     {
         int puppetCount = 0;
         int bounceCount = 0;
 
 
-        // ==============================
+        // =====================================================
         // 根據技能等級設定
-        // ==============================
+        // =====================================================
 
         switch (mizuki.att06)
         {
             case 1:
                 puppetCount = 1;
-                bounceCount = 1;
+                bounceCount = 2;
                 break;
 
             case 2:
                 puppetCount = 2;
-                bounceCount = 3;
+                bounceCount = 4;
                 break;
 
             case 3:
                 puppetCount = 3;
-                bounceCount = 5;
+                bounceCount = 6;
                 break;
+
+            default:
+                return;
         }
 
 
-        // ==============================
+        // =====================================================
         // 生成指定數量的人偶
-        // ==============================
+        // =====================================================
 
         for (int i = 0; i < puppetCount; i++)
         {
+            if (puppetPrefab == null)
+            {
+                Debug.LogWarning("Player_Att06：沒有設定 puppetPrefab。");
+                return;
+            }
+
+            if (spawnPoint == null)
+            {
+                Debug.LogWarning("Player_Att06：沒有設定 spawnPoint。");
+                return;
+            }
+
+
             GameObject puppet = Instantiate(
                 puppetPrefab,
                 spawnPoint.position,
@@ -77,13 +97,22 @@ public class Player_Att06 : MonoBehaviour
             );
 
 
-            // 設定人偶的彈跳次數
+            // =================================================
+            // 設定人偶彈射次數
+            // =================================================
+
             Object_runtantan puppetScript =
                 puppet.GetComponent<Object_runtantan>();
 
             if (puppetScript != null)
             {
                 puppetScript.SetBounceCount(bounceCount);
+            }
+            else
+            {
+                Debug.LogWarning(
+                    "Player_Att06：生成的人偶沒有 Object_runtantan。"
+                );
             }
         }
     }

@@ -216,10 +216,10 @@ public class V_HP : MonoBehaviour
 
         Level level = FindObjectOfType<Level>();
 
-        if (level != null)
-        {
-            level.CheckLevelUp();
-        }
+        //if (level != null)
+        //{
+        //    level.CheckLevelUp();
+        //}
 
 
         // -----------------------------------------------------

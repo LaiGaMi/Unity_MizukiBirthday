@@ -1,0 +1,54 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using EasyTransition;
+
+public class ui_change_scenes : MonoBehaviour
+{
+	// 場景名稱
+    public string sceneName;
+
+    // 改成拖這個
+    public TransitionSettings transitionSettings;
+
+    public float loadDelay = 0f;
+	
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+	
+	// 按鈕呼叫
+    public void ChangeScene()
+    {
+		TransitionManager.Instance().Transition(sceneName, transitionSettings, loadDelay);
+    }
+	
+	public void ChangeSceneRestart()
+    {
+		mizuki.att01 = 1;
+		mizuki.att02 = 0;
+		mizuki.att03 = 0;
+		mizuki.att04 = 0;
+		mizuki.att05 = 0;
+		mizuki.att06 = 0;
+		mizuki.att07 = 0;
+		
+		mizuki.level = 0;
+		mizuki.exp = 0;
+	
+		mizuki.card = 0;
+		mizuki.cardMax = 0;
+	
+		mizuki.Time = 0;
+		
+        TransitionManager.Instance().Transition(sceneName, transitionSettings, loadDelay);
+    }
+}

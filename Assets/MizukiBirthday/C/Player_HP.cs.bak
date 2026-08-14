@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,15 +10,26 @@ public class Player_HP : MonoBehaviour
     [SerializeField] private float currentHP;
 
     [Header("Damage")]
-    [SerializeField] private string damageTag = "Enemy";
+
+    // 可以造成玩家傷害的 Tag
+    [SerializeField] private List<string> damageTags = new List<string>()
+    {
+        "Enemy",
+        "EnemyBullet",
+        "EnemyAttack"
+    };
+
     [SerializeField] private float damageAmount = 5f;
     [SerializeField] private float damageCooldown = 1f;
+
 
     [Header("Card Defense")]
     [SerializeField] private float cardDefenseCooldown = 1f;
 
+
     [Header("HP Bar")]
     [SerializeField] private Image hpBar;
+
 
     [Header("Player Image")]
     [SerializeField] private SpriteRenderer playerSprite;
@@ -29,25 +41,15 @@ public class Player_HP : MonoBehaviour
 
     [Header("Heal Item Tag")]
 
-    // 回血道具 1 的 Tag
     [SerializeField] private string healItem01Tag = "HealItem01";
-
-    // 回血道具 2 的 Tag
     [SerializeField] private string healItem02Tag = "HealItem02";
-
-    // 回血道具 3 的 Tag
     [SerializeField] private string healItem03Tag = "HealItem03";
 
 
     [Header("Heal Amount")]
 
-    // 回血道具 1 回復量
     [SerializeField] private float healAmount01 = 10f;
-
-    // 回血道具 2 回復量
     [SerializeField] private float healAmount02 = 25f;
-
-    // 回血道具 3 回復量
     [SerializeField] private float healAmount03 = 50f;
 
 
@@ -60,10 +62,8 @@ public class Player_HP : MonoBehaviour
 
     private void Awake()
     {
-        // 初始血量
         currentHP = maxHP;
 
-        // 如果沒有手動綁定 SpriteRenderer
         if (playerSprite == null)
         {
             playerSprite = GetComponent<SpriteRenderer>();
@@ -106,20 +106,22 @@ public class Player_HP : MonoBehaviour
         // 一般受傷
         // =====================================================
 
-        // 一般無敵期間不受傷
         if (isInvincible)
         {
             return;
         }
 
-        // 塔羅牌防禦冷卻期間
         if (isCardDefenseCooldown)
         {
             return;
         }
 
-        // 確認敵人 Tag
-        if (other.CompareTag(damageTag))
+
+        // =====================================================
+        // 判斷是否為可以造成傷害的 Tag
+        // =====================================================
+
+        if (damageTags.Contains(other.tag))
         {
             TakeDamage(damageAmount);
         }
@@ -132,24 +134,16 @@ public class Player_HP : MonoBehaviour
 
     private void Heal(float amount, GameObject healItem)
     {
-        // 已經滿血
         if (currentHP >= maxHP)
         {
             return;
         }
 
-
-        // 增加 HP
         currentHP += amount;
 
-
-        // 不允許超過最大 HP
         currentHP = Mathf.Min(currentHP, maxHP);
 
-
-        // 更新 HP Bar
         UpdateHPBar();
-
 
         Debug.Log(
             "玩家回血 " +
@@ -160,8 +154,6 @@ public class Player_HP : MonoBehaviour
             maxHP
         );
 
-
-        // 刪除回血道具
         Destroy(healItem);
     }
 
@@ -178,7 +170,6 @@ public class Player_HP : MonoBehaviour
 
         if (mizuki.card > 0)
         {
-            // 消耗一張塔羅牌
             mizuki.card--;
 
             Debug.Log(
@@ -186,7 +177,6 @@ public class Player_HP : MonoBehaviour
                 mizuki.card
             );
 
-            // 開始塔羅牌防禦冷卻
             StartCoroutine(CardDefenseCooldown());
 
             return;
@@ -199,17 +189,13 @@ public class Player_HP : MonoBehaviour
 
         currentHP -= damage;
 
-        // 防止 HP 低於 0
         currentHP = Mathf.Max(currentHP, 0f);
 
-        // 更新 HP Bar
         UpdateHPBar();
 
-        // 開始一般無敵時間
         StartCoroutine(DamageCooldown());
 
 
-        // HP 歸零
         if (currentHP <= 0f)
         {
             Die();
@@ -225,13 +211,10 @@ public class Player_HP : MonoBehaviour
     {
         isInvincible = true;
 
-        // 半透明
         SetPlayerColor(1f, 1f, 1f, 0.5f);
 
-        // 等待冷卻
         yield return new WaitForSeconds(damageCooldown);
 
-        // 恢復正常
         SetPlayerColor(1f, 1f, 1f, 1f);
 
         isInvincible = false;
@@ -246,13 +229,10 @@ public class Player_HP : MonoBehaviour
     {
         isCardDefenseCooldown = true;
 
-        // 半透明 + 藍色
         SetPlayerColor(0.5f, 0.7f, 1f, 0.5f);
 
-        // 等待防禦冷卻
         yield return new WaitForSeconds(cardDefenseCooldown);
 
-        // 恢復正常
         SetPlayerColor(1f, 1f, 1f, 1f);
 
         isCardDefenseCooldown = false;

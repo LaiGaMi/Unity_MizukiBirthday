@@ -36,6 +36,16 @@ public class Player_HP : MonoBehaviour
 
 
     // =========================================================
+    // 玩家自身碰撞箱
+    // =========================================================
+
+    [Header("Player Collider")]
+
+    [Tooltip("只接受這個物件本身的 Collider2D，不包含子物件的 Collider2D。")]
+    [SerializeField] private Collider2D playerCollider;
+
+
+    // =========================================================
     // 回血道具
     // =========================================================
 
@@ -69,6 +79,13 @@ public class Player_HP : MonoBehaviour
             playerSprite = GetComponent<SpriteRenderer>();
         }
 
+        // 如果沒有手動指定，
+        // 自動取得「腳本所在物件」上的 Collider2D。
+        if (playerCollider == null)
+        {
+            playerCollider = GetComponent<Collider2D>();
+        }
+
         UpdateHPBar();
     }
 
@@ -79,6 +96,26 @@ public class Player_HP : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // =====================================================
+        // 只接受 Player_HP 所在 GameObject 自己的 Collider2D
+        // =====================================================
+
+        if (playerCollider == null)
+        {
+            return;
+        }
+
+
+        // 如果觸發這個事件的碰撞箱不是玩家自身指定的碰撞箱，
+        // 直接忽略。
+        //
+        // 子物件上的 Collider2D 不會進行任何判定。
+        if (playerCollider.gameObject != gameObject)
+        {
+            return;
+        }
+
+
         // =====================================================
         // 回血道具
         // =====================================================
@@ -268,6 +305,12 @@ public class Player_HP : MonoBehaviour
     {
         if (hpBar == null)
         {
+            return;
+        }
+
+        if (maxHP <= 0f)
+        {
+            hpBar.fillAmount = 0f;
             return;
         }
 
