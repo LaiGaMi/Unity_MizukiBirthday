@@ -18,6 +18,12 @@ public class DialogueLine
 
     public string name;
     public string talk;
+
+    // 對話音效 ID
+    // 沒有音效時可以不寫
+    public string sound;
+	
+	public string bgm;
 }
 
 [Serializable]

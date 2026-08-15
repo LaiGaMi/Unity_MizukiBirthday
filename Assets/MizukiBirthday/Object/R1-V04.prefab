@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 379411552392849384}
   - component: {fileID: 9079196897866362099}
   - component: {fileID: 970617479674725460}
-  - component: {fileID: 827431106676868381}
+  - component: {fileID: 2882221065156901804}
   - component: {fileID: 7690267070998447759}
   m_Layer: 0
   m_Name: R1-V04
@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -148,7 +148,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.15}
+  m_Offset: {x: 0, y: 0.06}
   m_Radius: 0.35
 --- !u!50 &9079196897866362099
 Rigidbody2D:
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMargin: 2
---- !u!114 &827431106676868381
+--- !u!114 &2882221065156901804
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,18 +199,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 9215997501418798535}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c165ac37e5dcfb45933e45d398f2b3d, type: 3}
+  m_Script: {fileID: 11500000, guid: 499ee842465a3f341b16848739225247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3.5
-  attackInterval: 2
-  bulletPrefab: {fileID: 0}
-  umbrellaTag: Patt04
-  knockbackDistance: 1
+  speed: 3
+  attackInterval: 5
+  rotateDuration: 1
+  dashSpeed: 14
+  rotationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  cameraEdgePadding: 1.5
   slowBulletTag: Patt07
   slowPercent: 50
-  stopChance: 25
-  stopDuration: 3
 --- !u!114 &7690267070998447759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,9 +250,9 @@ MonoBehaviour:
   healItem01: {fileID: 4745671821742337537, guid: ee5590d83972adb4a9c75765eeaf6374, type: 3}
   healItem02: {fileID: 3038220739446892327, guid: 90bf72aba738a9548a5305f9ead9b765, type: 3}
   healItem03: {fileID: 8274179225928898474, guid: a1840e8eff12103439b90f2fa7f5596b, type: 3}
-  dropChance01: 5
-  dropChance02: 5
-  dropChance03: 10
+  dropChance01: 50
+  dropChance02: 50
+  dropChance03: 100
   normalBulletTag: Patt01-2
   destroyBulletTag: Patt01
   continuousBulletTag: Patt05

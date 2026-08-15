@@ -47,11 +47,50 @@ public class Talk : MonoBehaviour
 
 
     // =========================================================
-    // 圖片資料
+    // 圖片 / 音效 / BGM 資料
     // =========================================================
 
-    [Header("圖片資料")]
+    [Header("圖片 / 音效 / BGM 資料")]
     public GameImage imageDatabase;
+
+
+    // =========================================================
+    // 音效
+    // =========================================================
+
+    [Header("音效")]
+    public AudioSource soundAudioSource;
+
+
+    // =========================================================
+    // BGM
+    // =========================================================
+
+    [Header("BGM")]
+    public AudioSource bgmAudioSource;
+
+    // BGM 切換淡入淡出時間
+    public float bgmFadeTime = 1f;
+
+    // 對話開始時記錄的 BGM 初始音量
+    private float initialBGMVolume = 1f;
+
+    // 是否已經記錄初始音量
+    private bool hasInitialBGMVolume = false;
+
+    // 目前正在播放的 BGM ID
+    private string currentBGMID = "";
+
+
+    // =========================================================
+    // 動畫完成提示圖標
+    // =========================================================
+
+    [Header("動畫完成提示圖標")]
+
+    // 動畫全部完成後顯示的 GameObject
+    // 例如：下一句箭頭、小手、提示圖標等等
+    public GameObject animationCompleteIcon;
 
 
     // =========================================================
@@ -68,7 +107,7 @@ public class Talk : MonoBehaviour
 
     private bool talking = false;
 
-    // 是否正在播放文字 / 背景 / 立繪動畫
+    // 是否正在播放文字 / 背景 / 立繪 / BGM 動畫
     private bool isTextAnimating = false;
 
     // 文字是否正在播放
@@ -76,6 +115,9 @@ public class Talk : MonoBehaviour
 
     // 背景是否正在切換
     private bool backgroundAnimating = false;
+
+    // BGM 是否正在切換
+    private bool bgmAnimating = false;
 
     // 立繪是否正在切換
     private bool ch01Animating = false;
@@ -127,6 +169,7 @@ public class Talk : MonoBehaviour
 
     private Coroutine textCoroutine;
     private Coroutine backgroundCoroutine;
+    private Coroutine bgmCoroutine;
 
     private Coroutine ch01Coroutine;
     private Coroutine ch02Coroutine;
@@ -196,6 +239,9 @@ public class Talk : MonoBehaviour
         StopAllAnimations();
 
         isTextAnimating = false;
+
+        // 對話物件停用時也隱藏提示圖標
+        HideAnimationCompleteIcon();
     }
 
 
@@ -256,33 +302,82 @@ public class Talk : MonoBehaviour
         talking = true;
 
 
+        // =====================================================
+        // 記錄 BGM 初始音量
+        // =====================================================
+
+        if (bgmAudioSource != null)
+        {
+            initialBGMVolume =
+                bgmAudioSource.volume;
+
+            hasInitialBGMVolume = true;
+        }
+        else
+        {
+            hasInitialBGMVolume = false;
+        }
+
+
+        // =====================================================
         // 重置目前背景 ID
+        // =====================================================
+
         currentBackgroundID = "";
 
 
-        // 確保立繪動畫狀態清空
+        // =====================================================
+        // 重置目前 BGM ID
+        // =====================================================
+
+        currentBGMID = "";
+
+
+        // =====================================================
+        // 確保動畫狀態清空
+        // =====================================================
+
         ch01Animating = false;
         ch02Animating = false;
         ch03Animating = false;
 
+        backgroundAnimating = false;
+        bgmAnimating = false;
 
+
+        // =====================================================
         // 清除立繪原始位置記錄
+        // =====================================================
+
         ch01HasOriginalPosition = false;
         ch02HasOriginalPosition = false;
         ch03HasOriginalPosition = false;
 
 
+        // =====================================================
+        // 隱藏動畫完成提示圖標
+        // =====================================================
+
+        HideAnimationCompleteIcon();
+
+
         dialogueUI.SetActive(true);
 
 
+        // =====================================================
         // 確保第二層背景一開始透明
+        // =====================================================
+
         SetImageAlpha(
             backgroundTransitionImage,
             0f
         );
 
 
+        // =====================================================
         // 顯示第一句
+        // =====================================================
+
         ShowDialogue();
     }
 
@@ -329,6 +424,13 @@ public class Talk : MonoBehaviour
 
     void ShowDialogue()
     {
+        // -----------------------------------------------------
+        // 顯示新句子時，先隱藏完成提示圖標
+        // -----------------------------------------------------
+
+        HideAnimationCompleteIcon();
+
+
         DialogueLine data =
             dialogueFile.dialogues[
                 currentIndex
@@ -378,6 +480,24 @@ public class Talk : MonoBehaviour
 
 
         // =====================================================
+        // 音效
+        // =====================================================
+
+        PlayDialogueSound(
+            data.sound
+        );
+
+
+        // =====================================================
+        // BGM
+        // =====================================================
+
+        ChangeBGM(
+            data.bgm
+        );
+
+
+        // =====================================================
         // 文字
         // =====================================================
 
@@ -386,7 +506,483 @@ public class Talk : MonoBehaviour
         );
 
 
+        // =====================================================
         // 更新總動畫狀態
+        // =====================================================
+
+        UpdateAnimationState();
+    }
+
+
+    // =========================================================
+    // 播放對話音效
+    // =========================================================
+
+    void PlayDialogueSound(
+        string soundID
+    )
+    {
+        // -----------------------------------------------------
+        // 沒有指定音效
+        // -----------------------------------------------------
+
+        if (string.IsNullOrEmpty(soundID))
+        {
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // 沒有圖片 / 音效資料庫
+        // -----------------------------------------------------
+
+        if (imageDatabase == null)
+        {
+            Debug.LogWarning(
+                "Talk 沒有綁定 GameImage。"
+            );
+
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // 沒有綁定 AudioSource
+        // -----------------------------------------------------
+
+        if (soundAudioSource == null)
+        {
+            Debug.LogWarning(
+                "Talk 沒有綁定 Sound Audio Source。"
+            );
+
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // 從資料庫取得音效
+        // -----------------------------------------------------
+
+        AudioClip clip =
+            imageDatabase.GetSound(
+                soundID
+            );
+
+
+        if (clip == null)
+        {
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // 播放音效
+        // -----------------------------------------------------
+
+        soundAudioSource.PlayOneShot(
+            clip
+        );
+    }
+
+
+    // =========================================================
+    // BGM 切換
+    // =========================================================
+
+    void ChangeBGM(
+        string bgmID
+    )
+    {
+        // -----------------------------------------------------
+        // 沒有指定 BGM
+        //
+        // 這一句不切換 BGM。
+        // -----------------------------------------------------
+
+        if (string.IsNullOrEmpty(bgmID))
+        {
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // 沒有 GameImage
+        // -----------------------------------------------------
+
+        if (imageDatabase == null)
+        {
+            Debug.LogWarning(
+                "Talk 沒有綁定 GameImage，無法取得 BGM。"
+            );
+
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // 沒有 BGM AudioSource
+        // -----------------------------------------------------
+
+        if (bgmAudioSource == null)
+        {
+            Debug.LogWarning(
+                "Talk 沒有綁定 BGM Audio Source。"
+            );
+
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // BGM ID 相同
+        //
+        // 不重新播放、不重新淡入。
+        // -----------------------------------------------------
+
+        if (bgmID == currentBGMID)
+        {
+            bgmAnimating = false;
+
+            UpdateAnimationState();
+
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // 取得新的 BGM
+        // -----------------------------------------------------
+
+        AudioClip newClip =
+            imageDatabase.GetBGM(
+                bgmID
+            );
+
+
+        if (newClip == null)
+        {
+            bgmAnimating = false;
+
+            UpdateAnimationState();
+
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // 記錄新的 BGM ID
+        // -----------------------------------------------------
+
+        currentBGMID =
+            bgmID;
+
+
+        // -----------------------------------------------------
+        // 停止上一個 BGM 動畫
+        // -----------------------------------------------------
+
+        if (bgmCoroutine != null)
+        {
+            StopCoroutine(
+                bgmCoroutine
+            );
+
+            bgmCoroutine = null;
+        }
+
+
+        // -----------------------------------------------------
+        // 開始 BGM 淡出 / 淡入
+        // -----------------------------------------------------
+
+        bgmCoroutine =
+            StartCoroutine(
+                FadeBGM(newClip)
+            );
+    }
+
+
+    // =========================================================
+    // BGM 淡出 / 淡入
+    // =========================================================
+
+    IEnumerator FadeBGM(
+        AudioClip newClip
+    )
+    {
+        bgmAnimating = true;
+
+        UpdateAnimationState();
+
+
+        // -----------------------------------------------------
+        // 確認初始音量
+        // -----------------------------------------------------
+
+        float targetVolume =
+            GetInitialBGMVolume();
+
+
+        // -----------------------------------------------------
+        // 防止設定為 0
+        // -----------------------------------------------------
+
+        if (bgmFadeTime <= 0f)
+        {
+            bgmAudioSource.Stop();
+
+            bgmAudioSource.clip =
+                newClip;
+
+            bgmAudioSource.volume =
+                targetVolume;
+
+            bgmAudioSource.Play();
+
+
+            bgmAnimating = false;
+
+            bgmCoroutine = null;
+
+            UpdateAnimationState();
+
+            yield break;
+        }
+
+
+        // -----------------------------------------------------
+        // 記錄目前音量
+        // -----------------------------------------------------
+
+        float startVolume =
+            bgmAudioSource.volume;
+
+
+        // =====================================================
+        // 第一階段：淡出
+        // =====================================================
+
+        float timer = 0f;
+
+
+        while (
+            timer <
+            bgmFadeTime
+        )
+        {
+            timer +=
+                Time.deltaTime;
+
+
+            float progress =
+                timer /
+                bgmFadeTime;
+
+
+            progress =
+                Mathf.Clamp01(
+                    progress
+                );
+
+
+            bgmAudioSource.volume =
+                Mathf.Lerp(
+                    startVolume,
+                    0f,
+                    progress
+                );
+
+
+            yield return null;
+        }
+
+
+        // -----------------------------------------------------
+        // 確保完全靜音
+        // -----------------------------------------------------
+
+        bgmAudioSource.volume = 0f;
+
+
+        // =====================================================
+        // 更換 BGM
+        // =====================================================
+
+        bgmAudioSource.Stop();
+
+
+        bgmAudioSource.clip =
+            newClip;
+
+
+        // =====================================================
+        // 開始播放新的 BGM
+        // =====================================================
+
+        bgmAudioSource.Play();
+
+
+        // =====================================================
+        // 第二階段：淡入
+        // =====================================================
+
+        timer = 0f;
+
+
+        while (
+            timer <
+            bgmFadeTime
+        )
+        {
+            timer +=
+                Time.deltaTime;
+
+
+            float progress =
+                timer /
+                bgmFadeTime;
+
+
+            progress =
+                Mathf.Clamp01(
+                    progress
+                );
+
+
+            bgmAudioSource.volume =
+                Mathf.Lerp(
+                    0f,
+                    targetVolume,
+                    progress
+                );
+
+
+            yield return null;
+        }
+
+
+        // -----------------------------------------------------
+        // 確保最後回到初始音量
+        // -----------------------------------------------------
+
+        bgmAudioSource.volume =
+            targetVolume;
+
+
+        // -----------------------------------------------------
+        // BGM 動畫完成
+        // -----------------------------------------------------
+
+        bgmAnimating = false;
+
+        bgmCoroutine = null;
+
+
+        UpdateAnimationState();
+    }
+
+
+    // =========================================================
+    // 取得 BGM 初始音量
+    // =========================================================
+
+    float GetInitialBGMVolume()
+    {
+        if (hasInitialBGMVolume)
+        {
+            return initialBGMVolume;
+        }
+
+
+        if (bgmAudioSource != null)
+        {
+            return bgmAudioSource.volume;
+        }
+
+
+        return 1f;
+    }
+
+
+    // =========================================================
+    // 立即完成 BGM
+    // =========================================================
+
+    void CompleteBGM()
+    {
+        if (!bgmAnimating)
+            return;
+
+
+        // -----------------------------------------------------
+        // 停止 BGM Coroutine
+        // -----------------------------------------------------
+
+        if (bgmCoroutine != null)
+        {
+            StopCoroutine(
+                bgmCoroutine
+            );
+
+            bgmCoroutine = null;
+        }
+
+
+        // -----------------------------------------------------
+        // 取得目前這句資料
+        // -----------------------------------------------------
+
+        DialogueLine data =
+            dialogueFile
+                .dialogues[currentIndex];
+
+
+        // -----------------------------------------------------
+        // 取得 BGM
+        // -----------------------------------------------------
+
+        AudioClip newClip =
+            imageDatabase.GetBGM(
+                data.bgm
+            );
+
+
+        // -----------------------------------------------------
+        // 直接切換 BGM
+        // -----------------------------------------------------
+
+        if (newClip != null)
+        {
+            bgmAudioSource.Stop();
+
+
+            bgmAudioSource.clip =
+                newClip;
+
+
+            bgmAudioSource.volume =
+                GetInitialBGMVolume();
+
+
+            bgmAudioSource.Play();
+        }
+        else
+        {
+            // 如果找不到新的 BGM，
+            // 至少恢復原本音量
+            bgmAudioSource.volume =
+                GetInitialBGMVolume();
+        }
+
+
+        // -----------------------------------------------------
+        // BGM 動畫完成
+        // -----------------------------------------------------
+
+        bgmAnimating = false;
+
+
         UpdateAnimationState();
     }
 
@@ -866,7 +1462,6 @@ public class Talk : MonoBehaviour
 
 
         // =====================================================
-        // 重要：
         // 直接記錄真正的原始目標位置
         // =====================================================
 
@@ -1446,9 +2041,9 @@ public class Talk : MonoBehaviour
         {
             image.color =
                 new Color(
-                    0.5f,
-                    0.5f,
-                    0.5f,
+                    0f,
+                    0f,
+                    0f,
                     1f
                 );
         }
@@ -1482,6 +2077,34 @@ public class Talk : MonoBehaviour
 
 
     // =========================================================
+    // 顯示動畫完成提示圖標
+    // =========================================================
+
+    void ShowAnimationCompleteIcon()
+    {
+        if (animationCompleteIcon == null)
+            return;
+
+
+        animationCompleteIcon.SetActive(true);
+    }
+
+
+    // =========================================================
+    // 隱藏動畫完成提示圖標
+    // =========================================================
+
+    void HideAnimationCompleteIcon()
+    {
+        if (animationCompleteIcon == null)
+            return;
+
+
+        animationCompleteIcon.SetActive(false);
+    }
+
+
+    // =========================================================
     // 完成所有動畫
     // =========================================================
 
@@ -1504,6 +2127,16 @@ public class Talk : MonoBehaviour
         if (backgroundAnimating)
         {
             CompleteBackground();
+        }
+
+
+        // -----------------------------------------------------
+        // BGM
+        // -----------------------------------------------------
+
+        if (bgmAnimating)
+        {
+            CompleteBGM();
         }
 
 
@@ -1546,7 +2179,10 @@ public class Talk : MonoBehaviour
         }
 
 
+        // -----------------------------------------------------
         // 最後統一更新
+        // -----------------------------------------------------
+
         UpdateAnimationState();
     }
 
@@ -1560,9 +2196,24 @@ public class Talk : MonoBehaviour
         isTextAnimating =
             textAnimating ||
             backgroundAnimating ||
+            bgmAnimating ||
             ch01Animating ||
             ch02Animating ||
             ch03Animating;
+
+
+        // =====================================================
+        // 所有動畫都完成
+        // =====================================================
+
+        if (!isTextAnimating)
+        {
+            ShowAnimationCompleteIcon();
+        }
+        else
+        {
+            HideAnimationCompleteIcon();
+        }
     }
 
 
@@ -1597,6 +2248,20 @@ public class Talk : MonoBehaviour
             );
 
             backgroundCoroutine = null;
+        }
+
+
+        // -----------------------------------------------------
+        // BGM
+        // -----------------------------------------------------
+
+        if (bgmCoroutine != null)
+        {
+            StopCoroutine(
+                bgmCoroutine
+            );
+
+            bgmCoroutine = null;
         }
 
 
@@ -1653,6 +2318,13 @@ public class Talk : MonoBehaviour
 
 
         // -----------------------------------------------------
+        // 隱藏動畫完成提示圖標
+        // -----------------------------------------------------
+
+        HideAnimationCompleteIcon();
+
+
+        // -----------------------------------------------------
         // 立繪動畫狀態
         // -----------------------------------------------------
 
@@ -1676,6 +2348,7 @@ public class Talk : MonoBehaviour
 
         textAnimating = false;
         backgroundAnimating = false;
+        bgmAnimating = false;
 
         isTextAnimating = false;
     }
@@ -1715,6 +2388,10 @@ public class Talk : MonoBehaviour
 
 
         StopAllAnimations();
+
+
+        // 確保結束時提示圖標隱藏
+        HideAnimationCompleteIcon();
 
 
         dialogueUI.SetActive(false);

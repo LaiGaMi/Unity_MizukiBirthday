@@ -38,8 +38,9 @@
       "ch01": {"id": "000", "focus": true},
       "ch02": {"id": "mzk_n", "focus": true},
       "ch03": {"id": "000", "focus": true},
+	  "sound": "walk",
       "name": "瑞希",
-      "talk": "你們幾個偷偷摸摸的～到底在做什麼呢？"
+      "talk": "妳們幾個偷偷摸摸的～到底在做什麼呢？"
     },
 	{
       "background": "BG01",
@@ -83,7 +84,7 @@
     },
 	{
       "background": "BG01",
-      "ch01": {"id": "mzk_n", "focus": true},
+      "ch01": {"id": "mzk_h", "focus": true},
       "ch02": {"id": "000", "focus": true},
       "ch03": {"id": "ena_n", "focus": true},
       "name": "瑞希",
@@ -91,7 +92,7 @@
     },
 	{
       "background": "BG01",
-      "ch01": {"id": "mzk_n", "focus": true},
+      "ch01": {"id": "mzk_h", "focus": true},
       "ch02": {"id": "000", "focus": true},
       "ch03": {"id": "ena_n", "focus": true},
       "name": "繪名",
@@ -100,10 +101,10 @@
 	{
       "background": "BG01",
       "ch01": {"id": "000", "focus": true},
-      "ch02": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "mzk_h", "focus": true},
       "ch03": {"id": "000", "focus": true},
       "name": "瑞希",
-      "talk": "那為什麼你們三個看到我之後，表情都這麼可疑？"
+      "talk": "那為什麼妳們三個看到我之後，表情都這麼可疑？"
     },
 	{
       "background": "BG01",
@@ -111,13 +112,13 @@
       "ch02": {"id": "mfy_n", "focus": true},
       "ch03": {"id": "000", "focus": true},
       "name": "真冬",
-      "talk": "……繪名，臉紅了。"
+      "talk": "……繪名，慌張了。"
     },
 	{
       "background": "BG01",
       "ch01": {"id": "mfy_n", "focus": true},
       "ch02": {"id": "000", "focus": true},
-      "ch03": {"id": "ena_n", "focus": true},
+      "ch03": {"id": "ena_a", "focus": true},
       "name": "繪名",
       "talk": "真冬！不要說出來！"
     },
@@ -140,7 +141,7 @@
 	{
       "background": "BG01",
       "ch01": {"id": "000", "focus": true},
-      "ch02": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
       "ch03": {"id": "000", "focus": true},
       "name": "瑞希",
       "talk": "嗯？"
@@ -166,6 +167,7 @@
       "ch01": {"id": "000", "focus": true},
       "ch02": {"id": "000", "focus": true},
       "ch03": {"id": "000", "focus": true},
+	  "sound": "shine",
       "name": "",
       "talk": "一道奇異的光芒突然出現在「世界」中央。"
     },
@@ -206,13 +208,14 @@
       "ch01": {"id": "000", "focus": true},
       "ch02": {"id": "000", "focus": true},
       "ch03": {"id": "000", "focus": true},
+	  "sound": "shine",
       "name": "",
       "talk": "光芒越來越強烈，周圍的景象開始扭曲。"
     },
 	{
       "background": "BG00-2",
       "ch01": {"id": "000", "focus": true},
-      "ch02": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "mzk_s", "focus": true},
       "ch03": {"id": "000", "focus": true},
       "name": "瑞希",
       "talk": "等等……這個感覺……"
@@ -220,7 +223,7 @@
 	{
       "background": "BG00-2",
       "ch01": {"id": "000", "focus": true},
-      "ch02": {"id": "ena_n", "focus": true},
+      "ch02": {"id": "ena_a", "focus": true},
       "ch03": {"id": "000", "focus": true},
       "name": "繪名",
       "talk": "瑞希！"
@@ -247,7 +250,7 @@
       "ch02": {"id": "000", "focus": true},
       "ch03": {"id": "000", "focus": true},
       "name": "",
-      "talk": "四人的身影，被光芒吞沒。"
+      "talk": "四人的身影被光芒吞沒。"
     }
 	
   ]

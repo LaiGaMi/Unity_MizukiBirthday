@@ -22,6 +22,12 @@ public class V_Wave : MonoBehaviour
     [Tooltip("每一項代表一個波次。")]
     public List<Wave> waves = new List<Wave>();
 
+    [Header("========== 第一波開始設定 ==========")]
+
+    [Tooltip("遊戲開始後，第一個波次開始生成敵人前要等待幾秒。只有第一波會等待。")]
+    [Min(0f)]
+    public float firstWaveStartDelay = 0f;
+
     [Header("========== 生成設定 ==========")]
 
     [Tooltip("場上最多同時存在多少隻由此生成器產生的敵人。")]
@@ -72,17 +78,17 @@ public class V_Wave : MonoBehaviour
 
     // 是否已經全部完成
     private bool isFinished = false;
-	
-	private Level levelManager;
-	
+
+    private Level levelManager;
+
     // --------------------------------------------------
     // Unity
     // --------------------------------------------------
 
     private void Start()
     {
-		levelManager = FindFirstObjectByType<Level>();
-		
+        levelManager = FindFirstObjectByType<Level>();
+
         Initialize();
     }
 
@@ -121,7 +127,27 @@ public class V_Wave : MonoBehaviour
         }
 
         // 開始第一波
-        StartWave(currentWaveIndex);
+        // 注意：只有第一波會經過 firstWaveStartDelay
+        StartCoroutine(StartFirstWaveWithDelay());
+    }
+
+    // --------------------------------------------------
+    // 第一波開始前等待
+    // --------------------------------------------------
+
+    private IEnumerator StartFirstWaveWithDelay()
+    {
+        // 第一波開始前等待指定秒數
+        if (firstWaveStartDelay > 0f)
+        {
+            yield return new WaitForSeconds(firstWaveStartDelay);
+        }
+
+        // 等待結束後，如果遊戲還沒有完成，才開始第一波
+        if (isFinished)
+            yield break;
+
+        StartWave(0);
     }
 
     // --------------------------------------------------
@@ -222,6 +248,8 @@ public class V_Wave : MonoBehaviour
         }
         else
         {
+            // 第二波以後直接開始
+            // 不會再套用 firstWaveStartDelay
             StartWave(currentWaveIndex);
         }
     }
@@ -287,12 +315,12 @@ public class V_Wave : MonoBehaviour
 
         if (isFinished)
             yield break;
-		
-		if (levelManager != null)
-		{
-		    levelManager.WaveCompleted();
-		}
-		
+
+        if (levelManager != null)
+        {
+            levelManager.WaveCompleted();
+        }
+
         // 進入下一波
         currentWaveIndex++;
 
@@ -302,6 +330,8 @@ public class V_Wave : MonoBehaviour
         }
         else
         {
+            // 後面的波次直接開始
+            // 不會再等待 firstWaveStartDelay
             StartWave(currentWaveIndex);
         }
     }
@@ -463,6 +493,9 @@ public class V_Wave : MonoBehaviour
 
         if (spawnInterval < 0f)
             spawnInterval = 0f;
+
+        if (firstWaveStartDelay < 0f)
+            firstWaveStartDelay = 0f;
     }
 }
 

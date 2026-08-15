@@ -1,0 +1,126 @@
+{
+  "dialogues": [
+  
+	{
+      "background": "BG02",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "幫助瑞希使用心願的力量修復驚喜的「世界」吧！"
+    },
+	{
+      "background": "BG02",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "th_02", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "觸碰畫面可以進行上、下、左、右的行動。"
+    },
+	{
+      "background": "BG02",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "th_01", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "瑞希的心願力量會自動發動。"
+    },
+	{
+      "background": "BG02",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "th_01", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "瞄準目標用心願修復Vocaloid們吧。"
+    },
+	{
+      "background": "BG02",
+      "ch01": {"id": "000", "focus": false},
+      "ch02": {"id": "000", "focus": false},
+      "ch03": {"id": "000", "focus": false},
+      "name": "",
+      "talk": "同時要小心各種Vocaloid的驚喜……"
+    },
+	{
+      "background": "BG02",
+      "ch01": {"id": "v02_n", "focus": false},
+      "ch02": {"id": "000", "focus": false},
+      "ch03": {"id": "000", "focus": false},
+      "name": "",
+      "talk": "例如某位Vocaloid可能會丟出麥克風……"
+    },
+	{
+      "background": "BG02",
+      "ch01": {"id": "v03_s", "focus": false},
+      "ch02": {"id": "000", "focus": false},
+      "ch03": {"id": "000", "focus": false},
+      "name": "",
+      "talk": "某位Vocaloid會施放衝擊波……"
+    },
+	{
+      "background": "BG02",
+      "ch01": {"id": "v04_r", "focus": false},
+      "ch02": {"id": "000", "focus": false},
+      "ch03": {"id": "000", "focus": false},
+      "name": "",
+      "talk": "某位Vocaloid或許會爆衝……"
+    },
+	{
+      "background": "BG02",
+      "ch01": {"id": "v05_s", "focus": false},
+      "ch02": {"id": "000", "focus": false},
+      "ch03": {"id": "000", "focus": false},
+      "name": "",
+      "talk": "……總之小心行事吧。"
+    },
+	{
+      "background": "BG02",
+      "ch01": {"id": "000", "focus": false},
+      "ch02": {"id": "000", "focus": false},
+      "ch03": {"id": "000", "focus": false},
+      "name": "",
+      "talk": "當修復一定數量的Vocaloid後……"
+    },
+	{
+      "background": "BG02",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "th_03", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "心願力量就會聚集到瑞希身邊，變成新的能力。"
+    },
+	{
+      "background": "BG02",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "th_03", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "每種能力可以升級三次，選取喜歡的能力強化吧！"
+    },
+	{
+      "background": "BG02",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "th_04", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "這些能力將幫助瑞希拯救同伴的旅程更加順利。"
+    },
+	{
+      "background": "BG02",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "以上，說明時間結束。"
+    },
+	{
+      "background": "BG02",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "助你旅途順利，「世界」的居民！"
+    }
+	
+  ]
+}

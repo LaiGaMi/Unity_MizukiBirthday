@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da23065ece84ed4ca20a7f4998f32d4, type: 3}
+  m_Name: GameImage
+  m_EditorClassIdentifier: 
+  characterImageList:
+  - id: 000
+    image: {fileID: 1759959299, guid: 921f870fc785b5a49afa77786f531b1e, type: 3}
+  - id: mfy_n
+    image: {fileID: 434003793750849643, guid: a566d978e15bc134382e5b0b201dd5b8, type: 3}
+  - id: knd_n
+    image: {fileID: -3767061752817380992, guid: a977b4c70bd36ba4d9ba917193031ee1, type: 3}
+  - id: v01_n
+    image: {fileID: 993339140203624302, guid: dad75e9cc5d0fc2438ff7635831c13af, type: 3}
+  - id: v02_n
+    image: {fileID: -7640580820871862235, guid: 8c9852b583d80e34dbc8c5623c68a2bb, type: 3}
+  - id: v03_n
+    image: {fileID: -7491742498953293678, guid: cf48817f43e79064995630e26f4b6600, type: 3}
+  - id: v03_s
+    image: {fileID: -3691307228519640562, guid: 6612a9a49923bc5489142b28f3b7ca58, type: 3}
+  - id: v04_r
+    image: {fileID: 4933841283169374081, guid: f69ebc22dd2e4eb488a9dfaddf62aca9, type: 3}
+  - id: v04_l
+    image: {fileID: 2106510020072161885, guid: 3ab64faa8a5063747aada319727166a9, type: 3}
+  - id: v05_n
+    image: {fileID: 8086896585132013184, guid: bd9e94edfa91e8e43a3f6e7365f3884b, type: 3}
+  - id: v05_s
+    image: {fileID: 1254459154, guid: b98079a6ca6e3844daa3338bd1ebb8c1, type: 3}
+  - id: mzk_n
+    image: {fileID: -1175587630421775703, guid: 973dc3cd821ce574aa8a0edd2e19797b, type: 3}
+  - id: mzk_o
+    image: {fileID: 294305917407646197, guid: 42cb1b710a9667d4894473295ebbb745, type: 3}
+  - id: mzk_b
+    image: {fileID: 1469218931765072930, guid: 6962c3dc90885f249873640dd121fe4f, type: 3}
+  - id: mzk_h
+    image: {fileID: -1076595740297925505, guid: 31ad0e4514550a54a85ca9d18c9c8fc1, type: 3}
+  - id: mzk_s
+    image: {fileID: 9111973904900941276, guid: 805142a0333581d47b619e009f38da90, type: 3}
+  - id: ena_n
+    image: {fileID: -2594243130540579084, guid: 4e202129516e5ec41ba7361ba675e44b, type: 3}
+  - id: ena_a
+    image: {fileID: -5113733948077256413, guid: a6699fda037ba7042b3867283aa8070c, type: 3}
+  - id: th_01
+    image: {fileID: -121931898672820157, guid: 111482f526323a447b7fb77accb03f20, type: 3}
+  - id: th_02
+    image: {fileID: -648747192570025341, guid: 52e659be54cab0f4ca191dcca4c5a9de, type: 3}
+  - id: th_03
+    image: {fileID: -1951972139718632546, guid: 6d2b4130c703b5649ac79d258c1822b0, type: 3}
+  - id: th_04
+    image: {fileID: 1978651553762039544, guid: 0b54b2489e8bffa4db22e28976623df6, type: 3}
+  backgroundImageList:
+  - id: BG00
+    image: {fileID: -3950361119258288663, guid: 8c5b362d5f40b394684d8e2e56f039ad, type: 3}
+  - id: BG00-2
+    image: {fileID: -1454654019944314086, guid: 07510f2e5b277b44a963d2761c4cc061, type: 3}
+  - id: BG01
+    image: {fileID: 1778045212982025016, guid: cfae4526329f29443b7a4c94eabdf076, type: 3}
+  - id: BG02
+    image: {fileID: -1481361546272026671, guid: ff10560c617f08c46b518651ef6698a2, type: 3}
+  - id: BG03
+    image: {fileID: 6540068351669172922, guid: e3c14ce3154e81d4b9df01faf1a50873, type: 3}
+  soundList:
+  - id: shine
+    sound: {fileID: 8300000, guid: e0fcff934baa7d34c96e30c06d7e8e79, type: 3}
+  - id: walk
+    sound: {fileID: 8300000, guid: b2fc01a02938f1c41b1f1e5fff8f6ca3, type: 3}
+  - id: run
+    sound: {fileID: 8300000, guid: 110f3e1ec3913c14c9ded8df4216cbff, type: 3}
+  bgmList:
+  - id: 001
+    bgm: {fileID: 8300000, guid: cd183f8bc8d11b3408a53488c760cc04, type: 3}
+  - id: 002
+    bgm: {fileID: 8300000, guid: e78846e1be8be13418fc2e5ab0be7067, type: 3}
+  - id: 003
+    bgm: {fileID: 8300000, guid: a8cec628c1bfff343a5535e7e0cf62f3, type: 3}
+  - id: 004
+    bgm: {fileID: 8300000, guid: 5c2968d6fceda7545a5ded9b4abf6dcb, type: 3}
+  - id: end
+    bgm: {fileID: 8300000, guid: 25238d8915e7233468459d467abb307d, type: 3}
+  - id: teach
+    bgm: {fileID: 8300000, guid: b332ab485d308e54c8af46f7fe2eb2c6, type: 3}

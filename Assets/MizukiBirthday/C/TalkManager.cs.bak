@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 
-
 [Serializable]
 public class DialogueFile
 {
@@ -11,14 +10,19 @@ public class DialogueFile
 [Serializable]
 public class DialogueLine
 {
+    public string background;
+
     public CharacterSlot ch01;
     public CharacterSlot ch02;
     public CharacterSlot ch03;
 
     public string name;
     public string talk;
-}
 
+    // 對話音效 ID
+    // 沒有音效時可以不寫
+    public string sound;
+}
 
 [Serializable]
 public class CharacterSlot

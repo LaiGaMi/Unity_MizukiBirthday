@@ -287,7 +287,12 @@ public class V_Wave : MonoBehaviour
 
         if (isFinished)
             yield break;
-
+		
+		if (levelManager != null)
+		{
+		    levelManager.WaveCompleted();
+		}
+		
         // 進入下一波
         currentWaveIndex++;
 

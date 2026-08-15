@@ -13,6 +13,8 @@ public class ui_change_scenes : MonoBehaviour
 
     public float loadDelay = 0f;
 	
+	public bool restart = false;
+	
     // Start is called before the first frame update
     void Start()
     {
@@ -33,21 +35,24 @@ public class ui_change_scenes : MonoBehaviour
 	
 	public void ChangeSceneRestart()
     {
-		mizuki.att01 = 1;
-		mizuki.att02 = 0;
-		mizuki.att03 = 0;
-		mizuki.att04 = 0;
-		mizuki.att05 = 0;
-		mizuki.att06 = 0;
-		mizuki.att07 = 0;
+		if(restart)
+		{
+			mizuki.att01 = 1;
+			mizuki.att02 = 0;
+			mizuki.att03 = 0;
+			mizuki.att04 = 0;
+			mizuki.att05 = 0;
+			mizuki.att06 = 0;
+			mizuki.att07 = 0;
 		
-		mizuki.level = 0;
-		mizuki.exp = 0;
+			mizuki.level = 0;
+			mizuki.exp = 0;
 	
-		mizuki.card = 0;
-		mizuki.cardMax = 0;
+			mizuki.card = 0;
+			mizuki.cardMax = 0;
 	
-		mizuki.Time = 0;
+			mizuki.Time = 0;
+		}
 		
         TransitionManager.Instance().Transition(sceneName, transitionSettings, loadDelay);
     }

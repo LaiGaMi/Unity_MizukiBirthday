@@ -1,0 +1,538 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class V_Move2 : MonoBehaviour
+{
+    [Header("Movement")]
+    [SerializeField] private float speed = 3f;
+
+    // 實際使用中的速度
+    private float currentSpeed;
+
+
+    [Header("Attack / Dash")]
+    // 多久發動一次衝刺
+    [SerializeField] private float attackInterval = 2f;
+
+    // 旋轉一圈所需時間
+    [SerializeField] private float rotateDuration = 0.5f;
+
+    // 衝刺速度
+    [SerializeField] private float dashSpeed = 8f;
+
+    // Z 軸旋轉速度曲線
+    [SerializeField] private AnimationCurve rotationCurve =
+        AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+
+
+    [Header("Camera Edge")]
+    // 攝影機邊緣往外擴張多少世界單位
+    [SerializeField] private float cameraEdgePadding = 2f;
+
+
+    [Header("Slow")]
+    [SerializeField] private string slowBulletTag = "SlowBullet";
+
+    // 減速百分比
+    [SerializeField, Range(0f, 100f)]
+    private float slowPercent = 25f;
+
+    // 是否已經被減速
+    private bool isSlowed = false;
+
+
+    private Rigidbody2D rb;
+    private Transform target;
+    private Camera mainCamera;
+
+    // 敵人目前的移動方向
+    private Vector2 moveDirection = Vector2.right;
+
+    // 攻擊計時器
+    private float attackTimer;
+
+    // 是否正在旋轉
+    private bool isRotating = false;
+
+    // 是否正在衝刺
+    private bool isDashing = false;
+
+
+    // =========================================================
+    // 衝刺相關
+    // =========================================================
+
+    // 旋轉開始時記錄的玩家位置
+    private Vector2 dashTargetPosition;
+
+    // 旋轉開始時決定好的衝刺方向
+    private Vector2 dashDirection;
+
+    // 是否已經經過玩家在旋轉開始時的位置
+    private bool hasPassedTargetPosition = false;
+
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+
+        // 初始速度
+        currentSpeed = speed;
+
+        // 找攝影機
+        mainCamera = Camera.main;
+
+        // 自動尋找玩家
+        FindTarget();
+
+        // 讓敵人一生成就開始計時
+        attackTimer = attackInterval;
+    }
+
+
+    private void FixedUpdate()
+    {
+        // 沒有玩家
+        if (target == null)
+        {
+            FindTarget();
+
+            rb.velocity = Vector2.zero;
+            return;
+        }
+
+
+        // =====================================================
+        // 正在旋轉
+        // =====================================================
+
+        if (isRotating)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        }
+
+
+        // =====================================================
+        // 正在衝刺
+        // =====================================================
+
+        if (isDashing)
+        {
+            Dash();
+            return;
+        }
+
+
+        // =====================================================
+        // 一般追蹤玩家
+        // =====================================================
+
+        moveDirection =
+            ((Vector2)target.position - rb.position).normalized;
+
+        rb.velocity =
+            moveDirection * currentSpeed;
+
+
+        // =====================================================
+        // 攻擊計時
+        // =====================================================
+
+        attackTimer -= Time.fixedDeltaTime;
+
+        if (attackTimer <= 0f)
+        {
+            // 開始攻擊流程
+            StartCoroutine(AttackSequence());
+        }
+    }
+
+
+    // =========================================================
+    // 攻擊流程
+    // =========================================================
+
+    private IEnumerator AttackSequence()
+    {
+        // 避免重複執行
+        if (isRotating || isDashing)
+        {
+            yield break;
+        }
+
+
+        // =====================================================
+        // 旋轉開始
+        // =====================================================
+
+        isRotating = true;
+
+        // 停止移動
+        rb.velocity = Vector2.zero;
+
+
+        // =====================================================
+        // 在「旋轉開始的瞬間」
+        // 決定這次衝刺的所有資料
+        // =====================================================
+
+        FindTarget();
+
+
+        if (target != null)
+        {
+            // ---------------------------------------------
+            // 1. 記錄玩家現在的位置
+            // ---------------------------------------------
+
+            dashTargetPosition =
+                target.position;
+
+
+            // ---------------------------------------------
+            // 2. 計算並鎖定衝刺方向
+            // ---------------------------------------------
+
+            dashDirection =
+                (dashTargetPosition - rb.position)
+                .normalized;
+
+
+            // ---------------------------------------------
+            // 3. 同步目前移動方向
+            // ---------------------------------------------
+
+            moveDirection =
+                dashDirection;
+        }
+
+
+        // ---------------------------------------------
+        // 4. 重置「是否經過玩家位置」
+        // ---------------------------------------------
+
+        hasPassedTargetPosition = false;
+
+
+        // =====================================================
+        // Z 軸旋轉一圈
+        // =====================================================
+
+        float timer = 0f;
+
+        while (timer < rotateDuration)
+        {
+            timer += Time.deltaTime;
+
+            float progress =
+                Mathf.Clamp01(
+                    timer / rotateDuration
+                );
+
+
+            // 使用 AnimationCurve 控制旋轉速度
+            float curveValue =
+                rotationCurve.Evaluate(progress);
+
+
+            // 旋轉 360 度
+            float angle =
+                curveValue * 360f;
+
+
+            transform.rotation =
+                Quaternion.Euler(
+                    0f,
+                    0f,
+                    angle
+                );
+
+
+            yield return null;
+        }
+
+
+        // =====================================================
+        // 旋轉結束
+        // =====================================================
+
+        transform.rotation =
+            Quaternion.Euler(
+                0f,
+                0f,
+                0f
+            );
+
+
+        // 結束旋轉
+        isRotating = false;
+
+
+        // =====================================================
+        // 開始衝刺
+        //
+        // 注意：
+        // 這裡不再重新尋找玩家，也不重新計算方向。
+        // 完全使用旋轉開始時鎖定的 dashDirection。
+        // =====================================================
+
+        isDashing = true;
+
+        rb.velocity =
+            dashDirection * dashSpeed;
+    }
+
+
+    // =========================================================
+    // 衝刺
+    // =========================================================
+
+    private void Dash()
+    {
+        // 永遠使用旋轉開始時鎖定的方向
+        rb.velocity =
+            dashDirection * dashSpeed;
+
+
+        // =====================================================
+        // 第一階段：
+        // 先確認是否已經經過玩家原本的位置
+        // =====================================================
+
+        if (!hasPassedTargetPosition)
+        {
+            CheckPassedTargetPosition();
+
+            // 還沒經過玩家位置
+            // 不判斷攝影機邊緣
+            return;
+        }
+
+
+        // =====================================================
+        // 第二階段：
+        // 已經經過玩家位置後
+        // 才開始判斷攝影機邊緣
+        // =====================================================
+
+        if (IsOutsideCamera())
+        {
+            StopDash();
+        }
+    }
+
+
+    // =========================================================
+    // 判斷是否已經經過玩家原本的位置
+    // =========================================================
+
+    private void CheckPassedTargetPosition()
+    {
+        // 玩家位置到敵人目前位置的向量
+        Vector2 toTarget =
+            dashTargetPosition - rb.position;
+
+
+        // 使用點積判斷是否已經越過目標位置
+        //
+        // > 0 ：玩家位置還在前方
+        // = 0 ：敵人正好到達玩家位置
+        // < 0 ：玩家位置已經在敵人後方
+        float dot =
+            Vector2.Dot(
+                dashDirection,
+                toTarget
+            );
+
+
+        if (dot < 0f)
+        {
+            hasPassedTargetPosition = true;
+
+            Debug.Log(
+                gameObject.name +
+                " 已經經過攻擊開始時玩家的位置"
+            );
+        }
+    }
+
+
+    // =========================================================
+    // 檢查攝影機邊緣
+    // =========================================================
+
+    private bool IsOutsideCamera()
+    {
+        if (mainCamera == null)
+        {
+            return false;
+        }
+
+
+        // =====================================================
+        // 計算攝影機世界範圍
+        // =====================================================
+
+        float cameraHeight =
+            mainCamera.orthographicSize * 2f;
+
+
+        float cameraWidth =
+            cameraHeight * mainCamera.aspect;
+
+
+        Vector3 cameraCenter =
+            mainCamera.transform.position;
+
+
+        // =====================================================
+        // 加上往外擴張的範圍
+        // =====================================================
+
+        float left =
+            cameraCenter.x -
+            cameraWidth / 2f -
+            cameraEdgePadding;
+
+
+        float right =
+            cameraCenter.x +
+            cameraWidth / 2f +
+            cameraEdgePadding;
+
+
+        float bottom =
+            cameraCenter.y -
+            cameraHeight / 2f -
+            cameraEdgePadding;
+
+
+        float top =
+            cameraCenter.y +
+            cameraHeight / 2f +
+            cameraEdgePadding;
+
+
+        Vector2 enemyPosition =
+            transform.position;
+
+
+        // 左
+        if (enemyPosition.x <= left)
+        {
+            return true;
+        }
+
+
+        // 右
+        if (enemyPosition.x >= right)
+        {
+            return true;
+        }
+
+
+        // 下
+        if (enemyPosition.y <= bottom)
+        {
+            return true;
+        }
+
+
+        // 上
+        if (enemyPosition.y >= top)
+        {
+            return true;
+        }
+
+
+        return false;
+    }
+
+
+    // =========================================================
+    // 停止衝刺
+    // =========================================================
+
+    private void StopDash()
+    {
+        isDashing = false;
+
+        rb.velocity = Vector2.zero;
+
+
+        // 重新開始攻擊計時
+        attackTimer = attackInterval;
+    }
+
+
+    // =========================================================
+    // 尋找玩家
+    // =========================================================
+
+    private void FindTarget()
+    {
+        GameObject mizukiObject =
+            GameObject.Find("mizuki");
+
+
+        if (mizukiObject != null)
+        {
+            target =
+                mizukiObject.transform;
+        }
+        else
+        {
+            target = null;
+
+            Debug.LogError(
+                "找不到名為 mizuki 的物件！"
+            );
+        }
+    }
+
+
+    // =========================================================
+    // Trigger
+    // =========================================================
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // 減速子彈
+        if (other.CompareTag(slowBulletTag))
+        {
+            SlowEnemy();
+        }
+    }
+
+
+    // =========================================================
+    // 減速
+    // =========================================================
+
+    private void SlowEnemy()
+    {
+        // 已經減速就不重複計算
+        if (isSlowed)
+        {
+            return;
+        }
+
+
+        isSlowed = true;
+
+
+        // 例如 3 × 0.75 = 2.25
+        currentSpeed =
+            speed *
+            (1f - slowPercent / 100f);
+
+
+        Debug.Log(
+            gameObject.name +
+            " 被減速！目前速度：" +
+            currentSpeed
+        );
+    }
+}

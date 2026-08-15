@@ -27,6 +27,23 @@ public class GameImage : ScriptableObject
 
 
     // =========================
+    // 音效清單
+    // =========================
+
+    [Header("音效清單")]
+    public List<SoundData> soundList =
+        new List<SoundData>();
+		
+	// =========================
+	// BGM 清單
+	// =========================
+
+	[Header("BGM清單")]
+	public List<BGMData> bgmList =
+	    new List<BGMData>();
+
+
+    // =========================
     // 取得立繪
     // =========================
 
@@ -68,6 +85,65 @@ public class GameImage : ScriptableObject
 
         return null;
     }
+
+
+    // =========================
+    // 取得音效
+    // =========================
+
+    public AudioClip GetSound(string id)
+    {
+        // 沒有指定音效
+        if (string.IsNullOrEmpty(id))
+        {
+            return null;
+        }
+
+
+        foreach (SoundData data in soundList)
+        {
+            if (data.id == id)
+            {
+                return data.sound;
+            }
+        }
+
+
+        Debug.LogWarning(
+            "找不到音效 ID : " + id
+        );
+
+        return null;
+    }
+	
+	// =========================
+	// 取得 BGM
+	// =========================
+
+	public AudioClip GetBGM(string id)
+	{
+	    // 沒有指定 BGM
+	    if (string.IsNullOrEmpty(id))
+	    {
+   	     return null;
+  	  }
+
+
+  	  foreach (BGMData data in bgmList)
+  	  {
+  	      if (data.id == id)
+   	     {
+   	         return data.bgm;
+   	     }
+   	 }
+
+
+   	 Debug.LogWarning(
+   	     "找不到 BGM ID : " + id
+   	 );
+	
+	    return null;
+	}
 }
 
 
@@ -92,4 +168,27 @@ public class BackgroundImageData
 {
     public string id;
     public Sprite image;
+}
+
+
+// =========================
+// 音效資料
+// =========================
+
+[System.Serializable]
+public class SoundData
+{
+    public string id;
+    public AudioClip sound;
+}
+
+// =========================
+// BGM 資料
+// =========================
+
+[System.Serializable]
+public class BGMData
+{
+    public string id;
+    public AudioClip bgm;
 }
