@@ -1,0 +1,446 @@
+{
+  "dialogues": [
+  
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "驚喜的「世界」"
+    },
+	{
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "街道"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+	  "sound": "walk",
+      "name": "瑞希",
+      "talk": "……這裡是……"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "街道？"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "mzk_o", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "mfy_n", "focus": true},
+      "name": "真冬",
+      "talk": "可是……好像被破壞得很嚴重。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "mzk_o", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "mfy_n", "focus": true},
+      "name": "瑞希",
+      "talk": "嗯……"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "mzk_b", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "mfy_n", "focus": true},
+      "name": "瑞希",
+      "talk": "而且這裡的心願……感覺好混亂。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "mzk_b", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "mfy_n", "focus": true},
+      "name": "真冬",
+      "talk": "……有東西過來了。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_s", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "欸？"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "v02_n", "focus": false},
+      "ch02": {"id": "v01_n", "focus": false},
+      "ch03": {"id": "v03_s", "focus": false},
+      "sound": "run",
+      "name": "",
+      "talk": "遠方傳來密集的腳步聲。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_s", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "又來了！？"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_s", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "這次的數量也太多了吧！"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "mzk_s", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "mfy_n", "focus": true},
+      "name": "真冬",
+      "talk": "……它們來了。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_b", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "看起來……全都是失控的驚喜們。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "等等……"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "那個是……"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v04_r", "focus": false},
+      "ch03": {"id": "000", "focus": true},
+      "name": "？？？",
+      "talk": "…………"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v04_l", "focus": false},
+      "ch03": {"id": "000", "focus": true},
+      "name": "？？？",
+      "talk": "…………"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "……？"
+    },
+	{
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mfy_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "真冬",
+      "talk": "……是鈴和連。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mfy_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "真冬",
+      "talk": "……但是，他們兩個……"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v04_r", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "鏡音鈴",
+      "talk": "……誰來……"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v04_l", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "鏡音連",
+      "talk": "……幫幫我們……"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_s", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "頭髮纏在一起了……？"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mfy_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "真冬",
+      "talk": "而且……一直在旋轉。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_s", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "這個世界到底把它們變成什麼樣子了啊！？"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mfy_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "真冬",
+      "talk": "……瑞希。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mfy_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "真冬",
+      "talk": "後面……"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "後面？"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "v02_n", "focus": false},
+      "ch02": {"id": "v04_l", "focus": true},
+      "ch03": {"id": "v03_s", "focus": false},
+	  "sound": "walk",
+	  "bgm": "004",
+      "name": "",
+      "talk": "更多的身影從街道兩側出現。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "v02_n", "focus": true},
+      "ch02": {"id": "v04_r", "focus": true},
+      "ch03": {"id": "v03_s", "focus": true},
+	  "sound": "walk",
+      "name": "",
+      "talk": "它們沒有說話，只是不斷向前逼近。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_s", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "數量也太多了吧……！"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mfy_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "真冬",
+      "talk": "……我們被包圍了。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+	  "sound": "run",
+      "name": "瑞希",
+      "talk": "先往前突破！"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "只要找到能通過的地方——"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_s", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "……！"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "那邊……！"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mfy_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "真冬",
+      "talk": "……怎麼了？"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "我看到奏了！"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mfy_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "真冬",
+      "talk": "……奏？"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "她就在那些傢伙中間！"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_b", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "奏一定也是被它們帶到這裡的！"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mfy_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "真冬",
+      "talk": "可是……它們太多了。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "沒關係。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "我已經救回真冬了。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_h", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "所以這一次……也一定可以。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "真冬，妳留在這裡。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "我去把奏帶回來！"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mfy_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "真冬",
+      "talk": "……瑞希。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mfy_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "真冬",
+      "talk": "小心點。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_h", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "嗯！"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "奏，我來了！"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+	  "sound": "run",
+      "name": "",
+      "talk": "瑞希朝著被包圍的奏跑去。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "sound": "run",
+      "name": "",
+      "talk": "而那些失控的驚喜，也同時轉過身來。"
+    }
+	
+  ]
+}

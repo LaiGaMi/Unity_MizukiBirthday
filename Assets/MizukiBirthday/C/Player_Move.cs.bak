@@ -72,7 +72,8 @@ public class Player_Move : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = moveDirection * moveSpeed;
+        float currentSpeed = moveSpeed + mizuki.att04;
+		rb.velocity = moveDirection * currentSpeed;
     }
 
     private void UpdateMoveDirection(Vector2 screenPosition)

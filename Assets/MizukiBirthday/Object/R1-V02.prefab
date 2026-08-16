@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  attackInterval: 1
+  attackInterval: 2
   bulletPrefab: {fileID: 8016347718208976517, guid: fd5299c67fd80584c83d55a1bdd92958, type: 3}
   umbrellaTag: Patt04
   knockbackDistance: 1

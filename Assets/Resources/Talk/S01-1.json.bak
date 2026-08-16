@@ -101,7 +101,7 @@
 	{
       "background": "BG01",
       "ch01": {"id": "000", "focus": true},
-      "ch02": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
       "ch03": {"id": "000", "focus": true},
       "name": "瑞希",
       "talk": "那為什麼妳們三個看到我之後，表情都這麼可疑？"

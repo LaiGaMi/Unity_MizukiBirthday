@@ -73,27 +73,39 @@ public class Player_Move : MonoBehaviour
     private void FixedUpdate()
     {
         float currentSpeed = moveSpeed + mizuki.att04;
-		rb.velocity = moveDirection * currentSpeed;
+
+        rb.velocity = moveDirection * currentSpeed;
     }
 
     private void UpdateMoveDirection(Vector2 screenPosition)
     {
-        // 螢幕中心
-        Vector2 screenCenter = new Vector2(
-            Screen.width / 2f,
-            Screen.height / 2f
-        );
-
+        // =========================
+        // 滑鼠 / 手指位置
         // 螢幕座標 → 世界座標
-        Vector3 touchWorldPosition =
-            mainCamera.ScreenToWorldPoint(screenPosition);
+        // =========================
 
-        Vector3 centerWorldPosition =
-            mainCamera.ScreenToWorldPoint(screenCenter);
+        Vector3 inputWorldPosition =
+            mainCamera.ScreenToWorldPoint(
+                new Vector3(
+                    screenPosition.x,
+                    screenPosition.y,
+                    -mainCamera.transform.position.z
+                )
+            );
 
-        // 畫面中心 → 滑鼠 / 手指
+        // =========================
+        // 玩家自身位置
+        // =========================
+
+        Vector3 playerWorldPosition = transform.position;
+
+        // 玩家 → 滑鼠 / 手指
         Vector2 direction =
-            (Vector2)(touchWorldPosition - centerWorldPosition);
+            (Vector2)(inputWorldPosition - playerWorldPosition);
+
+        // =========================
+        // 判斷方向
+        // =========================
 
         if (direction.sqrMagnitude > 0.01f)
         {
@@ -131,9 +143,9 @@ public class Player_Move : MonoBehaviour
         animator.SetBool("R", facingRight);
         animator.SetBool("L", !facingRight);
     }
-	
-	public Vector2 GetMoveDirection()
-	{
-	    return moveDirection;
-	}
+
+    public Vector2 GetMoveDirection()
+    {
+        return moveDirection;
+    }
 }

@@ -57,6 +57,10 @@ MonoBehaviour:
     image: {fileID: -1951972139718632546, guid: 6d2b4130c703b5649ac79d258c1822b0, type: 3}
   - id: th_04
     image: {fileID: 1978651553762039544, guid: 0b54b2489e8bffa4db22e28976623df6, type: 3}
+  - id: v05_hl
+    image: {fileID: 1855437978200972141, guid: bfd616878150b974c9a3b41312d89c3c, type: 3}
+  - id: v05_hr
+    image: {fileID: -1500536881913065639, guid: 0bd5c85b5f05c5444954b183a05a73cf, type: 3}
   backgroundImageList:
   - id: BG00
     image: {fileID: -3950361119258288663, guid: 8c5b362d5f40b394684d8e2e56f039ad, type: 3}
@@ -68,6 +72,12 @@ MonoBehaviour:
     image: {fileID: -1481361546272026671, guid: ff10560c617f08c46b518651ef6698a2, type: 3}
   - id: BG03
     image: {fileID: 6540068351669172922, guid: e3c14ce3154e81d4b9df01faf1a50873, type: 3}
+  - id: BG04
+    image: {fileID: 169611536338154155, guid: a0b7862c7d4b1914db063a4c398ecad7, type: 3}
+  - id: BG05
+    image: {fileID: 3284054878954015351, guid: 9384ee4ce43fa0941a43b43eed1e4e36, type: 3}
+  - id: BG06
+    image: {fileID: 6864332665213977318, guid: bd1301c08cfbdbb438bf1c0585543974, type: 3}
   soundList:
   - id: shine
     sound: {fileID: 8300000, guid: e0fcff934baa7d34c96e30c06d7e8e79, type: 3}
@@ -76,6 +86,8 @@ MonoBehaviour:
   - id: run
     sound: {fileID: 8300000, guid: 110f3e1ec3913c14c9ded8df4216cbff, type: 3}
   bgmList:
+  - id: teach
+    bgm: {fileID: 8300000, guid: b332ab485d308e54c8af46f7fe2eb2c6, type: 3}
   - id: 001
     bgm: {fileID: 8300000, guid: cd183f8bc8d11b3408a53488c760cc04, type: 3}
   - id: 002
@@ -84,7 +96,7 @@ MonoBehaviour:
     bgm: {fileID: 8300000, guid: a8cec628c1bfff343a5535e7e0cf62f3, type: 3}
   - id: 004
     bgm: {fileID: 8300000, guid: 5c2968d6fceda7545a5ded9b4abf6dcb, type: 3}
+  - id: boss
+    bgm: {fileID: 8300000, guid: b5680dd99e138fb41992a5ad81f44f29, type: 3}
   - id: end
     bgm: {fileID: 8300000, guid: 25238d8915e7233468459d467abb307d, type: 3}
-  - id: teach
-    bgm: {fileID: 8300000, guid: b332ab485d308e54c8af46f7fe2eb2c6, type: 3}

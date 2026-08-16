@@ -17,5 +17,26 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MizukiBirthday/scenes/001-wave.unity
     guid: d3be81754e22ff145ad1ecbbb5db217b
+  - enabled: 1
+    path: Assets/MizukiBirthday/scenes/002-store1.unity
+    guid: 4e0aeba09e5f3e54ab9c25acd11368e4
+  - enabled: 1
+    path: Assets/MizukiBirthday/scenes/002-store2.unity
+    guid: 08727000ce0af184684381b85f8e4613
+  - enabled: 1
+    path: Assets/MizukiBirthday/scenes/002-wave.unity
+    guid: 78d9c9cb71b71f24290981074c9381ba
+  - enabled: 1
+    path: Assets/MizukiBirthday/scenes/003-store1.unity
+    guid: ccf34c286ff9c734c8adcb67c844fef9
+  - enabled: 1
+    path: Assets/MizukiBirthday/scenes/003-store2.unity
+    guid: cdf33201438929e4bbfe5035e6d557d8
+  - enabled: 1
+    path: Assets/MizukiBirthday/scenes/003-wave.unity
+    guid: e3525cf9948fb7e4cbc790af3183e5b8
+  - enabled: 1
+    path: Assets/MizukiBirthday/scenes/004-store.unity
+    guid: 3a98b0d39136f1849b222b32249dbc66
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

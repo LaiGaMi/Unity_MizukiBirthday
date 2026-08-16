@@ -3850,7 +3850,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &835131303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8027,7 +8027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48521ba3b1c7bfa45a98acd2ee31924e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 001-wave
+  sceneName: 002-store1
   transitionSettings: {fileID: 11400000, guid: c9f7b34f761c5c342ada8a4b2ab7a716, type: 2}
   loadDelay: 0.5
 --- !u!1 &1753355850

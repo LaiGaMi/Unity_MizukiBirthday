@@ -1,0 +1,432 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using EasyTransition;
+
+public class Boss_Manager : MonoBehaviour
+{
+    // =========================================================
+    // 場景轉換設定
+    // =========================================================
+
+    // 場景名稱
+    public string sceneName;
+
+    // 改成拖這個
+    public TransitionSettings transitionSettings;
+
+    public float loadDelay = 0f;
+
+
+    // =========================================================
+    // Boss 血量進度條 UI
+    // =========================================================
+
+    [Header("Boss 血量進度條")]
+
+    // 拖入 UI Image
+    public Image bossHPBar;
+
+
+    // =========================================================
+    // Boss 階段設定
+    // =========================================================
+
+    [System.Serializable]
+    public class BossPhase
+    {
+        [Header("此階段的總物件")]
+        public GameObject mainObject;
+
+        [Header("此階段的附屬物件")]
+        public List<GameObject> subObjects = new List<GameObject>();
+    }
+
+    [Header("Boss 階段")]
+    [SerializeField]
+    private List<BossPhase> phases = new List<BossPhase>();
+
+
+    // =========================================================
+    // 目前階段
+    // =========================================================
+
+    private int currentPhaseIndex = 0;
+
+
+    // =========================================================
+    // Boss 全部附屬物的初始最大 HP 總和
+    // =========================================================
+
+    // 遊戲開始時記錄
+    // 之後即使附屬物被 Destroy，也不會改變
+    private float totalBossMaxHP = 0f;
+
+
+    // =========================================================
+    // 初始化
+    // =========================================================
+
+    private void Start()
+    {
+        if (phases.Count == 0)
+        {
+            Debug.LogWarning("Boss 沒有設定任何階段。");
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // 記錄整個 Boss 所有階段的最大 HP 總和
+        // -----------------------------------------------------
+
+        CalculateTotalBossMaxHP();
+
+
+        // -----------------------------------------------------
+        // 一開始只顯示第一階段
+        // -----------------------------------------------------
+
+        for (int i = 0; i < phases.Count; i++)
+        {
+            SetPhaseActive(i, i == 0);
+        }
+
+
+        // -----------------------------------------------------
+        // 初始化 Boss 血量 UI
+        // -----------------------------------------------------
+
+        UpdateBossHPBar();
+    }
+
+
+    // =========================================================
+    // Update
+    // =========================================================
+
+    private void Update()
+    {
+        if (phases.Count == 0)
+            return;
+
+
+        // 更新 Boss 總血量進度條
+        UpdateBossHPBar();
+
+
+        // 檢查目前階段的附屬物件是否全部消失
+        if (AreAllSubObjectsGone())
+        {
+            GoToNextPhase();
+        }
+    }
+
+
+    // =========================================================
+    // 計算 Boss 全部附屬物的初始最大 HP 總和
+    // =========================================================
+
+    private void CalculateTotalBossMaxHP()
+    {
+        totalBossMaxHP = 0f;
+
+
+        // -----------------------------------------------------
+        // 遍歷所有 Phase
+        // -----------------------------------------------------
+
+        foreach (BossPhase phase in phases)
+        {
+            // -------------------------------------------------
+            // 遍歷該 Phase 的所有附屬物
+            // -------------------------------------------------
+
+            foreach (GameObject subObject in phase.subObjects)
+            {
+                if (subObject == null)
+                    continue;
+
+
+                // 取得 Boss_hand
+                Boss_hand bossHand = subObject.GetComponent<Boss_hand>();
+
+
+                // 沒有 Boss_hand 就跳過
+                if (bossHand == null)
+                    continue;
+
+
+                // 記錄最大 HP
+                totalBossMaxHP += bossHand.maxHP;
+            }
+        }
+
+
+        Debug.Log(
+            "Boss 全部附屬物初始最大 HP 總和：" +
+            totalBossMaxHP
+        );
+    }
+
+
+    // =========================================================
+    // 更新 Boss 血量進度條
+    // =========================================================
+
+    private void UpdateBossHPBar()
+    {
+        // 沒有設定 UI
+        if (bossHPBar == null)
+            return;
+
+
+        // 沒有有效的 Boss 最大 HP
+        if (totalBossMaxHP <= 0f)
+        {
+            bossHPBar.fillAmount = 1f;
+            return;
+        }
+
+
+        // =====================================================
+        // 計算「目前存在的附屬物」血量
+        // =====================================================
+
+        float currentExistingHP = 0f;
+
+
+        // -----------------------------------------------------
+        // 只計算目前已經存在的附屬物
+        // -----------------------------------------------------
+
+        for (int i = 0; i < phases.Count; i++)
+        {
+            BossPhase phase = phases[i];
+
+
+            foreach (GameObject subObject in phase.subObjects)
+            {
+                // 已經被 Destroy
+                if (subObject == null)
+                    continue;
+
+
+                // 取得 Boss_hand
+                Boss_hand bossHand = subObject.GetComponent<Boss_hand>();
+
+
+                // 沒有 Boss_hand
+                if (bossHand == null)
+                    continue;
+
+
+                // -------------------------------------------------
+                // 只計算目前存在的物件血量
+                // -------------------------------------------------
+
+                currentExistingHP += Mathf.Max(
+                    0f,
+                    bossHand.currentHP
+                );
+            }
+        }
+
+
+        // =====================================================
+        // 計算「後面尚未登場階段」的預計血量
+        // =====================================================
+
+        float futurePhaseHP = 0f;
+
+
+        // -----------------------------------------------------
+        // currentPhaseIndex 後面的所有 Phase
+        // -----------------------------------------------------
+
+        for (
+            int i = currentPhaseIndex + 1;
+            i < phases.Count;
+            i++
+        )
+        {
+            BossPhase futurePhase = phases[i];
+
+
+            foreach (GameObject subObject in futurePhase.subObjects)
+            {
+                // 這裡的物件尚未登場
+                // 因此直接使用它原本的 maxHP
+                if (subObject == null)
+                    continue;
+
+
+                Boss_hand bossHand = subObject.GetComponent<Boss_hand>();
+
+
+                if (bossHand == null)
+                    continue;
+
+
+                futurePhaseHP += bossHand.maxHP;
+            }
+        }
+
+
+        // =====================================================
+        // 計算 Boss 目前真正剩餘的總生命
+        // =====================================================
+
+        float totalRemainingHP =
+            currentExistingHP +
+            futurePhaseHP;
+
+
+        // =====================================================
+        // 計算剩餘生命比例
+        // =====================================================
+
+        float remainingRatio =
+            totalRemainingHP / totalBossMaxHP;
+
+
+        remainingRatio = Mathf.Clamp01(remainingRatio);
+
+
+        // =====================================================
+        // 轉換成「損失生命比例」
+        //
+        // 滿血       = 0
+        // 損失 50%   = 0.5
+        // 損失 95%   = 0.95
+        // 全部死亡   = 1
+        // =====================================================
+
+        float lostRatio =
+            1f - remainingRatio;
+
+
+        lostRatio = Mathf.Clamp01(lostRatio);
+
+
+        // =====================================================
+        // 套用到 UI
+        // =====================================================
+
+        bossHPBar.fillAmount = lostRatio;
+    }
+
+
+    // =========================================================
+    // 檢查目前階段附屬物是否全部消失
+    // =========================================================
+
+    private bool AreAllSubObjectsGone()
+    {
+        BossPhase currentPhase = phases[currentPhaseIndex];
+
+
+        foreach (GameObject subObject in currentPhase.subObjects)
+        {
+            // 只要還有一個附屬物件存在
+            // 就不能進入下一階段
+            if (subObject != null)
+            {
+                return false;
+            }
+        }
+
+
+        return true;
+    }
+
+
+    // =========================================================
+    // 進入下一階段
+    // =========================================================
+
+    private void GoToNextPhase()
+    {
+        // -----------------------------------------------------
+        // 隱藏目前階段
+        // -----------------------------------------------------
+
+        SetPhaseActive(
+            currentPhaseIndex,
+            false
+        );
+
+
+        currentPhaseIndex++;
+
+
+        // -----------------------------------------------------
+        // 已經沒有下一階段
+        // -----------------------------------------------------
+
+        if (currentPhaseIndex >= phases.Count)
+        {
+            // Boss 已經勝利
+            if (bossHPBar != null)
+            {
+                bossHPBar.fillAmount = 1f;
+            }
+
+
+            OnBossVictory();
+
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // 顯示下一階段
+        // -----------------------------------------------------
+
+        SetPhaseActive(
+            currentPhaseIndex,
+            true
+        );
+
+
+        // 更新 Boss 總血量 UI
+        UpdateBossHPBar();
+    }
+
+
+    // =========================================================
+    // 開關階段總物件
+    // =========================================================
+
+    private void SetPhaseActive(
+        int phaseIndex,
+        bool active
+    )
+    {
+        BossPhase phase = phases[phaseIndex];
+
+
+        if (phase.mainObject != null)
+        {
+            phase.mainObject.SetActive(active);
+        }
+    }
+
+
+    // =========================================================
+    // Boss 勝利
+    // =========================================================
+
+    private void OnBossVictory()
+    {
+        Debug.Log("Boss Victory!");
+
+
+        TransitionManager.Instance().Transition(
+            sceneName,
+            transitionSettings,
+            loadDelay
+        );
+    }
+}

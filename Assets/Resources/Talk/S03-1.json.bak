@@ -1,0 +1,282 @@
+{
+  "dialogues": [
+  
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "驚喜的「世界」"
+    },
+	{
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "街道"
+    },
+	{
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "在穿過混亂的街道後，瑞希與真冬終於找到了奏的身影。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "v02_n", "focus": true},
+      "ch02": {"id": "v04_r", "focus": true},
+      "ch03": {"id": "v03_s", "focus": true},
+      "name": "",
+      "talk": "然而，失控的驚喜仍然不斷從四面八方湧來。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "sound": "run",
+      "name": "",
+      "talk": "瑞希在混亂之中突破包圍，朝著奏所在的位置前進。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_s", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "奏！抓住我！"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "knd_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "奏",
+      "talk": "……瑞希？"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "我來帶妳出去！"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "knd_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "奏",
+      "talk": "……嗯。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "sound": "run",
+      "name": "",
+      "talk": "瑞希拉住奏，兩人一同衝出了失控的驚喜群。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_h", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+	  "bgm": "003",
+      "name": "瑞希",
+      "talk": "呼……終於……"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "奏，妳沒事吧？"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "knd_n", "focus": true},
+      "name": "奏",
+      "talk": "……嗯。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "knd_n", "focus": true},
+      "name": "奏",
+      "talk": "只是……還是不太清楚這裡究竟是什麼地方。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "knd_n", "focus": true},
+      "name": "瑞希",
+      "talk": "沒關係！至少妳已經安全了。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "knd_n", "focus": true},
+      "name": "瑞希",
+      "talk": "而且真冬也在那邊等我們。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "knd_n", "focus": true},
+      "name": "奏",
+      "talk": "……真冬也找到了？"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "knd_n", "focus": true},
+      "name": "瑞希",
+      "talk": "嗯！我已經把她救出來了。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "knd_n", "focus": true},
+      "name": "瑞希",
+      "talk": "現在只剩下繪名了。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "knd_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "奏",
+      "talk": "……繪名。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "嗯。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_h", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "我們一定能找到她。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "……等等。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "那邊是不是有什麼？"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "knd_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "奏",
+      "talk": "……一條路？"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "又出現了……"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_h", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "看來這個世界還是不打算讓我們停下來呢。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "knd_n", "focus": true},
+      "name": "奏",
+      "talk": "……那就繼續走吧。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "knd_n", "focus": true},
+      "name": "瑞希",
+      "talk": "嗯！"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "knd_n", "focus": true},
+      "name": "瑞希",
+      "talk": "我們一起去救出繪名！"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "sound": "walk",
+      "name": "",
+      "talk": "瑞希與奏、真冬朝著新出現的道路前進。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "隨著她們逐漸遠離街道，周圍的景色也開始再次變換。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "道路的盡頭，似乎通往一個完全不同的地方。"
+    },
+    {
+      "background": "BG04",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "而那裡，正等待著她們最後要尋找的人。"
+    }
+	
+  ]
+}

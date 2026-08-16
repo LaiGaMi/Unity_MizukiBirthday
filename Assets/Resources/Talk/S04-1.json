@@ -1,0 +1,880 @@
+{
+  "dialogues": [
+  
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "驚喜的「世界」"
+    },
+	{
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "神秘平台"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "……看來是妳贏了。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "所以……妳會遵守約定吧？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "當然。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "我答應過妳，只要妳贏了，就會讓繪名離開。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": true},
+      "ch02": {"id": "v05_s", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": true},
+      "name": "巡音流歌",
+      "talk": "所以……"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "ena_n", "focus": true},
+      "ch03": {"id": "v05_hr", "focus": true},
+      "name": "繪名",
+      "talk": "……咦？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "妳可以回去了。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "ena_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "繪名",
+      "talk": "……真的？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "嗯。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "這個世界的出口，就在妳們身後。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "瑞希",
+      "talk": "繪名！"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "瑞希",
+      "talk": "太好了……妳終於可以回來了。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "繪名",
+      "talk": "嗯。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "繪名",
+      "talk": "謝謝妳，瑞希。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "瑞希",
+      "talk": "嘿嘿，這不是當然的嗎？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "瑞希",
+      "talk": "我們可是夥伴啊。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "knd_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "奏",
+      "talk": "……大家都沒事就好。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mfy_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "真冬",
+      "talk": "嗯。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "太好了！這樣大家就都到齊了！"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "繪名也平安回來了！"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "ena_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "繪名",
+      "talk": "等等……"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "ena_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "繪名",
+      "talk": "為什麼我總覺得還有什麼事情沒結束？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "mzk_o", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "瑞希",
+      "talk": "咦？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "呵呵。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "確實還有一件事情。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "mzk_o", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "還有？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "妳們不是一直很好奇，為什麼這個「世界」會存在嗎？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "mzk_o", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "嗯。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "那就好好看著吧。"
+    },
+    {
+      "background": "BG00-2",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+	  "sound": "shine",
+      "name": "",
+      "talk": "一道耀眼的強光從天空降下。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+	  "bgm": "end",
+      "name": "",
+      "talk": "光芒散去後，原本空蕩蕩的平台已經完全變了模樣。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "彩帶、氣球、禮物盒與閃耀的裝飾瞬間布滿整座平台。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "平台中央，更擺著一張精心準備的生日蛋糕桌。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "……欸？"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "這是……"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_o", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "mfy_n", "focus": true},
+      "name": "真冬",
+      "talk": "生日派對。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_o", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "mfy_n", "focus": true},
+      "name": "真冬",
+      "talk": "應該是為了妳準備的。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_o", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "knd_n", "focus": true},
+      "name": "奏",
+      "talk": "……原來如此。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_o", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "knd_n", "focus": true},
+      "name": "奏",
+      "talk": "這就是這個「世界」的意義。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_h", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "……大家……"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "ena_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "繪名",
+      "talk": "沒錯。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "ena_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "繪名",
+      "talk": "我們就是為了這個才會來到這裡。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "瑞希",
+      "talk": "所以……"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "瑞希",
+      "talk": "妳們真的準備了生日驚喜？"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "繪名",
+      "talk": "算是吧……雖然這個「世界」是個意外，連我們都不知道。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v01_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "初音未來",
+      "talk": "沒錯。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v01_n", "focus": true},
+      "name": "瑞希",
+      "talk": "未來！？"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v01_n", "focus": true},
+      "name": "初音未來",
+      "talk": "生日快樂，瑞希。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v01_n", "focus": true},
+      "name": "瑞希",
+      "talk": "……"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v01_n", "focus": true},
+      "name": "瑞希",
+      "talk": "謝謝……"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_h", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "真的……謝謝大家。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v03_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "KAITO",
+      "talk": "好了好了，別光站著說話。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "v03_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v02_n", "focus": true},
+      "name": "MEIKO",
+      "talk": "今天可是瑞希的生日。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_h", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "嗯！"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v02_n", "focus": true},
+      "name": "MEIKO",
+      "talk": "我們可是花了不少時間準備呢。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v02_n", "focus": true},
+      "name": "瑞希",
+      "talk": "我完全沒有發現！"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_h", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "我還以為大家今天都怪怪的……"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "原來全部都是因為這個！"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v04_r", "focus": true},
+      "name": "鏡音鈴",
+      "talk": "當然啦！"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v04_l", "focus": true},
+      "name": "鏡音連",
+      "talk": "我們可是準備了超級大的驚喜！"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v04_r", "focus": true},
+      "name": "鏡音鈴",
+      "talk": "而且還有這個。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_o", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v04_l", "focus": true},
+      "name": "瑞希",
+      "talk": "還有什麼？"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v01_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "初音未來",
+      "talk": "當然是蛋糕。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "ena_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v01_n", "focus": true},
+      "name": "繪名",
+      "talk": "等等，那個蛋糕是——"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "ena_a", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v01_n", "focus": true},
+      "name": "繪名",
+      "talk": "喂！那是給瑞希的吧！？"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "ena_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v01_n", "focus": true},
+      "name": "繪名",
+      "talk": "妳拿走做什麼！？"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "ena_a", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "繪名",
+      "talk": "未來！把蛋糕放下！"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v01_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "初音未來",
+      "talk": "我只是想幫忙保管……"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "ena_a", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "繪名",
+      "talk": "哪有人這樣保管蛋糕的！？"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v04_r", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "鏡音鈴",
+      "talk": "那我們也來幫忙吧！"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v04_l", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "鏡音連",
+      "talk": "嗯。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v04_r", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "鏡音鈴",
+      "talk": "一起上！"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "knd_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "奏",
+      "talk": "……妳們要做什麼？"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "knd_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v04_r", "focus": true},
+      "name": "鏡音鈴",
+      "talk": "當然是讓蛋糕飛起來！"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "knd_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v04_l", "focus": true},
+      "name": "鏡音連",
+      "talk": "走囉！"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "knd_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v04_r", "focus": true},
+      "name": "奏",
+      "talk": "……為什麼？"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "knd_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v04_l", "focus": true},
+      "name": "鏡音連",
+      "talk": "一、二——"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "knd_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v04_r", "focus": true},
+      "name": "鏡音鈴",
+      "talk": "三！"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "鈴與連合力捲起整盤蛋糕，直接朝天空飛去。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "knd_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "奏",
+      "talk": "……蛋糕飛走了。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "knd_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "奏",
+      "talk": "這樣真的沒問題嗎……"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "knd_n", "focus": true},
+      "name": "瑞希",
+      "talk": "哈哈哈哈！"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "knd_n", "focus": true},
+      "name": "瑞希",
+      "talk": "偶爾亂來一點也沒關係吧！"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "mfy_n", "focus": true},
+      "name": "真冬",
+      "talk": "嗯。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "mfy_n", "focus": true},
+      "name": "真冬",
+      "talk": "今天很的一切都出乎意料。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "mfy_n", "focus": true},
+      "name": "真冬",
+      "talk": "所以這樣就很好。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "mfy_n", "focus": true},
+      "name": "瑞希",
+      "talk": "……嗯。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "今天真的……是我收到過最棒的驚喜。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_h", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "謝謝大家。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_h", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "我會一直記得今天。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "繪名",
+      "talk": "那就好。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "繪名",
+      "talk": "畢竟我們可是費了很大的力氣，才把這個驚喜準備好。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "瑞希",
+      "talk": "嗯！"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v05_n", "focus": true},
+      "name": "巡音流歌",
+      "talk": "看來這場驚喜，算是成功了呢。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v05_n", "focus": true},
+      "name": "瑞希",
+      "talk": "嗯！"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v05_n", "focus": true},
+      "name": "瑞希",
+      "talk": "雖然中間稍微有一點混亂……"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v05_n", "focus": true},
+      "name": "瑞希",
+      "talk": "但我很喜歡！"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "mzk_h", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v05_n", "focus": true},
+      "name": "巡音流歌",
+      "talk": "那就足夠了。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v01_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "初音未來",
+      "talk": "瑞希。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v01_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "初音未來",
+      "talk": "生日快樂。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "生日快樂！"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "在這個意外誕生的世界裡，大家一起度過了屬於瑞希的生日。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "有蛋糕、有禮物、有彩帶，也有一群無論發生什麼都願意陪在身邊的夥伴。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "以及那些只存在於這個世界中的奇妙身影。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "這一天，也成為了瑞希永遠不會忘記的生日。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "驚喜的「世界」履行了大家的心願。"
+    },
+    {
+      "background": "BG06",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "而這場生日驚喜，也終於畫下了句點。"
+    }
+	
+  ]
+}

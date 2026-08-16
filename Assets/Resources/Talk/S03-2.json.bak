@@ -1,0 +1,639 @@
+{
+  "dialogues": [
+  
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "驚喜的「世界」"
+    },
+	{
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "神秘平台"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "",
+      "talk": "道路的另一端，是一座漂浮在霧氣之中的巨大平台。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "……這裡是？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "knd_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "奏",
+      "talk": "不知道……"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "這裡的心願……好強。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mfy_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "真冬",
+      "talk": "……而且只有這裡看起來還算完整。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "等等……"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_s", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "那邊有人！"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "ena_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "繪名",
+      "talk": "……瑞希？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "繪名！"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_h", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "太好了……妳真的在這裡！"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "ena_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "繪名",
+      "talk": "……妳們終於來了。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "妳沒事吧？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "ena_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "繪名",
+      "talk": "……我沒事。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "mzk_n", "focus": true},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "ena_n", "focus": true},
+      "name": "瑞希",
+      "talk": "那我現在就去——"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "mzk_s", "focus": true},
+      "ch02": {"id": "v05_hr", "focus": false},
+      "ch03": {"id": "ena_a", "focus": true},
+      "name": "",
+      "talk": "突然，神秘巨物從平台下方竄出，擋在瑞希與繪名之間。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_s", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "呀！？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": false},
+      "ch02": {"id": "mzk_s", "focus": true},
+      "ch03": {"id": "000", "focus": false},
+      "name": "瑞希",
+      "talk": "這是什麼東西！？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": false},
+      "ch02": {"id": "ena_a", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": false},
+      "name": "繪名",
+      "talk": "瑞希！別過來！"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_s", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "繪名！"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": false},
+      "ch02": {"id": "000", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": false},
+      "name": "",
+      "talk": "巨物緩緩移動，封鎖了通往繪名的道路。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "可惡……！"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_b", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "又想阻止我嗎！？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": false},
+      "ch02": {"id": "v05_s", "focus": false},
+      "ch03": {"id": "v05_hl", "focus": false},
+	  "bgm": "boss",
+      "name": "？？？",
+      "talk": "哼哼哼……"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": true},
+      "name": "？？？",
+      "talk": "別那麼生氣嘛。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "……流歌？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": true},
+      "name": "巡音流歌",
+      "talk": "答對了。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_s", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "不過……嚴格來說，現在的我可不是妳認識的那個流歌喔。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "那妳到底是什麼？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "我是這個世界的管理者之一。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": true},
+      "name": "巡音流歌",
+      "talk": "負責讓驚喜發生，也負責讓這個世界維持運轉。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "當然啦……"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": true},
+      "ch02": {"id": "v05_s", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": true},
+      "name": "巡音流歌",
+      "talk": "偶爾也要找點樂子嘛。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_s", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "所以這些觸手也是妳弄出來的！？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "算是吧。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "不過，妳應該也已經發現了吧？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "發現什麼？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "這一路上，妳遇到的那些驚喜。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": true},
+      "name": "巡音流歌",
+      "talk": "還有妳找到的那些同伴。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "……"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "其實，25時的大家現在正在做一件事情。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "25時……？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "嗯。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": true},
+      "ch02": {"id": "v05_s", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": true},
+      "name": "巡音流歌",
+      "talk": "她們正在為妳準備一場生日驚喜派對。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "……生日驚喜？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": true},
+      "name": "巡音流歌",
+      "talk": "沒錯。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "她們想把最好的驚喜送給妳。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": true},
+      "ch02": {"id": "v05_s", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": true},
+      "name": "巡音流歌",
+      "talk": "所以他們的心願最後融合，才會產生這個世界。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "……原來是這樣。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_h", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "難怪……"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_h", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "我今天總覺得，大家好像正在偷偷做些什麼。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "原來……是為了我的生日啊。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "是不是覺得很感動？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_h", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "嗯……"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "不過，既然是生日驚喜，那我可不能現在就把驚喜拆穿嘛。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "哼哼，妳倒是很懂嘛。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": true},
+      "name": "巡音流歌",
+      "talk": "但是呢，想要繼續往前，可沒那麼容易。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_o", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "……妳想做什麼？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "很簡單。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_s", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": true},
+      "name": "巡音流歌",
+      "talk": "只要妳能贏過我。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": true},
+      "ch02": {"id": "v05_s", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": true},
+      "name": "巡音流歌",
+      "talk": "我就讓妳帶繪名離開。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": true},
+      "ch02": {"id": "ena_a", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": true},
+      "name": "繪名",
+      "talk": "什麼！？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_s", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "真的嗎？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "當然。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "不只是繪名。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": true},
+      "name": "巡音流歌",
+      "talk": "只要妳能贏過我，這個世界也會恢復原本的樣子。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_h", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "……也就是說，只差最後一步了。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "沒錯。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": true},
+      "name": "巡音流歌",
+      "talk": "所以……準備好了嗎？"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "當然。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "我一定會贏過妳。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "然後把繪名帶回去。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "也把大家準備的驚喜……好好接住！"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "v05_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "巡音流歌",
+      "talk": "那麼——"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": true},
+      "ch02": {"id": "v05_s", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": true},
+      "name": "巡音流歌",
+      "talk": "驚喜的「世界」最後一場遊戲。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "v05_hr", "focus": true},
+      "ch02": {"id": "v05_s", "focus": true},
+      "ch03": {"id": "v05_hl", "focus": true},
+      "name": "巡音流歌",
+      "talk": "開始囉。"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "來吧！"
+    },
+    {
+      "background": "BG05",
+      "ch01": {"id": "000", "focus": true},
+      "ch02": {"id": "mzk_n", "focus": true},
+      "ch03": {"id": "000", "focus": true},
+      "name": "瑞希",
+      "talk": "我會把大家的驚喜，變成最棒的生日回憶！"
+    }
+	
+  ]
+}
