@@ -53,17 +53,17 @@ public class Player_Att06 : MonoBehaviour
         {
             case 1:
                 puppetCount = 1;
-                bounceCount = 1;
+                bounceCount = 2;
                 break;
 
             case 2:
                 puppetCount = 2;
-                bounceCount = 3;
+                bounceCount = 4;
                 break;
 
             case 3:
                 puppetCount = 3;
-                bounceCount = 5;
+                bounceCount = 6;
                 break;
 
             default:

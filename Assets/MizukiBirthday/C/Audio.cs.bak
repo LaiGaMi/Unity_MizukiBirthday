@@ -1,0 +1,63 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Audio : MonoBehaviour
+{
+    public static Audio Instance { get; private set; }
+
+    private Dictionary<string, AudioSource> audioSources = new Dictionary<string, AudioSource>();
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+        // 找出所有子物件的 AudioSource
+        AudioSource[] sources = GetComponentsInChildren<AudioSource>(true);
+
+        foreach (AudioSource source in sources)
+        {
+            string audioName = source.gameObject.name;
+
+            if (audioSources.ContainsKey(audioName))
+            {
+                Debug.LogWarning($"Audio：發現重複的音效名稱「{audioName}」");
+                continue;
+            }
+
+            audioSources.Add(audioName, source);
+        }
+    }
+
+    public void Play(string audioName)
+    {
+        if (!audioSources.TryGetValue(audioName, out AudioSource source))
+        {
+            Debug.LogWarning($"Audio：找不到音效「{audioName}」");
+            return;
+        }
+
+        // 如果正在播放，先停止
+        source.Stop();
+
+        // 從頭播放
+        source.Play();
+    }
+
+    public void Stop(string audioName)
+    {
+        if (!audioSources.TryGetValue(audioName, out AudioSource source))
+        {
+            Debug.LogWarning($"Audio：找不到音效「{audioName}」");
+            return;
+        }
+
+        source.Stop();
+    }
+}

@@ -74,6 +74,8 @@ public class Player_Att06 : MonoBehaviour
         // =====================================================
         // 生成指定數量的人偶
         // =====================================================
+		
+		Audio.Instance.Play("SE_mizuki06");
 
         for (int i = 0; i < puppetCount; i++)
         {

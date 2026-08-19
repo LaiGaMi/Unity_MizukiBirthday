@@ -30,6 +30,16 @@ public class Boss_Manager : MonoBehaviour
 
 
     // =========================================================
+    // Boss 回合結束預置物
+    // =========================================================
+
+    [Header("Boss 回合結束預置物")]
+
+    // 每個回合結束時生成的預置物
+    public GameObject phaseEndPrefab;
+
+
+    // =========================================================
     // Boss 階段設定
     // =========================================================
 
@@ -62,6 +72,13 @@ public class Boss_Manager : MonoBehaviour
     // 遊戲開始時記錄
     // 之後即使附屬物被 Destroy，也不會改變
     private float totalBossMaxHP = 0f;
+
+
+    // =========================================================
+    // Boss 勝利狀態
+    // =========================================================
+
+    private bool bossVictory = false;
 
 
     // =========================================================
@@ -108,15 +125,33 @@ public class Boss_Manager : MonoBehaviour
 
     private void Update()
     {
+        // -----------------------------------------------------
+        // Boss 已經勝利
+        // -----------------------------------------------------
+
+        if (bossVictory)
+            return;
+
+
+        // -----------------------------------------------------
+        // 沒有設定 Boss 階段
+        // -----------------------------------------------------
+
         if (phases.Count == 0)
             return;
 
 
+        // -----------------------------------------------------
         // 更新 Boss 總血量進度條
+        // -----------------------------------------------------
+
         UpdateBossHPBar();
 
 
-        // 檢查目前階段的附屬物件是否全部消失
+        // -----------------------------------------------------
+        // 檢查目前階段附屬物是否全部消失
+        // -----------------------------------------------------
+
         if (AreAllSubObjectsGone())
         {
             GoToNextPhase();
@@ -139,6 +174,10 @@ public class Boss_Manager : MonoBehaviour
 
         foreach (BossPhase phase in phases)
         {
+            if (phase == null)
+                continue;
+
+
             // -------------------------------------------------
             // 遍歷該 Phase 的所有附屬物
             // -------------------------------------------------
@@ -149,8 +188,12 @@ public class Boss_Manager : MonoBehaviour
                     continue;
 
 
+                // -------------------------------------------------
                 // 取得 Boss_hand
-                Boss_hand bossHand = subObject.GetComponent<Boss_hand>();
+                // -------------------------------------------------
+
+                Boss_hand bossHand =
+                    subObject.GetComponent<Boss_hand>();
 
 
                 // 沒有 Boss_hand 就跳過
@@ -158,7 +201,10 @@ public class Boss_Manager : MonoBehaviour
                     continue;
 
 
+                // -------------------------------------------------
                 // 記錄最大 HP
+                // -------------------------------------------------
+
                 totalBossMaxHP += bossHand.maxHP;
             }
         }
@@ -177,12 +223,18 @@ public class Boss_Manager : MonoBehaviour
 
     private void UpdateBossHPBar()
     {
+        // -----------------------------------------------------
         // 沒有設定 UI
+        // -----------------------------------------------------
+
         if (bossHPBar == null)
             return;
 
 
+        // -----------------------------------------------------
         // 沒有有效的 Boss 最大 HP
+        // -----------------------------------------------------
+
         if (totalBossMaxHP <= 0f)
         {
             bossHPBar.fillAmount = 1f;
@@ -191,20 +243,27 @@ public class Boss_Manager : MonoBehaviour
 
 
         // =====================================================
-        // 計算「目前存在的附屬物」血量
+        // 計算目前「已經存在」的附屬物血量
         // =====================================================
 
         float currentExistingHP = 0f;
 
 
         // -----------------------------------------------------
-        // 只計算目前已經存在的附屬物
+        // 遍歷所有 Phase
         // -----------------------------------------------------
 
         for (int i = 0; i < phases.Count; i++)
         {
             BossPhase phase = phases[i];
 
+            if (phase == null)
+                continue;
+
+
+            // -------------------------------------------------
+            // 遍歷附屬物
+            // -------------------------------------------------
 
             foreach (GameObject subObject in phase.subObjects)
             {
@@ -213,17 +272,20 @@ public class Boss_Manager : MonoBehaviour
                     continue;
 
 
+                // -------------------------------------------------
                 // 取得 Boss_hand
-                Boss_hand bossHand = subObject.GetComponent<Boss_hand>();
+                // -------------------------------------------------
+
+                Boss_hand bossHand =
+                    subObject.GetComponent<Boss_hand>();
 
 
-                // 沒有 Boss_hand
                 if (bossHand == null)
                     continue;
 
 
                 // -------------------------------------------------
-                // 只計算目前存在的物件血量
+                // 計算目前存在物件的 HP
                 // -------------------------------------------------
 
                 currentExistingHP += Mathf.Max(
@@ -235,14 +297,14 @@ public class Boss_Manager : MonoBehaviour
 
 
         // =====================================================
-        // 計算「後面尚未登場階段」的預計血量
+        // 計算「尚未登場的後續 Phase」預計 HP
         // =====================================================
 
         float futurePhaseHP = 0f;
 
 
         // -----------------------------------------------------
-        // currentPhaseIndex 後面的所有 Phase
+        // 從下一個 Phase 開始
         // -----------------------------------------------------
 
         for (
@@ -253,16 +315,22 @@ public class Boss_Manager : MonoBehaviour
         {
             BossPhase futurePhase = phases[i];
 
+            if (futurePhase == null)
+                continue;
+
+
+            // -------------------------------------------------
+            // 計算後續 Phase 附屬物的 Max HP
+            // -------------------------------------------------
 
             foreach (GameObject subObject in futurePhase.subObjects)
             {
-                // 這裡的物件尚未登場
-                // 因此直接使用它原本的 maxHP
                 if (subObject == null)
                     continue;
 
 
-                Boss_hand bossHand = subObject.GetComponent<Boss_hand>();
+                Boss_hand bossHand =
+                    subObject.GetComponent<Boss_hand>();
 
 
                 if (bossHand == null)
@@ -291,7 +359,8 @@ public class Boss_Manager : MonoBehaviour
             totalRemainingHP / totalBossMaxHP;
 
 
-        remainingRatio = Mathf.Clamp01(remainingRatio);
+        remainingRatio =
+            Mathf.Clamp01(remainingRatio);
 
 
         // =====================================================
@@ -307,7 +376,8 @@ public class Boss_Manager : MonoBehaviour
             1f - remainingRatio;
 
 
-        lostRatio = Mathf.Clamp01(lostRatio);
+        lostRatio =
+            Mathf.Clamp01(lostRatio);
 
 
         // =====================================================
@@ -324,8 +394,30 @@ public class Boss_Manager : MonoBehaviour
 
     private bool AreAllSubObjectsGone()
     {
-        BossPhase currentPhase = phases[currentPhaseIndex];
+        // -----------------------------------------------------
+        // 防止 currentPhaseIndex 超出範圍
+        // -----------------------------------------------------
 
+        if (
+            currentPhaseIndex < 0 ||
+            currentPhaseIndex >= phases.Count
+        )
+        {
+            return false;
+        }
+
+
+        BossPhase currentPhase =
+            phases[currentPhaseIndex];
+
+
+        if (currentPhase == null)
+            return true;
+
+
+        // -----------------------------------------------------
+        // 檢查所有附屬物
+        // -----------------------------------------------------
 
         foreach (GameObject subObject in currentPhase.subObjects)
         {
@@ -343,11 +435,125 @@ public class Boss_Manager : MonoBehaviour
 
 
     // =========================================================
+    // 生成回合結束預置物
+    // =========================================================
+
+    private void SpawnPhaseEndPrefab()
+    {
+        // -----------------------------------------------------
+        // 沒有設定預置物
+        // -----------------------------------------------------
+
+        if (phaseEndPrefab == null)
+        {
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // 防止 currentPhaseIndex 超出範圍
+        // -----------------------------------------------------
+
+        if (
+            currentPhaseIndex < 0 ||
+            currentPhaseIndex >= phases.Count
+        )
+        {
+            return;
+        }
+
+
+        BossPhase currentPhase =
+            phases[currentPhaseIndex];
+
+
+        if (currentPhase == null)
+        {
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // 沒有設定該回合的總物件
+        // -----------------------------------------------------
+
+        if (currentPhase.mainObject == null)
+        {
+            Debug.LogWarning(
+                "Boss Phase " +
+                currentPhaseIndex +
+                " 沒有設定 mainObject，" +
+                "無法生成回合結束預置物。"
+            );
+
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // 取得該回合總物件的位置
+        // -----------------------------------------------------
+
+        Vector3 spawnPosition =
+            currentPhase.mainObject.transform.position;
+
+
+        // -----------------------------------------------------
+        // 生成預置物
+        // -----------------------------------------------------
+
+        Instantiate(
+            phaseEndPrefab,
+            spawnPosition,
+            Quaternion.identity
+        );
+
+
+        Debug.Log(
+            "Boss Phase " +
+            (currentPhaseIndex + 1) +
+            " 結束，生成回合結束預置物。"
+        );
+    }
+
+
+    // =========================================================
     // 進入下一階段
     // =========================================================
 
     private void GoToNextPhase()
     {
+        // -----------------------------------------------------
+        // 防止重複執行
+        // -----------------------------------------------------
+
+        if (bossVictory)
+            return;
+
+
+        // -----------------------------------------------------
+        // 防止索引超出範圍
+        // -----------------------------------------------------
+
+        if (
+            currentPhaseIndex < 0 ||
+            currentPhaseIndex >= phases.Count
+        )
+        {
+            OnBossVictory();
+            return;
+        }
+
+
+        // =====================================================
+        // 回合結束
+        // =====================================================
+
+        // 在「目前回合的 mainObject 位置」
+        // 生成指定預置物
+        SpawnPhaseEndPrefab();
+
+
         // -----------------------------------------------------
         // 隱藏目前階段
         // -----------------------------------------------------
@@ -358,31 +564,27 @@ public class Boss_Manager : MonoBehaviour
         );
 
 
+        // -----------------------------------------------------
+        // 進入下一階段
+        // -----------------------------------------------------
+
         currentPhaseIndex++;
 
 
-        // -----------------------------------------------------
+        // =====================================================
         // 已經沒有下一階段
-        // -----------------------------------------------------
+        // =====================================================
 
         if (currentPhaseIndex >= phases.Count)
         {
-            // Boss 已經勝利
-            if (bossHPBar != null)
-            {
-                bossHPBar.fillAmount = 1f;
-            }
-
-
             OnBossVictory();
-
             return;
         }
 
 
-        // -----------------------------------------------------
+        // =====================================================
         // 顯示下一階段
-        // -----------------------------------------------------
+        // =====================================================
 
         SetPhaseActive(
             currentPhaseIndex,
@@ -390,7 +592,10 @@ public class Boss_Manager : MonoBehaviour
         );
 
 
+        // -----------------------------------------------------
         // 更新 Boss 總血量 UI
+        // -----------------------------------------------------
+
         UpdateBossHPBar();
     }
 
@@ -404,7 +609,25 @@ public class Boss_Manager : MonoBehaviour
         bool active
     )
     {
-        BossPhase phase = phases[phaseIndex];
+        // -----------------------------------------------------
+        // 防止索引超出範圍
+        // -----------------------------------------------------
+
+        if (
+            phaseIndex < 0 ||
+            phaseIndex >= phases.Count
+        )
+        {
+            return;
+        }
+
+
+        BossPhase phase =
+            phases[phaseIndex];
+
+
+        if (phase == null)
+            return;
 
 
         if (phase.mainObject != null)
@@ -420,8 +643,33 @@ public class Boss_Manager : MonoBehaviour
 
     private void OnBossVictory()
     {
+        // -----------------------------------------------------
+        // 設定勝利狀態
+        // -----------------------------------------------------
+
+        bossVictory = true;
+
+
+        // -----------------------------------------------------
+        // Boss 血量 UI 填滿
+        // -----------------------------------------------------
+
+        if (bossHPBar != null)
+        {
+            bossHPBar.fillAmount = 1f;
+        }
+
+
+        // -----------------------------------------------------
+        // 勝利訊息
+        // -----------------------------------------------------
+
         Debug.Log("Boss Victory!");
 
+
+        // -----------------------------------------------------
+        // 場景轉換
+        // -----------------------------------------------------
 
         TransitionManager.Instance().Transition(
             sceneName,

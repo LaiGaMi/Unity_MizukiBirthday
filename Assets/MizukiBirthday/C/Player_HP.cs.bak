@@ -33,6 +33,18 @@ public class Player_HP : MonoBehaviour
 
     [Header("Player Image")]
     [SerializeField] private SpriteRenderer playerSprite;
+	
+	[Header("Death Object")]
+	[SerializeField] private GameObject deathObject;
+
+    // =========================================================
+    // 玩家自身碰撞箱
+    // =========================================================
+
+    [Header("Player Collider")]
+
+    [Tooltip("只接受這個物件本身的 Collider2D，不包含子物件的 Collider2D。")]
+    [SerializeField] private Collider2D playerCollider;
 
 
     // =========================================================
@@ -69,6 +81,13 @@ public class Player_HP : MonoBehaviour
             playerSprite = GetComponent<SpriteRenderer>();
         }
 
+        // 如果沒有手動指定，
+        // 自動取得「腳本所在物件」上的 Collider2D。
+        if (playerCollider == null)
+        {
+            playerCollider = GetComponent<Collider2D>();
+        }
+
         UpdateHPBar();
     }
 
@@ -79,6 +98,26 @@ public class Player_HP : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // =====================================================
+        // 只接受 Player_HP 所在 GameObject 自己的 Collider2D
+        // =====================================================
+
+        if (playerCollider == null)
+        {
+            return;
+        }
+
+
+        // 如果觸發這個事件的碰撞箱不是玩家自身指定的碰撞箱，
+        // 直接忽略。
+        //
+        // 子物件上的 Collider2D 不會進行任何判定。
+        if (playerCollider.gameObject != gameObject)
+        {
+            return;
+        }
+
+
         // =====================================================
         // 回血道具
         // =====================================================
@@ -170,6 +209,8 @@ public class Player_HP : MonoBehaviour
 
         if (mizuki.card > 0)
         {
+			Audio.Instance.Play("SE_mizukiAtt02");
+			
             mizuki.card--;
 
             Debug.Log(
@@ -186,6 +227,7 @@ public class Player_HP : MonoBehaviour
         // =====================================================
         // 沒有塔羅牌
         // =====================================================
+		Audio.Instance.Play("SE_mizukiAtt");
 
         currentHP -= damage;
 
@@ -271,6 +313,12 @@ public class Player_HP : MonoBehaviour
             return;
         }
 
+        if (maxHP <= 0f)
+        {
+            hpBar.fillAmount = 0f;
+            return;
+        }
+
         hpBar.fillAmount = currentHP / maxHP;
     }
 
@@ -283,7 +331,8 @@ public class Player_HP : MonoBehaviour
     {
         Debug.Log("Player HP = 0");
 
-        // 之後可以在這裡加入死亡處理
+        deathObject.SetActive(true);
+		Destroy(gameObject);
     }
 
 

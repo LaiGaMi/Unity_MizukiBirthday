@@ -63,10 +63,13 @@ public class V_Move2 : MonoBehaviour
     // 衝刺相關
     // =========================================================
 
-    // 衝刺開始時玩家的位置
+    // 旋轉開始時記錄的玩家位置
     private Vector2 dashTargetPosition;
 
-    // 是否已經經過玩家在衝刺開始時的位置
+    // 旋轉開始時決定好的衝刺方向
+    private Vector2 dashDirection;
+
+    // 是否已經經過玩家在旋轉開始時的位置
     private bool hasPassedTargetPosition = false;
 
 
@@ -80,10 +83,8 @@ public class V_Move2 : MonoBehaviour
         // 找攝影機
         mainCamera = Camera.main;
 
-
-        // 自動尋找名為 mizuki 的物件
+        // 自動尋找玩家
         FindTarget();
-
 
         // 讓敵人一生成就開始計時
         attackTimer = attackInterval;
@@ -102,9 +103,9 @@ public class V_Move2 : MonoBehaviour
         }
 
 
-        // =========================
+        // =====================================================
         // 正在旋轉
-        // =========================
+        // =====================================================
 
         if (isRotating)
         {
@@ -113,9 +114,9 @@ public class V_Move2 : MonoBehaviour
         }
 
 
-        // =========================
+        // =====================================================
         // 正在衝刺
-        // =========================
+        // =====================================================
 
         if (isDashing)
         {
@@ -124,28 +125,26 @@ public class V_Move2 : MonoBehaviour
         }
 
 
-        // =========================
+        // =====================================================
         // 一般追蹤玩家
-        // =========================
+        // =====================================================
 
         moveDirection =
             ((Vector2)target.position - rb.position).normalized;
 
-        rb.velocity = moveDirection * currentSpeed;
+        rb.velocity =
+            moveDirection * currentSpeed;
 
 
-        // =========================
+        // =====================================================
         // 攻擊計時
-        // =========================
+        // =====================================================
 
         attackTimer -= Time.fixedDeltaTime;
 
         if (attackTimer <= 0f)
         {
-            // 停止移動
-            rb.velocity = Vector2.zero;
-
-            // 開始旋轉
+            // 開始攻擊流程
             StartCoroutine(AttackSequence());
         }
     }
@@ -164,15 +163,64 @@ public class V_Move2 : MonoBehaviour
         }
 
 
+        // =====================================================
+        // 旋轉開始
+        // =====================================================
+
         isRotating = true;
 
         // 停止移動
         rb.velocity = Vector2.zero;
+		
+		Audio.Instance.Play("SE_V04_1");
 
 
-        // =========================
+        // =====================================================
+        // 在「旋轉開始的瞬間」
+        // 決定這次衝刺的所有資料
+        // =====================================================
+
+        FindTarget();
+
+
+        if (target != null)
+        {
+            // ---------------------------------------------
+            // 1. 記錄玩家現在的位置
+            // ---------------------------------------------
+
+            dashTargetPosition =
+                target.position;
+
+
+            // ---------------------------------------------
+            // 2. 計算並鎖定衝刺方向
+            // ---------------------------------------------
+
+            dashDirection =
+                (dashTargetPosition - rb.position)
+                .normalized;
+
+
+            // ---------------------------------------------
+            // 3. 同步目前移動方向
+            // ---------------------------------------------
+
+            moveDirection =
+                dashDirection;
+        }
+
+
+        // ---------------------------------------------
+        // 4. 重置「是否經過玩家位置」
+        // ---------------------------------------------
+
+        hasPassedTargetPosition = false;
+
+
+        // =====================================================
         // Z 軸旋轉一圈
-        // =========================
+        // =====================================================
 
         float timer = 0f;
 
@@ -186,7 +234,7 @@ public class V_Move2 : MonoBehaviour
                 );
 
 
-            // 使用 AnimationCurve 控制旋轉
+            // 使用 AnimationCurve 控制旋轉速度
             float curveValue =
                 rotationCurve.Evaluate(progress);
 
@@ -208,9 +256,9 @@ public class V_Move2 : MonoBehaviour
         }
 
 
-        // =========================
+        // =====================================================
         // 旋轉結束
-        // =========================
+        // =====================================================
 
         transform.rotation =
             Quaternion.Euler(
@@ -220,49 +268,22 @@ public class V_Move2 : MonoBehaviour
             );
 
 
-        // =========================
-        // 重新尋找玩家
-        // =========================
-
-        FindTarget();
-
-
-        if (target != null)
-        {
-            // =========================================
-            // 記錄玩家目前位置
-            // =========================================
-
-            dashTargetPosition =
-                target.position;
-
-
-            // 計算衝刺方向
-            moveDirection =
-                (dashTargetPosition - rb.position)
-                .normalized;
-        }
-
-
-        // =========================================
-        // 重置「經過玩家位置」判定
-        // =========================================
-
-        hasPassedTargetPosition = false;
-
-
         // 結束旋轉
         isRotating = false;
 
 
-        // =========================
+        // =====================================================
         // 開始衝刺
-        // =========================
+        //
+        // 注意：
+        // 這裡不再重新尋找玩家，也不重新計算方向。
+        // 完全使用旋轉開始時鎖定的 dashDirection。
+        // =====================================================
 
         isDashing = true;
 
         rb.velocity =
-            moveDirection * dashSpeed;
+            dashDirection * dashSpeed;
     }
 
 
@@ -272,10 +293,11 @@ public class V_Move2 : MonoBehaviour
 
     private void Dash()
     {
-        // 保持直線衝刺
+        // 永遠使用旋轉開始時鎖定的方向
         rb.velocity =
-            moveDirection * dashSpeed;
-
+            dashDirection * dashSpeed;
+			
+		Audio.Instance.Play("SE_V04_2");
 
         // =====================================================
         // 第一階段：
@@ -286,15 +308,16 @@ public class V_Move2 : MonoBehaviour
         {
             CheckPassedTargetPosition();
 
-            // 尚未經過玩家位置
-            // 所以這裡不能檢查攝影機邊緣
+            // 還沒經過玩家位置
+            // 不判斷攝影機邊緣
             return;
         }
 
 
         // =====================================================
         // 第二階段：
-        // 已經經過玩家位置後，才開始檢查攝影機邊緣
+        // 已經經過玩家位置後
+        // 才開始判斷攝影機邊緣
         // =====================================================
 
         if (IsOutsideCamera())
@@ -310,46 +333,20 @@ public class V_Move2 : MonoBehaviour
 
     private void CheckPassedTargetPosition()
     {
-        // 計算敵人目前位置
-        Vector2 currentPosition =
-            rb.position;
+        // 玩家位置到敵人目前位置的向量
+        Vector2 toTarget =
+            dashTargetPosition - rb.position;
 
 
-        // 判斷敵人是否已經通過玩家位置
-        //
-        // 使用「距離」判斷：
-        // 如果敵人現在距離玩家原本位置
-        // 已經比開始衝刺時更近，代表正在接近。
-        //
-        // 當敵人通過該位置後，
-        // 距離會再次開始增加。
-
-        float currentDistance =
-            Vector2.Distance(
-                currentPosition,
-                dashTargetPosition
-            );
-
-
-        float startDistance =
-            Vector2.Distance(
-                rb.position - moveDirection,
-                dashTargetPosition
-            );
-
-
-        // 更可靠的方式：
         // 使用點積判斷是否已經越過目標位置
-        Vector2 fromStart =
-            dashTargetPosition - currentPosition;
-
-
-        // 如果敵人已經位於玩家位置的前方
-        // 就代表已經越過玩家
+        //
+        // > 0 ：玩家位置還在前方
+        // = 0 ：敵人正好到達玩家位置
+        // < 0 ：玩家位置已經在敵人後方
         float dot =
             Vector2.Dot(
-                moveDirection,
-                dashTargetPosition - currentPosition
+                dashDirection,
+                toTarget
             );
 
 
@@ -359,7 +356,7 @@ public class V_Move2 : MonoBehaviour
 
             Debug.Log(
                 gameObject.name +
-                " 已經經過衝刺開始時玩家的位置"
+                " 已經經過攻擊開始時玩家的位置"
             );
         }
     }
@@ -377,32 +374,26 @@ public class V_Move2 : MonoBehaviour
         }
 
 
-        Vector3 viewportPosition =
-            mainCamera.WorldToViewportPoint(
-                transform.position
-            );
-
-
         // =====================================================
-        // 將攝影機範圍往外擴張
+        // 計算攝影機世界範圍
         // =====================================================
 
-        // 攝影機高度
         float cameraHeight =
             mainCamera.orthographicSize * 2f;
 
 
-        // 攝影機寬度
         float cameraWidth =
             cameraHeight * mainCamera.aspect;
 
 
-        // 攝影機中心
         Vector3 cameraCenter =
             mainCamera.transform.position;
 
 
-        // 攝影機實際世界座標邊界
+        // =====================================================
+        // 加上往外擴張的範圍
+        // =====================================================
+
         float left =
             cameraCenter.x -
             cameraWidth / 2f -

@@ -15,11 +15,38 @@ public class V_HP : MonoBehaviour
 
 
     // =========================================================
+    // 受傷閃爍設定
+    // =========================================================
+
+    [Header("受傷閃爍")]
+
+    // 指定受傷時的顏色
+    public Color hitFlashColor = Color.red;
+
+    // 閃爍時間
+    public float hitFlashDuration = 0.1f;
+
+    // 敵人的 SpriteRenderer
+    private SpriteRenderer[] spriteRenderers;
+
+    // 記錄每個 SpriteRenderer 原本的顏色
+    private Color[] originalColors;
+
+    // 閃爍計時器
+    private float hitFlashTimer = 0f;
+
+    // 是否正在閃爍
+    private bool isHitFlashing = false;
+
+
+    // =========================================================
     // EXP 設定
     // =========================================================
 
     [Header("擊殺 EXP")]
     public int expReward = 10;
+
+    public GameObject DieItem;
 
 
     // =========================================================
@@ -92,6 +119,80 @@ public class V_HP : MonoBehaviour
     private void Start()
     {
         currentHP = maxHP;
+
+
+        // -----------------------------------------------------
+        // 找自己以及所有子物件的 SpriteRenderer
+        // -----------------------------------------------------
+
+        spriteRenderers =
+            GetComponentsInChildren<SpriteRenderer>();
+
+
+        // -----------------------------------------------------
+        // 建立原本顏色的陣列
+        // -----------------------------------------------------
+
+        originalColors =
+            new Color[spriteRenderers.Length];
+
+
+        // -----------------------------------------------------
+        // 記錄所有 SpriteRenderer 原本的顏色
+        // -----------------------------------------------------
+
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            if (spriteRenderers[i] != null)
+            {
+                originalColors[i] =
+                    spriteRenderers[i].color;
+            }
+        }
+    }
+
+
+    // =========================================================
+    // Update
+    // =========================================================
+
+    private void Update()
+    {
+        HandleHitFlash();
+    }
+
+
+    // =========================================================
+    // 受傷閃爍處理
+    // =========================================================
+
+    private void HandleHitFlash()
+    {
+        // -----------------------------------------------------
+        // 沒有正在閃爍
+        // -----------------------------------------------------
+
+        if (!isHitFlashing)
+        {
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // 倒數
+        // -----------------------------------------------------
+
+        hitFlashTimer -= Time.deltaTime;
+
+
+        // -----------------------------------------------------
+        // 時間到了
+        // -----------------------------------------------------
+
+        if (hitFlashTimer <= 0f)
+        {
+            RestoreOriginalColor();
+        }
     }
 
 
@@ -109,7 +210,11 @@ public class V_HP : MonoBehaviour
         {
             TakeDamage(1f);
 
-            if (mizuki.att02 == 3 && mizuki.card == mizuki.cardMax)
+
+            if (
+                mizuki.att02 == 3 &&
+                mizuki.card == mizuki.cardMax
+            )
             {
                 TakeDamage(0.2f);
             }
@@ -124,10 +229,15 @@ public class V_HP : MonoBehaviour
         {
             TakeDamage(1f);
 
-            if (mizuki.att02 == 3 && mizuki.card == mizuki.cardMax)
+
+            if (
+                mizuki.att02 == 3 &&
+                mizuki.card == mizuki.cardMax
+            )
             {
                 TakeDamage(0.2f);
             }
+
 
             Destroy(other.gameObject);
         }
@@ -153,6 +263,7 @@ public class V_HP : MonoBehaviour
         if (other.CompareTag(continuousBulletTag))
         {
             damageTimer += Time.deltaTime;
+
 
             if (damageTimer >= damageInterval)
             {
@@ -183,7 +294,26 @@ public class V_HP : MonoBehaviour
 
     private void TakeDamage(float damage)
     {
+        // -----------------------------------------------------
+        // 播放受傷音效
+        // -----------------------------------------------------
+
+        Audio.Instance.Play("SE_Vatt");
+
+
+        // -----------------------------------------------------
+        // 受傷閃爍
+        // -----------------------------------------------------
+
+        StartHitFlash();
+
+
+        // -----------------------------------------------------
+        // 扣血
+        // -----------------------------------------------------
+
         currentHP -= damage;
+
 
         Debug.Log(
             gameObject.name +
@@ -194,10 +324,136 @@ public class V_HP : MonoBehaviour
         );
 
 
+        // -----------------------------------------------------
         // HP 歸零
+        // -----------------------------------------------------
+
         if (currentHP <= 0)
         {
             Die();
+        }
+    }
+
+
+    // =========================================================
+    // 開始受傷閃爍
+    // =========================================================
+
+    private void StartHitFlash()
+    {
+        // -----------------------------------------------------
+        // 開始閃爍
+        // -----------------------------------------------------
+
+        isHitFlashing = true;
+
+
+        // -----------------------------------------------------
+        // 每次受到傷害都重新開始計算時間
+        // -----------------------------------------------------
+
+        hitFlashTimer =
+            hitFlashDuration;
+
+
+        // -----------------------------------------------------
+        // 如果 SpriteRenderer 沒有找到
+        // -----------------------------------------------------
+
+        if (spriteRenderers == null)
+        {
+            spriteRenderers =
+                GetComponentsInChildren<SpriteRenderer>();
+        }
+
+
+        // -----------------------------------------------------
+        // 如果原本顏色陣列沒有建立
+        // -----------------------------------------------------
+
+        if (
+            originalColors == null ||
+            originalColors.Length != spriteRenderers.Length
+        )
+        {
+            originalColors =
+                new Color[spriteRenderers.Length];
+
+
+            for (int i = 0;
+                 i < spriteRenderers.Length;
+                 i++)
+            {
+                if (spriteRenderers[i] != null)
+                {
+                    originalColors[i] =
+                        spriteRenderers[i].color;
+                }
+            }
+        }
+
+
+        // -----------------------------------------------------
+        // 變成受傷顏色
+        // -----------------------------------------------------
+
+        for (int i = 0;
+             i < spriteRenderers.Length;
+             i++)
+        {
+            if (spriteRenderers[i] != null)
+            {
+                spriteRenderers[i].color =
+                    hitFlashColor;
+            }
+        }
+    }
+
+
+    // =========================================================
+    // 恢復原本顏色
+    // =========================================================
+
+    private void RestoreOriginalColor()
+    {
+        // -----------------------------------------------------
+        // 停止閃爍
+        // -----------------------------------------------------
+
+        isHitFlashing = false;
+
+        hitFlashTimer = 0f;
+
+
+        // -----------------------------------------------------
+        // 沒有顏色資料
+        // -----------------------------------------------------
+
+        if (
+            spriteRenderers == null ||
+            originalColors == null
+        )
+        {
+            return;
+        }
+
+
+        // -----------------------------------------------------
+        // 恢復所有 SpriteRenderer
+        // -----------------------------------------------------
+
+        for (int i = 0;
+             i < spriteRenderers.Length;
+             i++)
+        {
+            if (
+                spriteRenderers[i] != null &&
+                i < originalColors.Length
+            )
+            {
+                spriteRenderers[i].color =
+                    originalColors[i];
+            }
         }
     }
 
@@ -209,21 +465,42 @@ public class V_HP : MonoBehaviour
     private void Die()
     {
         // -----------------------------------------------------
-        // 給玩家 EXP
+        // 死亡前先恢復原本顏色
+        // -----------------------------------------------------
+
+        RestoreOriginalColor();
+
+
+        // -----------------------------------------------------
+        // 增加 EXP
         // -----------------------------------------------------
 
         mizuki.exp += expReward;
 
-        Level level = FindObjectOfType<Level>();
 
-        //if (level != null)
-        //{
-        //    level.CheckLevelUp();
-        //}
+        // -----------------------------------------------------
+        // 播放死亡音效
+        // -----------------------------------------------------
+
+        Audio.Instance.Play("SE_V00");
 
 
         // -----------------------------------------------------
-        // att03 補血道具掉落
+        // 生成死亡特效 / 預置物
+        // -----------------------------------------------------
+
+        if (DieItem != null)
+        {
+            Instantiate(
+                DieItem,
+                transform.position,
+                Quaternion.identity
+            );
+        }
+
+
+        // -----------------------------------------------------
+        // 掉落補血道具
         // -----------------------------------------------------
 
         DropHealItem();
@@ -244,6 +521,7 @@ public class V_HP : MonoBehaviour
     private void DropHealItem()
     {
         GameObject item = null;
+
         float chance = 0f;
 
 
@@ -254,26 +532,39 @@ public class V_HP : MonoBehaviour
         switch (mizuki.att03)
         {
             case 1:
+
                 item = healItem01;
                 chance = dropChance01;
+
                 break;
+
 
             case 2:
+
                 item = healItem02;
                 chance = dropChance02;
+
                 break;
+
 
             case 3:
+
                 item = healItem03;
                 chance = dropChance03;
+
                 break;
 
+
             default:
+
                 return;
         }
 
 
+        // -----------------------------------------------------
         // 沒有設定預置物
+        // -----------------------------------------------------
+
         if (item == null)
         {
             return;
@@ -284,7 +575,9 @@ public class V_HP : MonoBehaviour
         // 隨機判定
         // -----------------------------------------------------
 
-        float randomValue = Random.Range(0f, 100f);
+        float randomValue =
+            Random.Range(0f, 100f);
+
 
         if (randomValue < chance)
         {
@@ -293,6 +586,7 @@ public class V_HP : MonoBehaviour
                 transform.position,
                 Quaternion.identity
             );
+
 
             Debug.Log(
                 "敵人掉落補血道具！ att03 = " +

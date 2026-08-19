@@ -171,6 +171,8 @@ public class V_Move2 : MonoBehaviour
 
         // 停止移動
         rb.velocity = Vector2.zero;
+		
+		Audio.Instance.Play("SE_V04_1");
 
 
         // =====================================================
@@ -279,6 +281,8 @@ public class V_Move2 : MonoBehaviour
         // =====================================================
 
         isDashing = true;
+		
+		Audio.Instance.Play("SE_V04_2");
 
         rb.velocity =
             dashDirection * dashSpeed;
@@ -294,7 +298,6 @@ public class V_Move2 : MonoBehaviour
         // 永遠使用旋轉開始時鎖定的方向
         rb.velocity =
             dashDirection * dashSpeed;
-
 
         // =====================================================
         // 第一階段：

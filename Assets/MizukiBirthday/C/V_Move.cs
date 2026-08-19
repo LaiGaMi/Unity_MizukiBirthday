@@ -14,6 +14,7 @@ public class V_Move : MonoBehaviour
     [Header("Attack")]
     [SerializeField] private float attackInterval = 2f;
     [SerializeField] private GameObject bulletPrefab;
+	[SerializeField] private string AttSouund;
 
 
     [Header("Umbrella")]
@@ -135,8 +136,9 @@ public class V_Move : MonoBehaviour
         {
             return;
         }
-
-
+		
+		Audio.Instance.Play(AttSouund);
+		
         GameObject bullet = Instantiate(
             bulletPrefab,
             transform.position,
@@ -194,7 +196,8 @@ public class V_Move : MonoBehaviour
                 backwardDirection * knockbackDistance;
 
             rb.position = newPosition;
-
+			
+			Audio.Instance.Play("SE_mizuki04");
 
             // att04 = 3
             // 25% 機率停止

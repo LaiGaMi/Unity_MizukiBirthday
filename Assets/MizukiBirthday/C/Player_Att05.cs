@@ -52,7 +52,8 @@ public class Player_Att05 : MonoBehaviour
         {
             return;
         }
-
+		
+		Audio.Instance.Play("SE_mizuki05");
 
         // =====================================================
         // 決定這次攻擊要鎖定幾個敵人
@@ -118,7 +119,7 @@ public class Player_Att05 : MonoBehaviour
             // =================================================
             // 在敵人位置生成預置物
             // =================================================
-
+			
             Instantiate(
                 attackPrefab,
                 target.transform.position,

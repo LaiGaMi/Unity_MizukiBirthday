@@ -7,9 +7,14 @@ public class V_Move : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float speed = 3f;
 
+    // 實際使用中的速度
+    private float currentSpeed;
+
+
     [Header("Attack")]
     [SerializeField] private float attackInterval = 2f;
     [SerializeField] private GameObject bulletPrefab;
+
 
     [Header("Umbrella")]
     [SerializeField] private string umbrellaTag = "Umbrella";
@@ -17,6 +22,19 @@ public class V_Move : MonoBehaviour
     // 碰到雨傘後後退的距離
     [SerializeField] private float knockbackDistance = 1f;
 
+
+    [Header("Slow")]
+    [SerializeField] private string slowBulletTag = "SlowBullet";
+
+    // 減速百分比
+    [SerializeField, Range(0f, 100f)]
+    private float slowPercent = 25f;
+
+    // 是否已經被減速
+    private bool isSlowed = false;
+
+
+    [Header("Stop")]
     // att04 = 3 時，停止移動的機率
     [Range(0f, 100f)]
     [SerializeField] private float stopChance = 25f;
@@ -42,6 +60,10 @@ public class V_Move : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
+        // 初始速度
+        currentSpeed = speed;
+
+
         // 自動尋找名為 mizuki 的物件
         GameObject mizukiObject = GameObject.Find("mizuki");
 
@@ -53,6 +75,7 @@ public class V_Move : MonoBehaviour
         {
             Debug.LogError("找不到名為 mizuki 的物件！");
         }
+
 
         // 讓敵人一生成就可以開始攻擊
         attackTimer = attackInterval;
@@ -84,7 +107,7 @@ public class V_Move : MonoBehaviour
         moveDirection =
             ((Vector2)target.position - rb.position).normalized;
 
-        rb.velocity = moveDirection * speed;
+        rb.velocity = moveDirection * currentSpeed;
 
 
         // =========================
@@ -134,55 +157,87 @@ public class V_Move : MonoBehaviour
 
 
     // =========================================================
-    // 碰到雨傘
+    // Trigger
     // =========================================================
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag(umbrellaTag))
+        // =====================================================
+        // 減速子彈
+        // =====================================================
+
+        if (other.CompareTag(slowBulletTag))
+        {
+            SlowEnemy();
+        }
+
+
+        // =====================================================
+        // 雨傘
+        // =====================================================
+
+        if (other.CompareTag(umbrellaTag))
+        {
+            // 面向玩家
+            if (target != null)
+            {
+                moveDirection =
+                    ((Vector2)target.position - rb.position).normalized;
+            }
+
+
+            // 後退
+            Vector2 backwardDirection = -moveDirection;
+
+            Vector2 newPosition =
+                rb.position +
+                backwardDirection * knockbackDistance;
+
+            rb.position = newPosition;
+			
+			Audio.Instance.Play("SE_mizuki04");
+
+            // att04 = 3
+            // 25% 機率停止
+            if (mizuki.att04 == 3)
+            {
+                float randomValue = Random.Range(0f, 100f);
+
+                if (randomValue < stopChance)
+                {
+                    StartCoroutine(StopMovement());
+                }
+            }
+        }
+    }
+
+
+    // =========================================================
+    // 減速
+    // =========================================================
+
+    private void SlowEnemy()
+    {
+        // 已經減速就不重複計算
+        if (isSlowed)
         {
             return;
         }
 
 
-        // =========================
-        // 面向玩家
-        // =========================
-
-        if (target != null)
-        {
-            moveDirection =
-                ((Vector2)target.position - rb.position).normalized;
-        }
+        isSlowed = true;
 
 
-        // =========================
-        // 後退
-        // =========================
-
-        Vector2 backwardDirection = -moveDirection;
-
-        Vector2 newPosition =
-            rb.position +
-            backwardDirection * knockbackDistance;
-
-        rb.position = newPosition;
+        // 例如 3 × 0.75 = 2.25
+        currentSpeed =
+            speed * (1f - slowPercent / 100f);
 
 
-        // =========================
-        // att04 = 3
-        // 25% 機率停止
-        // =========================
-
-        if (mizuki.att04 == 3)
-        {
-            float randomValue = Random.Range(0f, 100f);
-
-            if (randomValue < stopChance)
-            {
-                StartCoroutine(StopMovement());
-            }
-        }
+        Debug.Log(
+            gameObject.name +
+            " 被減速！目前速度：" +
+            currentSpeed
+        );
     }
 
 

@@ -33,7 +33,9 @@ public class Player_HP : MonoBehaviour
 
     [Header("Player Image")]
     [SerializeField] private SpriteRenderer playerSprite;
-
+	
+	[Header("Death Object")]
+	[SerializeField] private GameObject deathObject;
 
     // =========================================================
     // 玩家自身碰撞箱
@@ -175,6 +177,7 @@ public class Player_HP : MonoBehaviour
         {
             return;
         }
+		Audio.Instance.Play("SE_mizuki03");
 
         currentHP += amount;
 
@@ -207,6 +210,8 @@ public class Player_HP : MonoBehaviour
 
         if (mizuki.card > 0)
         {
+			Audio.Instance.Play("SE_mizukiAtt02");
+			
             mizuki.card--;
 
             Debug.Log(
@@ -223,6 +228,7 @@ public class Player_HP : MonoBehaviour
         // =====================================================
         // 沒有塔羅牌
         // =====================================================
+		Audio.Instance.Play("SE_mizukiAtt");
 
         currentHP -= damage;
 
@@ -326,7 +332,8 @@ public class Player_HP : MonoBehaviour
     {
         Debug.Log("Player HP = 0");
 
-        // 之後可以在這裡加入死亡處理
+        deathObject.SetActive(true);
+		Destroy(gameObject);
     }
 
 

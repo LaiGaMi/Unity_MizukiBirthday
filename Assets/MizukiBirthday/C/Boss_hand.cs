@@ -15,11 +15,38 @@ public class Boss_hand : MonoBehaviour
 
 
     // =========================================================
+    // 受傷閃爍設定
+    // =========================================================
+
+    [Header("受傷閃爍")]
+
+    // 受傷時顯示的顏色
+    public Color hitFlashColor = Color.red;
+
+    // 閃爍持續時間
+    public float hitFlashDuration = 0.1f;
+
+    // Boss 手部的 SpriteRenderer
+    private SpriteRenderer[] spriteRenderers;
+
+    // 記錄原本的顏色
+    private Color[] originalColors;
+
+    // 閃爍計時器
+    private float hitFlashTimer = 0f;
+
+    // 是否正在閃爍
+    private bool isHitFlashing = false;
+
+
+    // =========================================================
     // EXP 設定
     // =========================================================
 
     [Header("擊殺 EXP")]
     public int expReward = 10;
+
+    public GameObject DieItem;
 
 
     // =========================================================
@@ -122,6 +149,21 @@ public class Boss_hand : MonoBehaviour
     {
         currentHP = maxHP;
 
+        // 找自己以及所有子物件的 SpriteRenderer
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+        // 建立原本顏色的陣列
+        originalColors = new Color[spriteRenderers.Length];
+
+        // 記錄所有 SpriteRenderer 原本的顏色
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            if (spriteRenderers[i] != null)
+            {
+                originalColors[i] = spriteRenderers[i].color;
+            }
+        }
+
         // 小怪生成計時器歸零
         minionSpawnTimer = 0f;
     }
@@ -134,6 +176,108 @@ public class Boss_hand : MonoBehaviour
     private void Update()
     {
         HandleMinionSpawn();
+
+        // 處理受傷閃爍
+        HandleHitFlash();
+    }
+
+
+    // =========================================================
+    // 受傷閃爍處理
+    // =========================================================
+
+    private void HandleHitFlash()
+    {
+        // 沒有正在閃爍
+        if (!isHitFlashing)
+        {
+            return;
+        }
+
+        // 倒數
+        hitFlashTimer -= Time.deltaTime;
+
+        // 時間到了
+        if (hitFlashTimer <= 0f)
+        {
+            RestoreOriginalColor();
+        }
+    }
+
+
+    // =========================================================
+    // 開始受傷閃爍
+    // =========================================================
+
+    private void StartHitFlash()
+    {
+        // 如果 SpriteRenderer 還沒有找到
+        if (spriteRenderers == null)
+        {
+            spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        }
+
+        // 如果原本顏色陣列還沒有建立
+        if (originalColors == null ||
+            originalColors.Length != spriteRenderers.Length)
+        {
+            originalColors =
+                new Color[spriteRenderers.Length];
+
+            for (int i = 0; i < spriteRenderers.Length; i++)
+            {
+                if (spriteRenderers[i] != null)
+                {
+                    originalColors[i] =
+                        spriteRenderers[i].color;
+                }
+            }
+        }
+
+        // 開始閃爍
+        isHitFlashing = true;
+
+        // 每次受傷重新計時
+        hitFlashTimer = hitFlashDuration;
+
+        // 變成指定受傷顏色
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            if (spriteRenderers[i] != null)
+            {
+                spriteRenderers[i].color =
+                    hitFlashColor;
+            }
+        }
+    }
+
+
+    // =========================================================
+    // 恢復原本顏色
+    // =========================================================
+
+    private void RestoreOriginalColor()
+    {
+        isHitFlashing = false;
+
+        hitFlashTimer = 0f;
+
+        if (spriteRenderers == null ||
+            originalColors == null)
+        {
+            return;
+        }
+
+        // 恢復原本顏色
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            if (spriteRenderers[i] != null &&
+                i < originalColors.Length)
+            {
+                spriteRenderers[i].color =
+                    originalColors[i];
+            }
+        }
     }
 
 
@@ -185,15 +329,19 @@ public class Boss_hand : MonoBehaviour
         }
 
         // 從清單中隨機選擇
-        int randomIndex = Random.Range(0, minionPrefabs.Count);
+        int randomIndex =
+            Random.Range(0, minionPrefabs.Count);
 
-        GameObject selectedPrefab = minionPrefabs[randomIndex];
+        GameObject selectedPrefab =
+            minionPrefabs[randomIndex];
 
         // 清單中如果有空物件
         if (selectedPrefab == null)
         {
             return;
         }
+
+        Audio.Instance.Play("SE_V05");
 
         // 在 Boss 附屬物目前的位置生成
         GameObject minion = Instantiate(
@@ -264,7 +412,8 @@ public class Boss_hand : MonoBehaviour
         {
             TakeDamage(1f);
 
-            if (mizuki.att02 == 3 && mizuki.card == mizuki.cardMax)
+            if (mizuki.att02 == 3 &&
+                mizuki.card == mizuki.cardMax)
             {
                 TakeDamage(0.2f);
             }
@@ -279,7 +428,8 @@ public class Boss_hand : MonoBehaviour
         {
             TakeDamage(1f);
 
-            if (mizuki.att02 == 3 && mizuki.card == mizuki.cardMax)
+            if (mizuki.att02 == 3 &&
+                mizuki.card == mizuki.cardMax)
             {
                 TakeDamage(0.2f);
             }
@@ -310,7 +460,6 @@ public class Boss_hand : MonoBehaviour
             return false;
         }
 
-
         foreach (string tag in normalBulletTags)
         {
             // Tag 沒有設定
@@ -319,13 +468,11 @@ public class Boss_hand : MonoBehaviour
                 continue;
             }
 
-
             if (other.CompareTag(tag))
             {
                 return true;
             }
         }
-
 
         return false;
     }
@@ -370,6 +517,19 @@ public class Boss_hand : MonoBehaviour
 
     private void TakeDamage(float damage)
     {
+        // -----------------------------------------------------
+        // 播放受傷閃爍
+        // -----------------------------------------------------
+
+        StartHitFlash();
+
+        Audio.Instance.Play("SE_Vatt");
+
+
+        // -----------------------------------------------------
+        // 扣血
+        // -----------------------------------------------------
+
         currentHP -= damage;
 
         Debug.Log(
@@ -381,7 +541,10 @@ public class Boss_hand : MonoBehaviour
         );
 
 
+        // -----------------------------------------------------
         // HP 歸零
+        // -----------------------------------------------------
+
         if (currentHP <= 0)
         {
             Die();
@@ -395,6 +558,17 @@ public class Boss_hand : MonoBehaviour
 
     private void Die()
     {
+        // 死亡前先恢復原本顏色
+        RestoreOriginalColor();
+
+        Audio.Instance.Play("SE_V00");
+
+        Instantiate(
+            DieItem,
+            transform.position,
+            Quaternion.identity
+        );
+
         Destroy(gameObject);
     }
 
@@ -446,7 +620,8 @@ public class Boss_hand : MonoBehaviour
         // 隨機判定
         // -----------------------------------------------------
 
-        float randomValue = Random.Range(0f, 100f);
+        float randomValue =
+            Random.Range(0f, 100f);
 
         if (randomValue < chance)
         {

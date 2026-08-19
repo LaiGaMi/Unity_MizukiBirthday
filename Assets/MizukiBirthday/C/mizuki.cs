@@ -23,4 +23,8 @@ public static class mizuki
 	
 	// 其他紀錄
 	public static int Time = 0;
+	
+	// 設定
+	public static float musicVolume = 1f;
+	public static float seVolume = 1f;
 }

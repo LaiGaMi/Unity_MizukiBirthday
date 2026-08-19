@@ -1,0 +1,210 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class mizukiDataBackup : MonoBehaviour
+{
+    // =========================================================
+    // Inspector 開關
+    // =========================================================
+
+    [Header("啟用時，Start會自動記錄mizuki資料")]
+    public bool enableSave = true;
+
+    [Header("啟用時，每秒增加mizuki.Time")]
+    public bool enableTimeCounter = false;
+
+
+    // =========================================================
+    // Static 備份資料
+    //
+    // 這些資料不會因為切換場景而消失
+    // =========================================================
+
+    // 玩家技能紀錄
+    private static int save_att01;
+    private static int save_att02;
+    private static int save_att03;
+    private static int save_att04;
+    private static int save_att05;
+    private static int save_att06;
+    private static int save_att07;
+
+    // 玩家等級
+    private static int save_level;
+    private static int save_exp;
+
+    // 隱者
+    private static int save_card;
+    private static int save_cardMax;
+
+
+    // =========================================================
+    // 確認目前是否有備份資料
+    // =========================================================
+
+    private static bool hasSaveData = false;
+
+
+    // =========================================================
+    // 上一個場景
+    // =========================================================
+
+    public static string PreviousScene { get; private set; }
+
+
+    // =========================================================
+    // Start
+    // =========================================================
+
+    private void Start()
+    {
+        // 如果Inspector的開關開啟
+        // 就記錄mizuki資料
+        if (enableSave)
+        {
+            SaveMizukiData();
+
+            // 自動記錄目前場景
+            SetPreviousScene();
+        }
+
+
+        // 如果開啟計時器
+        if (enableTimeCounter)
+        {
+            StartCoroutine(TimeCounter());
+        }
+    }
+
+
+    // =========================================================
+    // 每秒增加 mizuki.Time
+    // =========================================================
+
+    private IEnumerator TimeCounter()
+    {
+        while (enableTimeCounter)
+        {
+            // 等待1秒
+            yield return new WaitForSeconds(1f);
+
+            // 每秒增加1
+            mizuki.Time++;
+
+            Debug.Log("目前遊戲時間：" + mizuki.Time);
+        }
+    }
+
+
+    // =========================================================
+    // 儲存目前 mizuki 的資料
+    //
+    // 注意：
+    // Time 完全不會被記錄
+    // =========================================================
+
+    public void SaveMizukiData()
+    {
+        // 玩家技能
+        save_att01 = mizuki.att01;
+        save_att02 = mizuki.att02;
+        save_att03 = mizuki.att03;
+        save_att04 = mizuki.att04;
+        save_att05 = mizuki.att05;
+        save_att06 = mizuki.att06;
+        save_att07 = mizuki.att07;
+
+        // 玩家等級
+        save_level = mizuki.level;
+        save_exp = mizuki.exp;
+
+        // 隱者
+        save_card = mizuki.card;
+        save_cardMax = mizuki.cardMax;
+
+        // 表示現在已經有備份資料
+        hasSaveData = true;
+
+        Debug.Log("Mizuki資料已經成功記錄！");
+    }
+
+
+    // =========================================================
+    // 將備份資料寫回目前的 mizuki
+    //
+    // Time 不會被修改
+    // =========================================================
+
+    public void LoadMizukiData()
+    {
+        // 如果還沒有任何備份資料
+        if (!hasSaveData)
+        {
+            Debug.LogWarning("目前沒有可以讀取的Mizuki備份資料！");
+            return;
+        }
+
+
+        // 玩家技能
+        mizuki.att01 = save_att01;
+        mizuki.att02 = save_att02;
+        mizuki.att03 = save_att03;
+        mizuki.att04 = save_att04;
+        mizuki.att05 = save_att05;
+        mizuki.att06 = save_att06;
+        mizuki.att07 = save_att07;
+
+
+        // 玩家等級
+        mizuki.level = save_level;
+        mizuki.exp = save_exp;
+
+
+        // 隱者
+        mizuki.card = save_card;
+        mizuki.cardMax = save_cardMax;
+
+
+        // 注意：
+        // 這裡故意沒有：
+        //
+        // mizuki.Time = ...
+        //
+        // 所以目前的Time會維持原本的數值。
+
+        Debug.Log("Mizuki備份資料已經成功寫回！");
+    }
+
+
+    // =========================================================
+    // 記錄目前場景
+    //
+    // 呼叫 SetPreviousScene() 時，
+    // 自動取得目前正在運行的場景名稱。
+    // =========================================================
+
+    public static void SetPreviousScene()
+    {
+        PreviousScene = SceneManager.GetActiveScene().name;
+
+        Debug.Log("已記錄目前場景：" + PreviousScene);
+    }
+
+
+    // =========================================================
+    // 切換場景
+    //
+    // 切換前先記錄目前場景
+    // =========================================================
+
+    public static void LoadScene(string sceneName)
+    {
+        // 切換前記錄目前場景
+        SetPreviousScene();
+
+        // 切換到指定場景
+        SceneManager.LoadScene(sceneName);
+    }
+}

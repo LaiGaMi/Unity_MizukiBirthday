@@ -11,14 +11,14 @@ public class Player_Att02 : MonoBehaviour
     [Header("塔羅牌預置物")]
     public GameObject cardPrefab;
 
+    [Header("塔羅牌父物件")]
+    public Transform cardParent;
+
     [Header("塔羅牌距離玩家的距離")]
     public float cardDistance = 1.5f;
 
     [Header("補充塔羅牌時間")]
     public float cardInterval = 5f;
-
-    [Header("塔羅牌旋轉速度")]
-    public float rotateSpeed = 90f;
 
 
     // =========================================================
@@ -26,13 +26,6 @@ public class Player_Att02 : MonoBehaviour
     // =========================================================
 
     private float cardTimer = 0f;
-
-
-    // =========================================================
-    // 塔羅牌旋轉角度
-    // =========================================================
-
-    private float currentAngle = 0f;
 
 
     // =========================================================
@@ -64,27 +57,12 @@ public class Player_Att02 : MonoBehaviour
         UpdateCardMax();
 
 
-        // =====================================================
-        // 技能沒有啟用
-        // =====================================================
-
+        // 如果技能沒有啟用
         if (mizuki.att02 <= 0)
         {
             ClearCards();
 
             return;
-        }
-
-
-        // =====================================================
-        // 塔羅牌旋轉
-        // =====================================================
-
-        currentAngle += rotateSpeed * Time.deltaTime;
-
-        if (currentAngle >= 360f)
-        {
-            currentAngle -= 360f;
         }
 
 
@@ -119,13 +97,6 @@ public class Player_Att02 : MonoBehaviour
         {
             UpdateCards();
         }
-
-
-        // =====================================================
-        // 更新塔羅牌位置
-        // =====================================================
-
-        UpdateCardPositions();
     }
 
 
@@ -164,7 +135,7 @@ public class Player_Att02 : MonoBehaviour
 
 
     // =========================================================
-    // 生成塔羅牌
+    // 更新塔羅牌
     // =========================================================
 
     private void UpdateCards()
@@ -180,70 +151,31 @@ public class Player_Att02 : MonoBehaviour
         }
 
 
+        // 沒有設定父物件
+        if (cardParent == null)
+        {
+            Debug.LogWarning("Player_Att02 尚未設定 Card Parent！");
+            return;
+        }
+
+
         // =====================================================
         // 生成塔羅牌
         // =====================================================
 
         for (int i = 0; i < mizuki.card; i++)
         {
-            GameObject newCard =
-                Instantiate(
-                    cardPrefab,
-                    transform.position,
-                    Quaternion.identity,
-                    transform
-                );
-
-
-            cards.Add(newCard);
-        }
-
-
-        // 生成完成後立刻更新位置
-        UpdateCardPositions();
-    }
-
-
-    // =========================================================
-    // 更新塔羅牌位置
-    // =========================================================
-
-    private void UpdateCardPositions()
-    {
-        if (cards.Count == 0)
-        {
-            return;
-        }
-
-
-        // =====================================================
-        // 平均分配塔羅牌
-        // =====================================================
-
-        float angleStep =
-            360f / cards.Count;
-
-
-        for (int i = 0; i < cards.Count; i++)
-        {
-            if (cards[i] == null)
-            {
-                continue;
-            }
-
-
-            // 每張牌自己的角度
+            // 計算角度
             float angle =
-                currentAngle + (angleStep * i);
+                (360f / mizuki.card) * i;
 
 
-            // 轉換成弧度
+            // 轉換成圓周座標
             float radian =
                 angle * Mathf.Deg2Rad;
 
 
-            // 計算圓周位置
-            Vector3 offset =
+            Vector3 position =
                 new Vector3(
                     Mathf.Cos(radian),
                     Mathf.Sin(radian),
@@ -251,8 +183,38 @@ public class Player_Att02 : MonoBehaviour
                 ) * cardDistance;
 
 
-            // 設定位置
-            cards[i].transform.localPosition = offset;
+            // =================================================
+            // 生成塔羅牌
+            // =================================================
+
+            GameObject newCard =
+                Instantiate(
+                    cardPrefab,
+                    cardParent
+                );
+
+
+            // =================================================
+            // 設定為父物件的子物件
+            // =================================================
+
+            newCard.transform.localPosition = position;
+
+
+            // =================================================
+            // 設定塔羅牌角度
+            // =================================================
+
+            newCard.transform.localRotation =
+                Quaternion.Euler(
+                    0f,
+                    0f,
+                    angle
+                );
+
+
+            // 記錄
+            cards.Add(newCard);
         }
     }
 

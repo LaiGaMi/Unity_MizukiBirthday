@@ -47,7 +47,7 @@ public class Player_Att07 : MonoBehaviour
         {
             return;
         }
-
+		Audio.Instance.Play("SE_mizuki07");
 
         // =====================================================
         // Level 1

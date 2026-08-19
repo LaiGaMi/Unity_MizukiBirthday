@@ -186,7 +186,8 @@ public class Player_Att02 : MonoBehaviour
             // =================================================
             // 生成塔羅牌
             // =================================================
-
+			Audio.Instance.Play("SE_mizuki02");
+			
             GameObject newCard =
                 Instantiate(
                     cardPrefab,

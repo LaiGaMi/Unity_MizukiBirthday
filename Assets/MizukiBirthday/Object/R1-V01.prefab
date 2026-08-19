@@ -205,6 +205,7 @@ MonoBehaviour:
   speed: 2.5
   attackInterval: 2
   bulletPrefab: {fileID: 0}
+  AttSouund: 
   umbrellaTag: Patt04
   knockbackDistance: 1
   slowBulletTag: Patt07
@@ -224,7 +225,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 5
+  hitFlashColor: {r: 0.817607, g: 0.59011215, b: 0.8396226, a: 1}
+  hitFlashDuration: 0.1
   expReward: 5
+  DieItem: {fileID: 5791903697552397433, guid: 9646f6d53d8388247b2679a3fca17154, type: 3}
   healItem01: {fileID: 4745671821742337537, guid: ee5590d83972adb4a9c75765eeaf6374, type: 3}
   healItem02: {fileID: 3038220739446892327, guid: 90bf72aba738a9548a5305f9ead9b765, type: 3}
   healItem03: {fileID: 8274179225928898474, guid: a1840e8eff12103439b90f2fa7f5596b, type: 3}

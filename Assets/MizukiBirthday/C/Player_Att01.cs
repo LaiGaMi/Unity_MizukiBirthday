@@ -113,7 +113,8 @@ public class Player_Att01 : MonoBehaviour
         // =========================================
         // 生成子彈
         // =========================================
-
+		Audio.Instance.Play("SE_mizuki01");
+		
         Instantiate(
             bullet,
             firePoint.position,
